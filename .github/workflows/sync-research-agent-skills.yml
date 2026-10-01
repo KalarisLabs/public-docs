@@ -1,0 +1,39 @@
+name: Sync Research Agent Skills docs
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-research-agent-skills
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: KalarisLabs/research-agent-skills
+          ref: main
+          path: _source
+          persist-credentials: false
+      - name: Mirror project docs
+        run: python3 scripts/sync_research_agent_skills.py --source _source/docs
+      - name: Commit changed pages
+        run: |
+          git add docs.json research-agent-skills
+          if git diff --cached --quiet; then
+            echo "Documentation is current"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Sync Research Agent Skills documentation"
+          git push

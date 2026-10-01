@@ -1,0 +1,113 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "Kalaris Labs Docs",
+  "description": "Documentation for Kalaris Labs projects and tools.",
+  "theme": "mint",
+  "colors": {
+    "primary": "#165D74",
+    "light": "#1B7894",
+    "dark": "#69C3D6"
+  },
+  "navigation": {
+    "products": [
+      {
+        "product": "Kalaris Labs",
+        "description": "Project documentation home",
+        "icon": "house",
+        "pages": [
+          "index"
+        ]
+      },
+      {
+        "product": "Research Agent Skills",
+        "description": "AI agent skills for scientific research and writing",
+        "icon": "flask-conical",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "research-agent-skills/index",
+              "research-agent-skills/getting-started/installation",
+              "research-agent-skills/getting-started/quickstart"
+            ]
+          },
+          {
+            "group": "Research guides",
+            "pages": [
+              "research-agent-skills/guides/by-field",
+              "research-agent-skills/guides/write-a-research-paper",
+              "research-agent-skills/guides/thesis-and-dissertation",
+              "research-agent-skills/guides/no-slop-academic-writing",
+              "research-agent-skills/guides/systematic-review"
+            ]
+          },
+          {
+            "group": "Explore skills",
+            "pages": [
+              "research-agent-skills/skills/index"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "research-agent-skills/reference/cli",
+              "research-agent-skills/reference/architecture",
+              "research-agent-skills/reference/benchmarks",
+              "research-agent-skills/reference/security",
+              "research-agent-skills/reference/contributing",
+              "research-agent-skills/faq"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Kalaris Labs",
+        "href": "https://kalarislabs.com"
+      }
+    ]
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/KalarisLabs"
+    }
+  },
+  "redirects": [
+    {
+      "source": "/getting-started/:slug*",
+      "destination": "/research-agent-skills/getting-started/:slug*",
+      "permanent": true
+    },
+    {
+      "source": "/guides/:slug*",
+      "destination": "/research-agent-skills/guides/:slug*",
+      "permanent": true
+    },
+    {
+      "source": "/skills",
+      "destination": "/research-agent-skills/skills",
+      "permanent": true
+    },
+    {
+      "source": "/skills/:slug*",
+      "destination": "/research-agent-skills/skills/:slug*",
+      "permanent": true
+    },
+    {
+      "source": "/reference/:slug*",
+      "destination": "/research-agent-skills/reference/:slug*",
+      "permanent": true
+    },
+    {
+      "source": "/faq",
+      "destination": "/research-agent-skills/faq",
+      "permanent": true
+    }
+  ],
+  "seo": {
+    "indexing": "all"
+  }
+}
