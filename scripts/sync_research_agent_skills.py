@@ -12,6 +12,7 @@ from pathlib import Path
 PRODUCT = "research-agent-skills"
 SKIP_TOP_LEVEL = {"docs.json", "llms.txt", "maintainers", "overrides"}
 LINK_PATTERN = re.compile(r'(\]\(|\b(?:href|src)=")/(?!/)')
+MARKDOWN_LINK = re.compile(r"\]\(/([^\s)#]+)")
 
 
 def prefix_navigation(value: object) -> object:
@@ -34,6 +35,40 @@ def prefix_navigation(value: object) -> object:
                 output[key] = prefix_navigation(item)
         return output
     return value
+
+
+def validate_site(hub: Path, destination: Path, hub_config: dict) -> None:
+    """Check local page targets that Mintlify's product-aware CLI check misses."""
+    missing = []
+
+    def exists(target: str) -> bool:
+        path = hub / target.lstrip("/")
+        return any(
+            candidate.is_file()
+            for candidate in (path, path.with_suffix(".md"), path.with_suffix(".mdx"), path / "index.md")
+        )
+
+    pages = [hub / "index.md", *destination.rglob("*.md"), *destination.rglob("*.mdx")]
+    for page in pages:
+        for target in MARKDOWN_LINK.findall(page.read_text(encoding="utf-8")):
+            if not exists(target):
+                missing.append(f"{page.relative_to(hub)} -> /{target}")
+
+    def walk_navigation(value: object) -> None:
+        if isinstance(value, dict):
+            for key, item in value.items():
+                if key == "pages" and isinstance(item, list):
+                    for entry in item:
+                        if isinstance(entry, str) and not exists(entry):
+                            missing.append(f"navigation -> {entry}")
+                walk_navigation(item)
+        elif isinstance(value, list):
+            for item in value:
+                walk_navigation(item)
+
+    walk_navigation(hub_config["navigation"])
+    if missing:
+        raise ValueError("Broken documentation paths:\n" + "\n".join(missing[:30]))
 
 
 def sync(source: Path, hub: Path) -> None:
@@ -76,6 +111,7 @@ def sync(source: Path, hub: Path) -> None:
         product.pop(key, None)
     product.update(source_navigation)
     config_path.write_text(json.dumps(hub_config, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    validate_site(hub, destination, hub_config)
 
 
 def main() -> int:
