@@ -109,5 +109,11 @@
   ],
   "seo": {
     "indexing": "all"
-  }
+  },
+  "logo": {
+    "light": "https://kalarislabs.com/kalaris-wordmark.png",
+    "dark": "https://kalarislabs.com/kalaris-wordmark.png",
+    "href": "https://kalarislabs.com"
+  },
+  "favicon": "https://kalarislabs.com/fellowship/kalaris-mark-96.png"
 }
