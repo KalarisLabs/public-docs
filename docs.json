@@ -27,14 +27,13 @@
             "group": "Get started",
             "pages": [
               "research-agent-skills/index",
-              "research-agent-skills/getting-started/installation",
-              "research-agent-skills/getting-started/quickstart"
+              "research-agent-skills/getting-started/quickstart",
+              "research-agent-skills/getting-started/installation"
             ]
           },
           {
-            "group": "Research guides",
+            "group": "Research workflows",
             "pages": [
-              "research-agent-skills/guides/by-field",
               "research-agent-skills/guides/write-a-research-paper",
               "research-agent-skills/guides/thesis-and-dissertation",
               "research-agent-skills/guides/no-slop-academic-writing",
@@ -42,7 +41,19 @@
             ]
           },
           {
-            "group": "Explore skills",
+            "group": "Skills by discipline",
+            "pages": [
+              "research-agent-skills/guides/by-field",
+              "research-agent-skills/fields/machine-learning",
+              "research-agent-skills/fields/artificial-intelligence",
+              "research-agent-skills/fields/biology",
+              "research-agent-skills/fields/chemistry",
+              "research-agent-skills/fields/medicine",
+              "research-agent-skills/fields/physics"
+            ]
+          },
+          {
+            "group": "All skills",
             "pages": [
               "research-agent-skills/skills/index"
             ]
