@@ -31,6 +31,8 @@ wordmark for light mode (`logo/light.png`) and the white wordmark for dark mode 
 - `.github/workflows/docs-checks.yml` runs `mint validate`, `mint broken-links`, `mint a11y` and the hub link
   check on every pull request.
 
+## Adding a project
+
 Add future projects under their own directory and `navigation.products` entry in `docs.json`.
 Keep project paths stable; use `redirects` when moving published pages.
 
