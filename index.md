@@ -1,84 +1,105 @@
 ---
-title: "Kalaris Labs documentation: guides for open-source tools"
+title: "Kalaris Labs documentation"
 sidebarTitle: "Home"
-description: "Setup guides, research workflows, and reference material for Kalaris Labs projects, starting with open-source Research Agent Skills for AI agents."
+description: "Documentation for Kalaris Labs open-source projects: Research Agent Skills for AI-assisted research and writing, and Skill Doctor, a security scanner for AI agent skills."
 mode: "wide"
 ---
 
-Kalaris Labs builds open-source tools for researchers, students, and labs. Use this site to install a project, follow a workflow end to end, or look up reference details.
+Kalaris Labs builds open-source infrastructure for AI agents: the skills they use for research, and the
+tools that check those skills are safe to run. Every project here works with Claude Code, Codex, Cursor,
+Gemini CLI, GitHub Copilot, OpenCode and Windsurf.
 
-## Featured project
+## Set up with your agent
 
-<Card title="Research Agent Skills" icon="flask-conical" horizontal href="/research-agent-skills">
-  Open-source AI agent skills for academic writing, literature reviews, citation checks, and scientific data analysis. Works with Claude Code, Codex, Cursor, Gemini CLI, Copilot, OpenCode, and Windsurf.
-</Card>
+Paste this prompt into your coding agent. It installs the right project for your repository and checks
+the result.
 
-```bash Install
-npx research-agent-skills
+<CodeGroup>
+```markdown setup-prompt.md
+You are setting up Kalaris Labs tools in this project. Docs: https://docs.kalarislabs.com
+Full page index for agents: https://docs.kalarislabs.com/llms.txt
+
+Step 1: Read this repository and tell me what it contains (papers, data analysis, agent skills, other).
+Step 2: Recommend one or both of these, with one line on why for this repo:
+  - Research Agent Skills: skills for academic writing, literature review, citation checks and
+    scientific data analysis. Install: npx skills add KalarisLabs/research-agent-skills
+  - Skill Doctor: an offline security scanner for agent skills and MCP servers.
+    Scan: npx @security.kalarislabs/skill-doctor scan-all .
+Step 3: Wait for my approval before installing anything or changing files.
+Step 4: After installing, run one small task that proves it works and show me the output.
 ```
 
-## Get started in minutes
+```bash Research Agent Skills
+npx skills add KalarisLabs/research-agent-skills
+```
 
-<Steps>
-  <Step title="Install the skills">
-    Run the installer and pick a bundle, or install into one project with `--project`. See the [installation guide](/research-agent-skills/getting-started/installation).
-  </Step>
-  <Step title="Run your first task">
-    Follow the [quickstart](/research-agent-skills/getting-started/quickstart) to put a skill to work in your AI agent.
-  </Step>
-  <Step title="Pick a workflow">
-    Choose a guide for your goal, from a first paper to a full systematic review.
-  </Step>
-</Steps>
+```bash Skill Doctor
+npx @security.kalarislabs/skill-doctor scan-all .
+```
+</CodeGroup>
 
-## Explore by goal
+## Choose a project
 
-<CardGroup cols={3}>
-  <Card title="Write a research paper" icon="file-pen" href="/research-agent-skills/guides/write-a-research-paper">
-    Draft, revise, and format manuscripts for your target journal.
+<Columns cols={2}>
+  <Card title="Research Agent Skills" img="/research-agent-skills/assets/banner.webp" href="/research-agent-skills" cta="Read the docs">
+    280+ open-source agent skills for manuscripts, theses, systematic reviews, citation checks and
+    scientific data analysis across ML, biology, chemistry, medicine and physics.
   </Card>
 
-  <Card title="Thesis and dissertation" icon="graduation-cap" href="/research-agent-skills/guides/thesis-and-dissertation">
-    Structure and write long-form academic work in your own voice.
+  <Card title="Skill Doctor" img="/skill-doctor/assets/banner.webp" href="/skill-doctor" cta="Read the docs">
+    A deterministic, offline-first security scanner for agent skills, tools and MCP servers. Catches
+    prompt injection, command injection and data exfiltration before a skill loads.
   </Card>
+</Columns>
 
-  <Card title="Systematic review" icon="search" href="/research-agent-skills/guides/systematic-review">
-    Search literature, screen studies, and verify every citation.
-  </Card>
+## Find the right page
 
-  <Card title="No-slop academic writing" icon="sparkles" href="/research-agent-skills/guides/no-slop-academic-writing">
-    Remove stock phrasing and rewrite toward specific, evidence-backed prose.
-  </Card>
+| What I want to do | Best option |
+|---|---|
+| Write or revise a paper with an AI agent | [Write a research paper](/research-agent-skills/guides/write-a-research-paper) |
+| Write a thesis or dissertation | [Thesis and dissertation guide](/research-agent-skills/guides/thesis-and-dissertation) |
+| Run a systematic review and verify citations | [Systematic review guide](/research-agent-skills/guides/systematic-review) |
+| Find databases and packages for my field | [Skills by field](/research-agent-skills/guides/by-field) |
+| Install only the research skills I need | [Installation](/research-agent-skills/getting-started/installation) |
+| Check a skill before I install it | [Skill Doctor quickstart](/skill-doctor/getting-started/quickstart) |
+| Have my agent audit skills on its own | [Skill Doctor as an MCP server](/skill-doctor/guides/mcp-server) |
+| Block risky skills in pull requests | [Skill Doctor in CI](/skill-doctor/guides/ci) |
+| Give my agent these docs as context | [Use these docs with AI](/ai-tools) |
 
-  <Card title="Skills by field" icon="microscope" href="/research-agent-skills/guides/by-field">
-    Find databases and analysis packages for your discipline.
+## Explore
+
+<Columns cols={3}>
+  <Card title="Research workflows" icon="file-pen" href="/research-agent-skills/guides/write-a-research-paper">
+    Papers, theses, systematic reviews and writing without AI slop.
   </Card>
 
   <Card title="Skill catalog" icon="layout-grid" href="/research-agent-skills/skills">
-    Browse every available skill in one place.
-  </Card>
-</CardGroup>
-
-## Reference
-
-<CardGroup cols={2}>
-  <Card title="CLI reference" icon="terminal" href="/research-agent-skills/reference/cli">
-    Commands and flags for the installer.
+    Every research skill, grouped by category.
   </Card>
 
   <Card title="Benchmarks" icon="chart-bar" href="/research-agent-skills/reference/benchmarks">
-    How skills are scored and evaluated.
+    How research skills are scored and evaluated.
   </Card>
 
-  <Card title="Security" icon="shield-check" href="/research-agent-skills/reference/security">
-    Scanning, signing, and release attestation.
+  <Card title="Threat classes" icon="shield-alert" href="/skill-doctor/reference/threat-classes">
+    The 11 risks Skill Doctor detects, SD-01 to SD-11.
   </Card>
 
-  <Card title="FAQ" icon="circle-help" href="/research-agent-skills/faq">
-    Answers to common questions.
+  <Card title="CLI reference" icon="terminal" href="/skill-doctor/reference/cli">
+    Skill Doctor commands, flags and exit codes.
   </Card>
-</CardGroup>
 
-<Note>
-  More Kalaris Labs projects will appear here as their documentation is published. Follow progress on [GitHub](https://github.com/KalarisLabs).
-</Note>
+  <Card title="Verify releases" icon="badge-check" href="/skill-doctor/reference/verify-releases">
+    Check signatures and checksums before you run a binary.
+  </Card>
+</Columns>
+
+## Next steps
+
+- [Research Agent Skills quickstart](/research-agent-skills/getting-started/quickstart): install one skill
+  and verify a bibliography.
+- [Skill Doctor quickstart](/skill-doctor/getting-started/quickstart): scan your first skill in under a
+  minute.
+- [Use these docs with AI](/ai-tools): connect the docs MCP server or install Kalaris skills from this
+  site.
+- [GitHub](https://github.com/KalarisLabs): source, issues and releases for every project.
