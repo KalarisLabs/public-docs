@@ -1,84 +1,84 @@
 ---
 title: "Kalaris Labs documentation: guides for open-source tools"
 sidebarTitle: "Home"
-description: "Setup guides, research workflows, and reference material for Kalaris Labs projects, starting with open-source Research Agent Skills for AI agents."
+description: "Documentation for Kalaris Labs open-source projects: Research Agent Skills for AI-assisted research and writing, and Skill Doctor, a security scanner for AI agent skills."
 mode: "wide"
 ---
 
-Kalaris Labs builds open-source tools for researchers, students, and labs. Use this site to install a project, follow a workflow end to end, or look up reference details.
+Kalaris Labs builds open-source infrastructure for AI agents: the skills they use, and the tools that keep
+those skills safe. Pick a project to install it, follow a workflow end to end, or look up a reference.
 
-## Featured project
+## Projects
 
-<Card title="Research Agent Skills" icon="flask-conical" horizontal href="/research-agent-skills">
-  Open-source AI agent skills for academic writing, literature reviews, citation checks, and scientific data analysis. Works with Claude Code, Codex, Cursor, Gemini CLI, Copilot, OpenCode, and Windsurf.
-</Card>
-
-```bash Install
-npx research-agent-skills
-```
-
-## Get started in minutes
-
-<Steps>
-  <Step title="Install the skills">
-    Run the installer and pick a bundle, or install into one project with `--project`. See the [installation guide](/research-agent-skills/getting-started/installation).
-  </Step>
-  <Step title="Run your first task">
-    Follow the [quickstart](/research-agent-skills/getting-started/quickstart) to put a skill to work in your AI agent.
-  </Step>
-  <Step title="Pick a workflow">
-    Choose a guide for your goal, from a first paper to a full systematic review.
-  </Step>
-</Steps>
-
-## Explore by goal
-
-<CardGroup cols={3}>
-  <Card title="Write a research paper" icon="file-pen" href="/research-agent-skills/guides/write-a-research-paper">
-    Draft, revise, and format manuscripts for your target journal.
+<CardGroup cols={2}>
+  <Card title="Research Agent Skills" icon="flask-conical" href="/research-agent-skills" cta="Read the docs">
+    Open-source AI agent skills for academic writing, literature reviews, citation checks and scientific
+    data analysis. Works with Claude Code, Codex, Cursor, Gemini CLI, Copilot, OpenCode and Windsurf.
   </Card>
 
-  <Card title="Thesis and dissertation" icon="graduation-cap" href="/research-agent-skills/guides/thesis-and-dissertation">
-    Structure and write long-form academic work in your own voice.
-  </Card>
-
-  <Card title="Systematic review" icon="search" href="/research-agent-skills/guides/systematic-review">
-    Search literature, screen studies, and verify every citation.
-  </Card>
-
-  <Card title="No-slop academic writing" icon="sparkles" href="/research-agent-skills/guides/no-slop-academic-writing">
-    Remove stock phrasing and rewrite toward specific, evidence-backed prose.
-  </Card>
-
-  <Card title="Skills by field" icon="microscope" href="/research-agent-skills/guides/by-field">
-    Find databases and analysis packages for your discipline.
-  </Card>
-
-  <Card title="Skill catalog" icon="layout-grid" href="/research-agent-skills/skills">
-    Browse every available skill in one place.
+  <Card title="Skill Doctor" icon="shield-check" href="/skill-doctor" cta="Read the docs">
+    A deterministic, offline-first security scanner for AI agent skills, tools and MCP servers. Catches
+    prompt injection, command injection and data exfiltration before your agent loads a skill.
   </Card>
 </CardGroup>
 
-## Reference
+## Install in one command
 
-<CardGroup cols={2}>
-  <Card title="CLI reference" icon="terminal" href="/research-agent-skills/reference/cli">
-    Commands and flags for the installer.
+<CodeGroup>
+```bash Research Agent Skills
+npx skills add KalarisLabs/research-agent-skills
+```
+
+```bash Skill Doctor
+npx @security.kalarislabs/skill-doctor scan ./my-skill
+```
+</CodeGroup>
+
+## Start with a goal
+
+<CardGroup cols={3}>
+  <Card title="Write a research paper" icon="file-pen" href="/research-agent-skills/guides/write-a-research-paper">
+    Draft, revise and format a manuscript for your target journal.
   </Card>
 
-  <Card title="Benchmarks" icon="chart-bar" href="/research-agent-skills/reference/benchmarks">
-    How skills are scored and evaluated.
+  <Card title="Run a systematic review" icon="search" href="/research-agent-skills/guides/systematic-review">
+    Search literature, screen studies and verify every citation.
   </Card>
 
-  <Card title="Security" icon="shield-check" href="/research-agent-skills/reference/security">
-    Scanning, signing, and release attestation.
+  <Card title="Find skills for your field" icon="microscope" href="/research-agent-skills/guides/by-field">
+    Databases and analysis packages for biology, chemistry, medicine, physics and ML.
   </Card>
 
-  <Card title="FAQ" icon="circle-help" href="/research-agent-skills/faq">
-    Answers to common questions.
+  <Card title="Scan a skill before you install it" icon="shield-alert" href="/skill-doctor/getting-started/quickstart">
+    Check any skill for hidden instructions and risky scripts in under a minute.
+  </Card>
+
+  <Card title="Let your agent audit skills" icon="plug" href="/skill-doctor/guides/mcp-server">
+    Add Skill Doctor as an MCP server in Claude Code, Cursor or Windsurf.
+  </Card>
+
+  <Card title="Block risky skills in CI" icon="git-pull-request" href="/skill-doctor/guides/ci">
+    Fail pull requests on high-severity findings and upload SARIF reports.
+  </Card>
+</CardGroup>
+
+## Built in the open
+
+<CardGroup cols={3}>
+  <Card title="Open source" icon="github" href="https://github.com/KalarisLabs">
+    Every project is on GitHub under MIT or Apache-2.0.
+  </Card>
+
+  <Card title="Verifiable releases" icon="shield-check" href="/skill-doctor/reference/verify-releases">
+    Releases are checksummed, signed and attested.
+  </Card>
+
+  <Card title="Measured" icon="chart-bar" href="/research-agent-skills/reference/benchmarks">
+    Skills are scored and benchmarked, with published results.
   </Card>
 </CardGroup>
 
 <Note>
-  More Kalaris Labs projects will appear here as their documentation is published. Follow progress on [GitHub](https://github.com/KalarisLabs).
+  More Kalaris Labs projects will appear here as their documentation is published. Follow progress on
+  [GitHub](https://github.com/KalarisLabs).
 </Note>

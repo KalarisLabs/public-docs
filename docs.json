@@ -8,11 +8,27 @@
     "light": "#1B7894",
     "dark": "#69C3D6"
   },
+  "icons": {
+    "library": "lucide"
+  },
+  "fonts": {
+    "family": "Manrope"
+  },
+  "appearance": {
+    "default": "system"
+  },
+  "background": {
+    "decoration": "gradient"
+  },
+  "styling": {
+    "eyebrows": "breadcrumbs",
+    "codeblocks": "system"
+  },
   "navigation": {
     "products": [
       {
         "product": "Kalaris Labs",
-        "description": "Project documentation home",
+        "description": "All projects and where to start",
         "icon": "house",
         "pages": [
           "index"
@@ -70,7 +86,48 @@
             ]
           }
         ]
+      },
+      {
+        "product": "Skill Doctor",
+        "description": "Security scanner for AI agent skills",
+        "icon": "shield-check",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "skill-doctor/index",
+              "skill-doctor/getting-started/quickstart",
+              "skill-doctor/getting-started/installation"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "skill-doctor/guides/mcp-server",
+              "skill-doctor/guides/ci"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "skill-doctor/reference/threat-classes",
+              "skill-doctor/reference/cli",
+              "skill-doctor/reference/verify-releases"
+            ]
+          }
+        ]
       }
+    ]
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "cursor",
+      "vscode"
     ]
   },
   "navbar": {
@@ -79,12 +136,59 @@
         "label": "Kalaris Labs",
         "href": "https://kalarislabs.com"
       }
-    ]
+    ],
+    "primary": {
+      "type": "github",
+      "href": "https://github.com/KalarisLabs"
+    }
   },
   "footer": {
     "socials": {
-      "github": "https://github.com/KalarisLabs"
-    }
+      "github": "https://github.com/KalarisLabs",
+      "x": "https://x.com/kalarislabs",
+      "website": "https://kalarislabs.com"
+    },
+    "links": [
+      {
+        "header": "Projects",
+        "items": [
+          {
+            "label": "Research Agent Skills",
+            "href": "https://github.com/KalarisLabs/research-agent-skills"
+          },
+          {
+            "label": "Skill Doctor",
+            "href": "https://github.com/KalarisLabs/Skill-Doctor"
+          }
+        ]
+      },
+      {
+        "header": "Community",
+        "items": [
+          {
+            "label": "Skill Doctor discussions",
+            "href": "https://github.com/KalarisLabs/Skill-Doctor/discussions"
+          },
+          {
+            "label": "Report a security issue",
+            "href": "https://github.com/KalarisLabs/Skill-Doctor/security/advisories"
+          }
+        ]
+      },
+      {
+        "header": "Kalaris Labs",
+        "items": [
+          {
+            "label": "Website",
+            "href": "https://kalarislabs.com"
+          },
+          {
+            "label": "GitHub",
+            "href": "https://github.com/KalarisLabs"
+          }
+        ]
+      }
+    ]
   },
   "redirects": [
     {
@@ -126,5 +230,12 @@
     "dark": "https://kalarislabs.com/kalaris-wordmark.png",
     "href": "https://kalarislabs.com"
   },
-  "favicon": "https://kalarislabs.com/fellowship/kalaris-mark-96.png"
+  "favicon": "https://kalarislabs.com/fellowship/kalaris-mark-96.png",
+  "errors": {
+    "404": {
+      "redirect": false,
+      "title": "Page not found",
+      "description": "This page may have moved. Go to the [documentation home](/) or pick a project from the switcher above."
+    }
+  }
 }
