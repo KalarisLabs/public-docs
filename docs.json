@@ -5,24 +5,36 @@
   "theme": "mint",
   "colors": {
     "primary": "#165D74",
-    "light": "#1B7894",
-    "dark": "#69C3D6"
+    "light": "#69C3D6",
+    "dark": "#1B7894"
+  },
+  "logo": {
+    "light": "/logo/light.png",
+    "dark": "/logo/dark.png",
+    "href": "/"
+  },
+  "favicon": "/favicon.png",
+  "fonts": {
+    "family": "Manrope"
   },
   "icons": {
     "library": "lucide"
-  },
-  "fonts": {
-    "family": "Manrope"
   },
   "appearance": {
     "default": "system"
   },
   "background": {
-    "decoration": "gradient"
+    "decoration": "gradient",
+    "color": {
+      "dark": "#050505"
+    }
   },
   "styling": {
     "eyebrows": "breadcrumbs",
     "codeblocks": "system"
+  },
+  "thumbnails": {
+    "preset": "headline"
   },
   "navigation": {
     "products": [
@@ -30,8 +42,14 @@
         "product": "Kalaris Labs",
         "description": "All projects and where to start",
         "icon": "house",
-        "pages": [
-          "index"
+        "groups": [
+          {
+            "group": "Kalaris Labs",
+            "pages": [
+              "index",
+              "ai-tools"
+            ]
+          }
         ]
       },
       {
@@ -112,35 +130,41 @@
             "pages": [
               "skill-doctor/reference/threat-classes",
               "skill-doctor/reference/cli",
-              "skill-doctor/reference/verify-releases"
+              "skill-doctor/reference/verify-releases",
+              "skill-doctor/changelog"
             ]
           }
         ]
       }
     ]
   },
-  "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "cursor",
-      "vscode"
-    ]
-  },
   "navbar": {
     "links": [
       {
-        "label": "Kalaris Labs",
-        "href": "https://kalarislabs.com"
+        "label": "Research",
+        "href": "https://kalarislabs.com/research"
+      },
+      {
+        "label": "Brand",
+        "href": "https://kalarislabs.com/brand"
       }
     ],
     "primary": {
       "type": "github",
       "href": "https://github.com/KalarisLabs"
     }
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "claude",
+      "chatgpt",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
   "footer": {
     "socials": {
@@ -166,6 +190,10 @@
         "header": "Community",
         "items": [
           {
+            "label": "Use these docs with AI",
+            "href": "https://docs.kalarislabs.com/ai-tools"
+          },
+          {
             "label": "Skill Doctor discussions",
             "href": "https://github.com/KalarisLabs/Skill-Doctor/discussions"
           },
@@ -189,6 +217,13 @@
         ]
       }
     ]
+  },
+  "errors": {
+    "404": {
+      "redirect": false,
+      "title": "Page not found",
+      "description": "This page may have moved. Go to the [documentation home](/) or pick a project from the switcher above."
+    }
   },
   "redirects": [
     {
@@ -224,18 +259,5 @@
   ],
   "seo": {
     "indexing": "all"
-  },
-  "logo": {
-    "light": "https://kalarislabs.com/kalaris-wordmark.png",
-    "dark": "https://kalarislabs.com/kalaris-wordmark.png",
-    "href": "https://kalarislabs.com"
-  },
-  "favicon": "https://kalarislabs.com/fellowship/kalaris-mark-96.png",
-  "errors": {
-    "404": {
-      "redirect": false,
-      "title": "Page not found",
-      "description": "This page may have moved. Go to the [documentation home](/) or pick a project from the switcher above."
-    }
   }
 }

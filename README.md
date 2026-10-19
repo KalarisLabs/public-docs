@@ -18,6 +18,19 @@ Site-wide settings (theme, fonts, icons, navbar, footer, contextual menu, 404 pa
 level of `docs.json`. The sync script only replaces the Research Agent Skills product's navigation, so
 these settings and other products are kept. Icons use the Lucide library.
 
+Logos and the favicon come from the Kalaris Labs brand kit (https://kalarislabs.com/brand): the black
+wordmark for light mode (`logo/light.png`) and the white wordmark for dark mode (`logo/dark.png`).
+
+## Working with agents
+
+- `AGENTS.md` (also loaded by `CLAUDE.md`) explains the repository layout and checks for coding agents.
+- `.mintlify/AGENTS.md` holds the writing rules used by the Mintlify agent and coding agents.
+- `.agents/skills/mintlify/` is Mintlify's official skill, linked into `.claude/skills/` for Claude Code.
+- `.mintlify/skills/` contains the Kalaris Labs skills that Mintlify publishes at
+  `https://docs.kalarislabs.com/.well-known/skills/`, so `npx skills add https://docs.kalarislabs.com` works.
+- `.github/workflows/docs-checks.yml` runs `mint validate`, `mint broken-links`, `mint a11y` and the hub link
+  check on every pull request.
+
 Add future projects under their own directory and `navigation.products` entry in `docs.json`.
 Keep project paths stable; use `redirects` when moving published pages.
 
