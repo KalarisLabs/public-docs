@@ -1,23 +1,47 @@
 ---
 title: "nature-portfolio — AI agent skill for journal formats"
 description: "Prepare manuscripts for Nature and Nature Portfolio journals (Nature, Nature Communications, Nature Methods, Nature Biotechnology, Scientific Reports and…"
+keywords: ["Nature", "Nature Communications", "Scientific Reports", "journal formatting", "submission"]
 ---
 
 # `nature-portfolio`
 
-> Prepare manuscripts for Nature and Nature Portfolio journals (Nature, Nature Communications, Nature Methods, Nature Biotechnology, Scientific Reports and other Nature-branded titles), covering article types, summary paragraph vs abstract, main-text and display-item limits, Methods and Extended Data, reporting summaries, data/code availability, figure preparation, references and presubmission enquiries. Use when targeting any Nature Portfolio journal, reformatting a paper for one, or checking a submission against its guidelines.
-
 **Category:** [journal-formats](/research-agent-skills/skills#journal-formats) · **License:** MIT · **Version:** 1.0
 
-## Install
-
-```bash
-npx skills add KalarisLabs/research-agent-skills --skill nature-portfolio
-```
+**Tags:** Nature, Nature Communications, Scientific Reports, journal formatting, submission
 
 ## When to use it
 
 Prepare manuscripts for Nature and Nature Portfolio journals (Nature, Nature Communications, Nature Methods, Nature Biotechnology, Scientific Reports and other Nature-branded titles), covering article types, summary paragraph vs abstract, main-text and display-item limits, Methods and Extended Data, reporting summaries, data/code availability, figure preparation, references and presubmission enquiries. Use when targeting any Nature Portfolio journal, reformatting a paper for one, or checking a submission against its guidelines.
+
+## Example requests
+
+Ask your agent in plain language, for example:
+
+- *"Reformat our paper for Nature: summary paragraph, Methods, Extended Data and reporting summary."*
+
+## Install
+
+```bash
+# skills.sh (Claude Code, Codex, Cursor, Gemini CLI, Copilot and more)
+npx skills add KalarisLabs/research-agent-skills --skill nature-portfolio
+
+# GitHub CLI
+gh skill install KalarisLabs/research-agent-skills nature-portfolio
+```
+
+In Claude Code you can also add the marketplace with `/plugin marketplace add KalarisLabs/research-agent-skills` and install the whole `journal-formats` category with `/plugin install journal-formats@research-agent-skills`.
+
+## Related
+
+- [`abstract-and-title`](/research-agent-skills/skills/abstract-and-title)
+- [`cover-letter-to-editor`](/research-agent-skills/skills/cover-letter-to-editor)
+- [`rebuttal-and-response-to-reviewers`](/research-agent-skills/skills/rebuttal-and-response-to-reviewers)
+- [`reproducibility-statement`](/research-agent-skills/skills/reproducibility-statement)
+- [`scientific-visualization`](/research-agent-skills/skills/scientific-visualization)
+- [`statistical-analysis`](/research-agent-skills/skills/statistical-analysis)
+- [`venue-templates`](/research-agent-skills/skills/venue-templates)
+- [Write a research paper with AI](/research-agent-skills/guides/write-a-research-paper)
 
 ## Full playbook
 

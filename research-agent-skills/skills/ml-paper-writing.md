@@ -1,23 +1,50 @@
 ---
 title: "ml-paper-writing — AI agent skill for research writing"
 description: "Write publication-ready ML/AI papers for NeurIPS, ICML, ICLR, ACL, AAAI, COLM."
+keywords: ["Academic Writing", "NeurIPS", "ICML", "ICLR", "ACL", "AAAI", "COLM", "LaTeX", "Paper Writing", "Citations", "Research"]
 ---
 
 # `ml-paper-writing`
 
-> Write publication-ready ML/AI papers for NeurIPS, ICML, ICLR, ACL, AAAI, COLM. Use when drafting papers from research repos, structuring arguments, verifying citations, or preparing camera-ready submissions. For systems venues (OSDI, NSDI, ASPLOS, SOSP), use systems-paper-writing instead.
-
 **Category:** [research-writing](/research-agent-skills/skills#research-writing) · **License:** MIT · **Version:** 1.2.0
 
-## Install
-
-```bash
-npx skills add KalarisLabs/research-agent-skills --skill ml-paper-writing
-```
+**Tags:** Academic Writing, NeurIPS, ICML, ICLR, ACL, AAAI, COLM, LaTeX, Paper Writing, Citations, Research
 
 ## When to use it
 
 Write publication-ready ML/AI papers for NeurIPS, ICML, ICLR, ACL, AAAI, COLM. Use when drafting papers from research repos, structuring arguments, verifying citations, or preparing camera-ready submissions. For systems venues (OSDI, NSDI, ASPLOS, SOSP), use systems-paper-writing instead.
+
+## Example requests
+
+Ask your agent in plain language, for example:
+
+- *"Help me write up my paper for ICLR. I've got the code and results in a folder."*
+- *"I have ~/proj/sae-steering with results/ablation_table.csv, wandb exports, and a README. We steer Llama-3-8B with sparse autoencoder features and it beats prompting on 4 benchmarks. Can you draft the abstract and intro for NeurIPS 2025? I need to stay inside 9 pages and fill in the checklist later."*
+- *"My related work section has about 30 references that I pulled together with ChatGPT, and I'm worried some are fake. Can you check them and tidy up the section before I submit to ACL?"*
+
+## Install
+
+```bash
+# skills.sh (Claude Code, Codex, Cursor, Gemini CLI, Copilot and more)
+npx skills add KalarisLabs/research-agent-skills --skill ml-paper-writing
+
+# GitHub CLI
+gh skill install KalarisLabs/research-agent-skills ml-paper-writing
+```
+
+In Claude Code you can also add the marketplace with `/plugin marketplace add KalarisLabs/research-agent-skills` and install the whole `research-writing` category with `/plugin install research-writing@research-agent-skills`.
+
+## Related
+
+- [`abstract-and-title`](/research-agent-skills/skills/abstract-and-title)
+- [`academic-plotting`](/research-agent-skills/skills/academic-plotting)
+- [`acm-sigconf`](/research-agent-skills/skills/acm-sigconf)
+- [`arxiv-submission`](/research-agent-skills/skills/arxiv-submission)
+- [`rebuttal-and-response-to-reviewers`](/research-agent-skills/skills/rebuttal-and-response-to-reviewers)
+- [`reproducibility-statement`](/research-agent-skills/skills/reproducibility-statement)
+- [`systems-paper-writing`](/research-agent-skills/skills/systems-paper-writing)
+- [`unslop-academic-writing`](/research-agent-skills/skills/unslop-academic-writing)
+- [Write a research paper with AI](/research-agent-skills/guides/write-a-research-paper)
 
 ## Full playbook
 
