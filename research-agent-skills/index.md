@@ -58,3 +58,7 @@ GitHub Copilot, OpenCode and Windsurf.
 - **Secure.** Every file is scanned for prompt injection and malicious code, and releases are checksummed, signed and attested.
 
 [Install Research Agent Skills](/research-agent-skills/getting-started/installation) · [Browse all skills](/research-agent-skills/skills)
+
+## Research note
+
+The [Research Agent Skills research note](https://kalarislabs.com/research/research-agent-skills) explains why the library exists, what has been measured and on what sample sizes, and what has not been measured yet. New to skills? Read the [guide to agent skills](https://kalarislabs.com/blog/agent-skills-guide), and scan third-party skills with [Skill Doctor](/skill-doctor/index).

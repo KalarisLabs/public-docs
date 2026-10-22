@@ -82,5 +82,9 @@ Skill Doctor checks a skill in four layers. Only the first runs by default.
   </Card>
 </CardGroup>
 
+## Research note
+
+The [Skill Doctor research note](https://kalarislabs.com/research/skill-doctor) describes the SDTM-v1 threat taxonomy and the layered architecture, and states what has and has not been measured at v0.1.0. For how skills load and how to audit them in general, read the [guide to agent skills](https://kalarislabs.com/blog/agent-skills-guide).
+
 Skill Doctor is Apache-2.0 licensed and maintained by Kalaris Labs. Report vulnerabilities privately through
 [GitHub Security Advisories](https://github.com/KalarisLabs/Skill-Doctor/security/advisories).
