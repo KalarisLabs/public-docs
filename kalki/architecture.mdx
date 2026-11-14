@@ -1,0 +1,71 @@
+---
+title: "Kalki architecture: kernel, genome and admission gate"
+sidebarTitle: "Architecture"
+description: "How Kalki separates the agent that proposes a self-modification from the gate that admits it: an append-only event log, a deny-first policy, a hashed genome and eight ordered admission predicates."
+keywords: ["Kalki architecture", "admission gate", "agent genome", "append-only log", "recursive self-improvement", "agent safety", "Rust"]
+---
+
+**Kalki separates proposing a change from admitting it.** The agent may edit its genome. Only the gate, which sits
+outside the agent's read and write sets, can admit a new genome version, and the kernel loads a version only when an
+admission record names its hash.
+
+## Layers
+
+```text
+surfaces     terminal UI · headless CLI · JSONL protocol
+kernel       event log · policy · checkpoints · context compiler · provider gateway
+executors    native Rust loop · Pi over RPC
+genome       prompts, skills, context policy: what self-improvement may change
+gate         eight checks a change must pass before it is kept
+```
+
+| Layer | Built today |
+|---|---|
+| Kernel: event log, blob store, policy, provider gateway | Yes |
+| Kernel: checkpoints, context compiler | Designed |
+| Executors: native Rust loop | Yes |
+| Genome and gate | Designed |
+| Sandbox | Designed |
+
+## The kernel
+
+- Every event is written to an append-only log framed with CRC32C checksums, with rotation and crash recovery.
+- Large tool output is stored by hash in a blob store and kept out of the model's context.
+- A deny-first policy engine checks each `bash` command against named rules; the first match wins.
+
+## The admission gate
+
+The gate admits a candidate genome only when eight ordered predicates hold. In outline, from the
+[Agent Kalki paper](/research/papers/agent-kalki):
+
+- Candidate and incumbent are compared with *k* live runs per case, from matched starting states.
+- Any loss on a protected set of cases that pass today, beyond a Bonferroni-corrected flake margin, rejects the
+  candidate.
+- Gains must exceed a measured noise ceiling τ.
+- Token cost must stay within a bound κ.
+- Held-out tasks guard against overfitting to the cases behind the change.
+
+The paper also specifies a write barrier with five invariants and maps the threat model to MITRE ATT&CK, MITRE ATLAS
+and the OWASP Top 10 for LLM applications.
+
+## Repository layout
+
+| Path | Contents |
+|---|---|
+| `crates/kalki-protocol` | Event and wire types |
+| `crates/kalki-core` | The kernel: log, blobs, policy, providers, session loop, tools |
+| `crates/kalki` | The `kalki` binary |
+| `xtask` | `cargo xtask ci`, the local gate |
+| `docs/` | Architecture, proposal, whitepaper, compatibility and ADRs |
+| `.agents/skills/` | Skills for coding agents that work on this repository |
+
+## Related research
+
+- [Viveka](/research/papers/viveka): why "keep it if it scores higher" admits no-op changes half the time.
+- [The Harness Is the Lab](/research/papers/the-harness-is-the-lab): held-out self-improvement curves for AI scientists.
+- [Evaluation principles](/benchmarks/evaluation-principles): the rules the gate encodes.
+
+## Contributing
+
+Run `cargo xtask ci`, sign off commits with `git commit -s`, and open an ADR before changing the protocol, the log
+format, the policy engine or the gate.

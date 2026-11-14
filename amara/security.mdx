@@ -1,0 +1,62 @@
+---
+title: "AMARA security model, wire protocol and robot safety"
+sidebarTitle: "Security and robots"
+description: "How AMARA signs and seals every packet with Ed25519, X25519 and ChaCha20-Poly1305, routes over UDP and Bluetooth LE, and gives robots a signed, mesh-wide emergency stop. Includes known limits."
+keywords: ["AMARA security", "Ed25519", "ChaCha20-Poly1305", "end-to-end encryption", "mesh protocol", "robot emergency stop", "self-certifying identity"]
+---
+
+**Every AMARA packet is signed, every call and message is sealed for its recipient, and relays forward only
+ciphertext.** AMARA has not yet been independently audited.
+
+## Guarantees
+
+| Property | How |
+|---|---|
+| Signed | Every packet carries an Ed25519 signature. Unsigned or forged packets are dropped at the first hop. |
+| Sealed | Calls, results and direct messages are encrypted with an ephemeral X25519 key and ChaCha20-Poly1305. Only the recipient can read them. |
+| Bound | Ciphertext is bound to its header as AEAD associated data, so it cannot be replayed under another sender or recipient. |
+| Bounded | Rate limits, a dedup window, memory caps and decompression-bomb guards. |
+| Self-certifying identity | A PeerId is the BLAKE3 hash of the public key. Keys are pinned on first sight, with no pairing and no PKI. |
+
+## Known limits
+
+- Relays can see who talks to whom.
+- Display names are not authenticated. Authorize peers by PeerId, not by name.
+- The protocol has not been independently audited.
+
+## Protocol layers
+
+| Layer | What it does |
+|---|---|
+| Interfaces | MCP server, HTTP API with server-sent events, CLI, chat, Python, JavaScript and Rust SDKs |
+| Agent runtime | Tools, streaming calls, messages, topics, files, emergency stop, trust policy, rate limits |
+| Protocol | 42-byte binary header, Ed25519 signatures, sealed boxes, compact JSON bodies, LZ4 |
+| Mesh | Self-certifying announces, dedup, TTL, jittered flooding, learned next-hop routes, per-hop fragmentation, store and forward |
+| Transport | UDP on the LAN (multicast discovery and unicast), Bluetooth LE, in-process simulators |
+
+Each link fragments packets to its own MTU below the signature layer, so the same packets travel over UDP and Bluetooth
+LE and relay between them. Offline messages are wrapped in a self-certifying envelope: any agent can carry them, and
+none can read or forge them.
+
+## Robots
+
+- **Topics:** publish telemetry such as battery level without a broker. Every node caches the latest value per topic,
+  so an agent that joins knows the robot's state at once.
+- **Streaming actions:** tool calls stream partial output, similar to ROS actions.
+- **Emergency stop:** `amara stop` sends a signed broadcast with the mesh's full radius. Each robot chooses who may stop
+  it with `estop_from` (`anyone` by default, `trusted` or `off`) and runs `estop_command` on every accepted stop.
+
+## Trust settings
+
+```toml ~/.amara/config.toml
+[security]
+require_trusted = true
+trusted = ["9f3e21aa5c0d4b11"]
+blocked = []
+
+[files]
+accept = "trusted"
+```
+
+Full details are in the repository's [security model](https://github.com/KalarisLabs/amara/blob/main/docs/SECURITY.md)
+and [wire protocol](https://github.com/KalarisLabs/amara/blob/main/docs/PROTOCOL.md) documents.

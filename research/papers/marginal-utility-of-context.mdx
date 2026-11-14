@@ -1,0 +1,62 @@
+---
+title: "The Marginal Utility of Context: pricing token scarcity for agents"
+sidebarTitle: "Marginal Utility of Context"
+description: "An exponential barrier price on context use makes a rational agent compress memory early. In a 50-agent simulation it raised task success from 0.42 to 0.73."
+keywords: ["context window", "LLM agents", "scarcity pricing", "memory management", "mechanism design", "synthetic microeconomics", "Kalaris Labs", "preprint"]
+"og:type": "article"
+---
+
+**Bottom line:** Truncation, sliding windows and flat token budgets charge the last token of context the same price as the first. This paper argues that is the wrong price. An exponential barrier makes a self-interested agent compress its memory early instead of at the edge of failure.
+
+| | |
+|---|---|
+| **Author** | Sayan Chowdhury ([ORCID 0009-0004-8421-0087](https://orcid.org/0009-0004-8421-0087)), Kalaris Labs |
+| **Published** | 2026-11 on Zenodo (preprint) |
+| **Evidence** | Results come from simulation. |
+| **DOI** | [10.5281/zenodo.24121147](https://doi.org/10.5281/zenodo.24121147) |
+| **License** | CC BY 4.0 |
+| **Theme** | [Agent economies](/research#agent-economies) |
+
+<Columns cols={2}>
+  <Card title="Read the paper" icon="file-text" href="https://zenodo.org/records/24121147">
+    Full text (01_The_Marginal_Utility_of_Context.pdf) and versions on Zenodo.
+  </Card>
+  <Card title="Agent economies series" icon="book-open" href="/research/agent-economies">
+    Related Kalaris Labs documentation.
+  </Card>
+</Columns>
+
+## Key points
+
+- The barrier is φ(c) = β·exp(γc / (1 − c)) on normalised context use c ∈ [0, 1). It is smooth, increasing, convex and unbounded as c → 1.
+- Any barrier that is unbounded as c → 1 caps a rational agent's utilisation below 1. Linear and polynomial prices do not.
+- The exponential form keeps that cap more stable than a logarithmic barrier when the agent mis-estimates its value of information.
+- In a 50-agent simulator built on the Generative Agents architecture, barrier pricing (β = 0.5, γ = 4) raised task success from 0.42 under linear pricing to 0.73. It lowered cognitive-collapse events from 12.4 to 1.4 per 1,000 steps and raised context efficiency from 0.31 to 0.74 (means over 20 seeds).
+
+## Limitations
+
+These are simulation results with a simplified compression model. They have not been replicated on production agents.
+
+## Abstract
+
+> A language-model agent that works for hours or days eventually fills its context window. Most agents deal with this through truncation, sliding windows, or a flat token budget, and all of these charge the same price for the last token as for the first. We argue that this is the wrong price. Treating context as a scarce resource, we ask which cost function makes a self-interested agent compress its memory early instead of at the edge of failure. We study an exponential barrier φ(c) = β exp γc/(1 − c) on normalised context use c ∈ [0, 1). We show that it is smooth, increasing, convex and unbounded as c → 1, and we prove that any barrier with that last property caps the utilisation of a rational agent below 1, while linear and polynomial prices do not. The exponential form differs from the logarithmic barrier in how stable that cap is when the agent's value of information is mis-estimated. In a simulator of 50 agents built on the Generative Agents architecture, barrier pricing (β = 0.5, γ = 4) raised task success from 0.42 under linear pricing to 0.73, lowered cognitive-collapse events from 12.4 to 1.4 per 1000 steps, and raised context efficiency from 0.31 to 0.74 (means over 20 seeds). These are simulation results with a simplified compression model, and they have not been replicated on production agents.
+
+## Related research
+
+- [Liquidity Coupling](/research/papers/liquidity-coupling): Escrowing a fraction of each contract stops insolvency cascades when AI agents hire agents. In a 10,000-agent simulation, mean cascade depth fell by 70.2%.
+- [Orchestration Trilemma](/research/papers/orchestration-trilemma): Agent markets face finite context, slow verification and fast default cascades at once. The Agent Coupling Protocol cut simulated systemic failure 8.1 to 14.2 times against four baselines.
+- [Agent Coupling Protocol](/research/papers/agent-coupling-protocol): ACP is a ten-stage protocol that weighs provider reliability more heavily as an orchestrator's context fills. In simulation, honest providers earn 4.8 to 7.6 times more than malicious ones.
+
+## Cite this paper
+
+```bibtex
+@misc{chowdhury2026marginalutilityofcontext,
+  title     = {{The Marginal Utility of Context: Token scarcity as digital real estate in agent economies}},
+  author    = {Chowdhury, Sayan},
+  year      = {2026},
+  publisher = {Zenodo},
+  note      = {Preprint, Kalaris Labs},
+  doi       = {10.5281/zenodo.24121147},
+  url       = {https://doi.org/10.5281/zenodo.24121147}
+}
+```

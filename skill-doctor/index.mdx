@@ -1,0 +1,101 @@
+---
+title: "Skill Doctor: security scanner for AI agent skills and MCP servers"
+sidebarTitle: "Overview"
+description: "Skill Doctor is a deterministic, offline Rust scanner that finds prompt injection, command injection, data exfiltration and backdoors in agent skill files, tools and MCP servers before an agent loads them."
+keywords: ["Skill Doctor", "agent skill security", "SKILL.md scanner", "MCP security", "prompt injection detection", "static analysis", "SARIF", "supply chain security"]
+---
+
+**Skill Doctor scans agent skills, tools and MCP servers for malicious content before your agent loads them.** It runs
+offline by default, uses no language model for its core checks, and gives the same output for the same input.
+
+```bash
+npx @security.kalarislabs/skill-doctor scan ./my-skill
+```
+
+## Why skills need scanning
+
+Agent skills are natural-language instructions and scripts that agents run with real access to shells, files and the
+network, and they are often installed from public repositories without signing or sandboxing. A skill can hide prompt
+injection in Markdown comments or Unicode tags, run unsanitized shell commands, trick an agent into reading `.env` files
+and SSH keys, or write auto-loaded rules into `.claude/` or `~/.bashrc` that survive restarts. A model-based detector
+can be fooled by the same injections it is looking for, so Skill Doctor's first layer is deterministic.
+
+## Install
+
+<Tabs>
+  <Tab title="npx">
+    ```bash
+    npx @security.kalarislabs/skill-doctor scan ./my-skill
+    ```
+  </Tab>
+  <Tab title="npm">
+    ```bash
+    npm install -g @security.kalarislabs/skill-doctor
+    ```
+  </Tab>
+  <Tab title="cargo">
+    ```bash
+    cargo install skill-doctor --locked --features mcp
+    ```
+    The published crate has no default features. Without `--features mcp` it ships without the MCP server.
+  </Tab>
+  <Tab title="Binary">
+    Download a signed binary for Linux, macOS or Windows from
+    [GitHub releases](https://github.com/KalarisLabs/Skill-Doctor/releases).
+  </Tab>
+</Tabs>
+
+## Commands
+
+| Task | Command |
+|---|---|
+| Scan one skill | `skill-doctor scan ./my-skill` |
+| Scan a directory of skills | `skill-doctor scan-all . --exclude "node_modules/*"` |
+| Compare with a baseline | `skill-doctor diff ./my-skill --baseline report.json` |
+| Gate CI | `skill-doctor gate ./my-skill --fail-on HIGH --fail-under-coverage 0.8` |
+| Re-scan as files change | `skill-doctor watch ./skills` |
+| Run as an MCP server | `skill-doctor mcp` |
+
+## Example output
+
+```text
+$ skill-doctor scan ./suspicious-skill
+HIGH [SD-01] Prompt Injection: ASCII smuggling detected in agent prompt
+HIGH [SD-10] Obfuscation: Mixed-script homoglyph "e" (U+0435) in function name
+MEDIUM [SD-03] Data Exfiltration: Environment variable $AWS_ACCESS_KEY referenced
+
+Coverage: 94% (comprehensive frontmatter parsed)
+Scan complete in 42ms
+```
+
+## Exit codes
+
+| Code | Meaning |
+|---|---|
+| `0` | Clean: no findings above the threshold |
+| `1` | Usage or internal engine error |
+| `2` | Findings at or above `--fail-on` |
+| `3` | Structural coverage below `--fail-under-coverage` |
+
+## Verify a release
+
+Release binaries are hashed into `SHA256SUMS.txt` and signed with Sigstore Cosign (keyless OIDC). Each release
+includes a CycloneDX SBOM.
+
+```bash
+cosign verify-blob \
+  --bundle SHA256SUMS.txt.bundle \
+  --certificate-identity-regexp '^https://github\.com/KalarisLabs/Skill-Doctor/\.github/workflows/release\.yml@refs/tags/v.*$' \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+  SHA256SUMS.txt
+sha256sum -c SHA256SUMS.txt --ignore-missing
+```
+
+<Columns cols={2}>
+  <Card title="Use with your agent" icon="bot" href="/skill-doctor/mcp">
+    MCP setup, watch mode and CI integration.
+  </Card>
+  <Card title="Detection rules" icon="shield-check" href="/skill-doctor/rules">
+    The 11 threat classes and four analysis layers.
+  </Card>
+</Columns>

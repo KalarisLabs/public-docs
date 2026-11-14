@@ -1,0 +1,50 @@
+---
+title: "Remake a launch video with Kuchi: the five-step agent workflow"
+sidebarTitle: "Remake workflow"
+description: "How an agent uses Kuchi to remake a launch video for your product: find a reference, study its storyboard, plan a frame-timed blueprint, build it and check it against the reference."
+keywords: ["launch video workflow", "AI video remake", "storyboard analysis", "frame-by-frame breakdown", "Kuchi workflow", "motion design agent"]
+---
+
+**Kuchi measures and plans; your agent sees and builds.** The workflow has five steps. Each tool result tells the
+agent what to do next.
+
+<Steps>
+  <Step title="Find a reference">
+    The agent calls `kuchi_suggest_templates` and shows you each candidate's poster and link. You pick one in chat, or
+    pick a video on [kuchi.kalarislabs.com](https://kuchi.kalarislabs.com/) and paste its link.
+  </Step>
+  <Step title="Study it">
+    The agent calls `kuchi_get_breakdown`, looks at the storyboard sheets, and classifies what each shot shows against
+    the 14 shot kinds.
+  </Step>
+  <Step title="Plan the remake">
+    The agent calls `kuchi_plan_remake` with your product details and its shot analysis. Kuchi returns a blueprint that
+    re-times every reference shot to your target length on whole frames, and lists the assets it still needs, such as
+    your logo and screenshots.
+  </Step>
+  <Step title="Build">
+    The agent builds to the blueprint's frames, using only your product, assets and copy.
+  </Step>
+  <Step title="Check before delivery">
+    The agent calls `kuchi_check_remake` with its shot list. Kuchi flags reused brand words, borrowed assets, invented
+    logos or UI and timing gaps, and returns matching frame times to compare.
+  </Step>
+</Steps>
+
+## How the frame-by-frame breakdown works
+
+A script decodes every frame of every video and records where each shot starts and ends, how it enters, how much of
+the frame moves, its colors and its loudness. The same file always gives the same result, and a test checks that each
+video's shots cover every frame exactly once. Shot classes such as entrance, motion level and tone come from fixed
+thresholds on those measurements, so they are reproducible rather than a model's opinion.
+
+What a shot *shows*, such as a logo, a product screen or a chart, is a judgement, so Kuchi does not guess it. The
+connected agent reads it from the storyboard sheets. A curator can review a video and write labels, which then take
+the place of the agent's reading for that shot. Labels stop being served if the video is re-measured and its shots
+change.
+
+## Rules every remake follows
+
+- Copy the reference's motion and taste: timing, transitions, layout and color balance.
+- Take everything on screen from your product.
+- Never reuse the reference's brand, footage or music.

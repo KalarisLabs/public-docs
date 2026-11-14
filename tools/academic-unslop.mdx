@@ -1,0 +1,49 @@
+---
+title: "Academic Unslop: evidence-preserving academic writing revision skill"
+sidebarTitle: "Academic Unslop"
+description: "Academic Unslop is an agent skill for conservative, minimal-edit revision of English and Chinese theses and papers that reduces traceable AI-writing patterns while preserving evidence and citations."
+keywords: ["Academic Unslop", "academic writing AI", "thesis revision", "AI writing patterns", "Turnitin AI", "CNKI AIGC", "agent skill", "Claude Code skill"]
+---
+
+**Academic Unslop is an agent skill that revises academic writing conservatively: minimal edits, protected evidence
+and citations, and fewer traceable AI-writing patterns.** It supports English and Chinese and is compatible with more
+than 25 agent harnesses, including Claude Code, Cursor, Codex, Gemini CLI and GitHub Copilot.
+
+<Warning>
+This is not a detector-bypass tool and it does not guarantee any AI-detector score. It focuses on evidence-preserving
+revision and academic integrity.
+</Warning>
+
+## Install
+
+<Tabs>
+  <Tab title="skills CLI">
+    ```bash
+    npx skills add KalarisLabs/academic-unslop-skill
+    ```
+    Add `-g` to install for every agent on your machine.
+  </Tab>
+  <Tab title="Claude Code">
+    ```bash
+    claude plugin add KalarisLabs/academic-unslop-skill
+    ```
+  </Tab>
+  <Tab title="npx">
+    ```bash
+    npx @kalarislabs/academic-unslop-skill
+    ```
+  </Tab>
+</Tabs>
+
+## What it supports
+
+- Minimal-edit revision chapter by chapter.
+- Protected academic elements, such as citations, data and technical terms.
+- Routing between qualitative and quantitative writing.
+- Awareness of Turnitin AI and CNKI AIGC detection for risk reduction, without bypass claims.
+
+## Related
+
+For a full writing and citation-verification toolkit, see [Research Agent Skills](/research-agent-skills) and its
+[no-slop academic writing guide](/research-agent-skills/guides/no-slop-academic-writing). Source:
+[KalarisLabs/academic-unslop-skill](https://github.com/KalarisLabs/academic-unslop-skill) (MIT).

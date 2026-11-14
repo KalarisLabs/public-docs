@@ -1,0 +1,44 @@
+---
+title: "Kalaris Labs benchmarks and evals for AI agents"
+sidebarTitle: "Overview"
+description: "Benchmarks and evaluations from Kalaris Labs: PrincipalBench v2 for LLM orchestrators, HiddenLaw for machine scientific discovery, agent skill quality benchmarks and our evaluation principles."
+keywords: ["LLM benchmark", "AI agent evaluation", "orchestrator benchmark", "PrincipalBench", "HiddenLaw", "agent skills benchmark", "KernelBench", "RE-Bench"]
+---
+
+**We build benchmarks to test claims about agents, and we audit our own.** This section lists every benchmark and
+evaluation Kalaris Labs has released, the results reported with it, and the rules we use to decide whether a result
+counts.
+
+## Benchmarks we maintain
+
+| Benchmark | Measures | Status | Docs |
+|---|---|---|---|
+| PrincipalBench v2 | How well an LLM orchestrates worker agents: planning, failure detection, synthesis and coherence | v2 core split released; v1 rankings withdrawn | [PrincipalBench](/benchmarks/principalbench) |
+| HiddenLaw | Whether a learner can introduce a variable its vocabulary lacks (Level-3 discovery) | Released with transcripts and reproduction script | [HiddenLaw](/benchmarks/hiddenlaw) |
+| Research Agent Skills benchmarks | Skill quality, trigger routing, with-vs-without-skill task outcomes, citation verification and writing revision | Pilot measurements | [Skill benchmarks](/research-agent-skills/reference/benchmarks) |
+| Skill Doctor attack fixtures | Detection of malicious skill files across 11 threat classes | 14 curated fixtures in v0.1.0 | [Detection rules](/skill-doctor/rules) |
+
+## External benchmarks we report on
+
+| Benchmark | Used in | Result |
+|---|---|---|
+| KernelBench | [TailHorizon](/research/papers/tailhorizon) | fast_1 of 48% / 78% / 22% on Levels 1–3, against 43% / 72% / 18% for the strongest baseline (three seeds) |
+| RE-Bench | [TailHorizon](/research/papers/tailhorizon) | Ahead of the best baseline in six of seven environments; not significant (*p* = 0.0625) |
+
+## Evaluation protocols in our papers
+
+Several papers define how a system will be evaluated before any result exists. Pre-registering the protocol stops us
+from choosing the test after seeing the outcome.
+
+| Paper | Protocol |
+|---|---|
+| [Agent Kalki](/research/papers/agent-kalki) | Eight ordered admission predicates, *k* live runs per case, Bonferroni-corrected flake margin on a protected set |
+| [Viveka](/research/papers/viveka) | Re-test each change on unseen seeds, replace lucky scores, remove changes that do not matter |
+| [The Harness Is the Lab](/research/papers/the-harness-is-the-lab) | Held-out self-improvement curve at three nested levels |
+| [Pipit](/research/papers/pipit) | Ten pre-registered hypotheses scored against same-machine baselines and each run's physical roofline |
+| [Anudhi](/research/papers/anudhi) | Every kernel gated against a scalar reference and an independent oracle |
+| [VeriClust](/research/papers/vericlust) | Planned measurements on mathematical reasoning, software verification and fact-checking |
+
+<Card title="Evaluation principles" icon="scale" href="/benchmarks/evaluation-principles">
+  The rules we apply to every result we publish, drawn from what went wrong in PrincipalBench v1.
+</Card>

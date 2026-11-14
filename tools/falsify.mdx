@@ -1,0 +1,45 @@
+---
+title: "Falsify: an adversarial pre-mortem for research hypotheses"
+sidebarTitle: "Falsify"
+description: "Falsify stress-tests a research hypothesis before experiments begin: it decomposes claims, surfaces hidden assumptions and confounders, proposes falsification tests and outputs a Falsification Passport."
+keywords: ["Falsify", "hypothesis testing", "research pre-mortem", "falsification", "confounders", "experimental design", "AI research tool"]
+---
+
+**Falsify asks what would have to be true for your hypothesis to be wrong, before you spend time and money testing
+it.** It turns a hypothesis into a structured research pre-mortem.
+
+```text
+HYPOTHESIS → DECOMPOSE → ATTACK → TEST → DECIDE
+```
+
+## What it produces
+
+- Atomic claims that can be tested separately
+- Hidden assumptions and confounders
+- Competing explanations and missing controls
+- Falsification tests designed to weaken the hypothesis, not confirm it
+- The most dangerous failure mode and the minimum next experiment
+- Evidence boundaries: what should raise confidence, lower it or force a revision
+
+Each investigation can become a **Falsification Passport**, exported as Markdown, JSON or a printable report.
+
+## Research statuses
+
+| Status | Meaning |
+|---|---|
+| `UNDER_SPECIFIED` | Not precise enough to falsify properly |
+| `TESTABLE` | Defined well enough for useful testing |
+| `WEAKLY_SUPPORTED` | Some evidence exists, but important uncertainty remains |
+| `EVIDENCE_BACKED` | The supplied evidence survives the current pre-mortem |
+
+These labels describe the state of the analysis, not scientific truth.
+
+## Status
+
+Falsify is a prototype built for the NativeBuilder hackathon. It uses OpenRouter for inference, keeps investigations in
+the browser and needs no account. It is a reasoning aid, not a replacement for domain experts, peer review or
+experiments. Source: [KalarisLabs/Falsify](https://github.com/KalarisLabs/Falsify).
+
+For agent skills that cover the same stage, see
+[`hypothesis-generation`](/research-agent-skills/skills/hypothesis-generation) and
+[`experimental-design`](/research-agent-skills/skills/experimental-design) in Research Agent Skills.

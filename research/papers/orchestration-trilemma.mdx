@@ -1,0 +1,62 @@
+---
+title: "The Orchestration Trilemma: agent coordination under context, trust and solvency"
+sidebarTitle: "Orchestration Trilemma"
+description: "Agent markets face finite context, slow verification and fast default cascades at once. The Agent Coupling Protocol cut simulated systemic failure 8.1 to 14.2 times against four baselines."
+keywords: ["multi-agent systems", "Orchestration Trilemma", "Agent Coupling Protocol", "mechanism design", "context scarcity", "insolvency cascades", "Kalaris Labs", "preprint"]
+"og:type": "article"
+---
+
+**Bottom line:** Markets for autonomous agents face three pressures together: a finite context window, verification that can take longer than a decision, and defaults that spread faster than a person can react. The paper argues that mechanisms built for human markets struggle to meet all three, and proposes the Agent Coupling Protocol (ACP).
+
+| | |
+|---|---|
+| **Author** | Sayan Chowdhury ([ORCID 0009-0004-8421-0087](https://orcid.org/0009-0004-8421-0087)), Kalaris Labs |
+| **Published** | 2026-11 on Zenodo (preprint) |
+| **Evidence** | Results come from simulation. |
+| **DOI** | [10.5281/zenodo.24121235](https://doi.org/10.5281/zenodo.24121235) |
+| **License** | CC BY 4.0 |
+| **Theme** | [Agent economies](/research#agent-economies) |
+
+<Columns cols={2}>
+  <Card title="Read the paper" icon="file-text" href="https://zenodo.org/records/24121235">
+    Full text (03_The_Orchestration_Trilemma.pdf) and versions on Zenodo.
+  </Card>
+  <Card title="Agent economies series" icon="book-open" href="/research/agent-economies">
+    Related Kalaris Labs documentation.
+  </Card>
+</Columns>
+
+## Key points
+
+- The trilemma is supported by a semi-formal argument, not a theorem.
+- ACP combines an exponential context barrier, an escrowed stake that limits how far defaults travel, and a winner-determination rule that weighs price against context load and stake.
+- The paper states a cascade bound that follows from branching-process theory, and an equilibrium characterisation as a conjecture.
+- In an extended Generative Agents simulation (1,000 agents, 30 simulated days, 100 seeds), ACP's systemic failure rate was 0.011 against 0.089–0.156 for four baselines: 8.1 to 14.2 times lower, and 9.1 times lower than the median baseline. Its cognitive-collapse rate was 0.003 against 0.028–0.045.
+
+## Limitations
+
+The simulation uses a cached language-model stand-in at a decision frequency below the regime in which the trilemma is stated. The results have not been replicated with deployed agents.
+
+## Abstract
+
+> Markets for autonomous language-model agents run into three pressures at once. An agent's context window is finite, verifying a counterparty can take longer than the agent's decision interval, and a single default can spread through a chain of obligations faster than a person can react. We call this combination the Orchestration Trilemma and argue, with a semi-formal argument rather than a theorem, that mechanisms built for human markets struggle to meet all three constraints together. We then describe the Agent Coupling Protocol (ACP), a mechanism that combines an exponential context barrier, an escrowed stake that limits how far defaults travel, and a winner-determination rule that weighs price against context load and stake. We state a cascade bound that follows from branching-process theory, and we state an equilibrium characterisation as a conjecture. In an extended Generative-Agents simulation with 1,000 agents over 30 simulated days and 100 seeds, ACP's systemic failure rate was 0.011 against 0.089-0.156 for four baselines, a reduction of 8.1 to 14.2 times (9.1 times against the median baseline), and its cognitive-collapse rate was 0.003 against 0.028-0.045. These are simulation results with a cached language-model stand-in, at a decision frequency below the regime in which the trilemma is stated, and have not been replicated with deployed agents.
+
+## Related research
+
+- [Agent Coupling Protocol](/research/papers/agent-coupling-protocol): ACP is a ten-stage protocol that weighs provider reliability more heavily as an orchestrator's context fills. In simulation, honest providers earn 4.8 to 7.6 times more than malicious ones.
+- [Liquidity Coupling](/research/papers/liquidity-coupling): Escrowing a fraction of each contract stops insolvency cascades when AI agents hire agents. In a 10,000-agent simulation, mean cascade depth fell by 70.2%.
+- [Marginal Utility of Context](/research/papers/marginal-utility-of-context): An exponential barrier price on context use makes a rational agent compress memory early. In a 50-agent simulation it raised task success from 0.42 to 0.73.
+
+## Cite this paper
+
+```bibtex
+@misc{chowdhury2026orchestrationtrilemma,
+  title     = {{The Orchestration Trilemma in Multi-Agent Systems: A framework for coordination under context, trust and solvency constraints}},
+  author    = {Chowdhury, Sayan},
+  year      = {2026},
+  publisher = {Zenodo},
+  note      = {Preprint, Kalaris Labs},
+  doi       = {10.5281/zenodo.24121235},
+  url       = {https://doi.org/10.5281/zenodo.24121235}
+}
+```

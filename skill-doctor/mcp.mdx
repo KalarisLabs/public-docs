@@ -1,0 +1,95 @@
+---
+title: "Run Skill Doctor as an MCP server and in CI"
+sidebarTitle: "MCP and CI"
+description: "Add Skill Doctor to Claude Code, Cursor, Windsurf or Cline as an MCP server so your agent audits skills before loading them, and gate CI with SARIF output in GitHub Actions or GitLab."
+keywords: ["Skill Doctor MCP", "Claude Code security", "MCP server security scanner", "SARIF GitHub Actions", "GitLab SAST", "agent skill CI"]
+---
+
+**Run Skill Doctor as an MCP server so your agent checks a skill before it loads or edits it, and as a CI gate so
+nothing malicious is merged.**
+
+## Add it to your agent
+
+<Tabs>
+  <Tab title="Claude Code">
+    ```bash
+    claude mcp add skill-doctor -- npx -y @security.kalarislabs/skill-doctor mcp
+    ```
+  </Tab>
+  <Tab title="JSON config">
+    Use this in Claude Desktop, Cursor, Windsurf or Cline:
+
+    ```json mcp.json
+    {
+      "mcpServers": {
+        "skill-doctor": {
+          "command": "npx",
+          "args": ["-y", "@security.kalarislabs/skill-doctor", "mcp"]
+        }
+      }
+    }
+    ```
+  </Tab>
+  <Tab title="Prompt">
+    ```text
+    Please install @security.kalarislabs/skill-doctor and register it as an MCP server with command `npx -y @security.kalarislabs/skill-doctor mcp`. Use it to audit skill files and tools in this workspace before executing or modifying them.
+    ```
+  </Tab>
+</Tabs>
+
+## Watch mode
+
+Keep Skill Doctor running while you or your agent edit skills. It re-scans each change:
+
+```bash
+npx @security.kalarislabs/skill-doctor watch ./skills
+```
+
+## GitHub Actions
+
+```yaml .github/workflows/skills.yml
+- name: Run Skill Doctor
+  uses: KalarisLabs/Skill-Doctor@v0.1.0
+  with:
+    path: .
+    mode: scan-all
+    fail-on: HIGH
+    fail-under-coverage: 0.8
+    output: sarif
+    sarif-file: skill-doctor.sarif
+
+- name: Upload SARIF report
+  if: always()
+  uses: github/codeql-action/upload-sarif@v3
+  with:
+    sarif_file: skill-doctor.sarif
+```
+
+## GitLab CI
+
+```yaml .gitlab-ci.yml
+scan-skills:
+  image: ubuntu:latest
+  before_script:
+    - apt-get update && apt-get install -y curl
+    - curl -sSfL https://github.com/KalarisLabs/Skill-Doctor/releases/download/v0.1.0/skill-doctor-v0.1.0-x86_64-unknown-linux-musl.tar.gz | tar -xz
+    - mv skill-doctor /usr/local/bin/
+  script:
+    - skill-doctor scan-all . --fail-on HIGH --output sarif > skill-doctor.sarif
+  artifacts:
+    reports:
+      sast: skill-doctor.sarif
+```
+
+## Flags
+
+| Flag | Effect |
+|---|---|
+| `--output <format>` | Output format: `text` (default), `json` or `sarif` |
+| `--deterministic` | Byte-identical output: sorted keys, stable ordering, pinned timestamps |
+| `--fail-on <severity>` | Minimum severity for exit code 2: `LOW`, `MEDIUM`, `HIGH` (default) or `CRITICAL` |
+| `--fail-under-coverage <0.0–1.0>` | Minimum structural coverage for exit code 3 |
+| `--sandbox` | Opt in to the L3 behavioral harness |
+| `--intel` | Opt in to L4 threat intelligence lookups |
+| `--tui` | Interactive terminal dashboard |
+| `--offline` | On by default: no network calls, no telemetry |

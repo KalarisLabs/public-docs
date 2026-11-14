@@ -1,0 +1,62 @@
+---
+title: "Economic safeguards against indirect prompt injection in agent networks"
+sidebarTitle: "Safeguards against prompt injection"
+description: "A system-level defence against indirect prompt injection that makes attacks cost more than they are worth. Simulated attack success fell from 38.4% to 2.1%."
+keywords: ["indirect prompt injection", "IDPI", "agent security", "LLM agents", "economic mechanisms", "reputation", "Kalaris Labs", "preprint"]
+"og:type": "article"
+---
+
+**Bottom line:** Model-level defences against indirect prompt injection keep being bypassed by adaptive attackers. This paper adds a system-level layer whose aim is not to stop every injection but to make a successful attack cost more than it is worth, and to contain the damage when one succeeds.
+
+| | |
+|---|---|
+| **Author** | Sayan Chowdhury ([ORCID 0009-0004-8421-0087](https://orcid.org/0009-0004-8421-0087)), Kalaris Labs |
+| **Published** | 2026-11 on Zenodo (preprint) |
+| **Evidence** | Results come from simulation. |
+| **DOI** | [10.5281/zenodo.24121312](https://doi.org/10.5281/zenodo.24121312) |
+| **License** | CC BY 4.0 |
+| **Theme** | [Agent economies](/research#agent-economies) |
+
+<Columns cols={2}>
+  <Card title="Read the paper" icon="file-text" href="https://zenodo.org/records/24121312">
+    Full text (05_Economic_Safeguards_Against_IDPI.pdf) and versions on Zenodo.
+  </Card>
+  <Card title="Skill Doctor" icon="book-open" href="/skill-doctor">
+    Related Kalaris Labs documentation.
+  </Card>
+</Columns>
+
+## Key points
+
+- Four mechanisms from the agent economies series: a context scarcity barrier that limits how much untrusted text an agent holds, a stake locked before high-impact actions, reputation cascades that isolate compromised agents, and verifiable execution.
+- The paper gives a simple attacker-cost model and a corrected bound on the probability that a multi-step attack succeeds.
+- In a simulated testbed, attack success fell from 38.4% for the strongest baseline (a sandbox) to 2.1%, a 94.5% relative reduction, with a 0.5 percentage-point drop in task completion and about 0.2 s of added latency.
+- Removing any one mechanism raised attack success to between 8.3% and 18.9%.
+
+## Limitations
+
+These are simulation results, the attacker model is simple, and the claims about attacker cost depend on assumed prices.
+
+## Abstract
+
+> Language-model agents that read untrusted content and can act on it are exposed to indirect prompt injection (IDPI), in which instructions hidden in a web page, document or API response steer the agent. Defences that work on the model alone, such as hardened prompts, instruction hierarchies and input classifiers, have repeatedly been bypassed by adaptive attackers. This paper explores a complementary, system-level approach. We combine four mechanisms from the Synthetic Microeconomics series: a context scarcity barrier that limits how much untrusted text an agent holds, a stake that must be locked before high-impact actions, reputation cascades that isolate agents found to be compromised, and verifiable execution. The aim is not to prevent every injection but to make a successful attack cost more than it is worth, and to contain the damage when one succeeds. We give a simple attacker-cost model and a corrected bound on the probability that a multi-step attack succeeds. In a simulated testbed, attack success fell from 38.4% for the strongest baseline (a sandbox) to 2.1% (a relative reduction of 94.5%), with a 0.5 percentage-point drop in task completion and about 0.2 s of added latency. In an ablation, removing any one mechanism raised attack success to between 8.3% and 18.9%. These are simulation results, the attacker model is simple, and the claims about attacker cost depend on assumed prices. We state these limits in the paper.
+
+## Related research
+
+- [Agent Coupling Protocol](/research/papers/agent-coupling-protocol): ACP is a ten-stage protocol that weighs provider reliability more heavily as an orchestrator's context fills. In simulation, honest providers earn 4.8 to 7.6 times more than malicious ones.
+- [Marginal Utility of Context](/research/papers/marginal-utility-of-context): An exponential barrier price on context use makes a rational agent compress memory early. In a 50-agent simulation it raised task success from 0.42 to 0.73.
+- [Orchestration Trilemma](/research/papers/orchestration-trilemma): Agent markets face finite context, slow verification and fast default cascades at once. The Agent Coupling Protocol cut simulated systemic failure 8.1 to 14.2 times against four baselines.
+
+## Cite this paper
+
+```bibtex
+@misc{chowdhury2026economicsafeguardsindire,
+  title     = {{Economic Safeguards Against Indirect Prompt Injection: A systemic defence layer for autonomous agent networks}},
+  author    = {Chowdhury, Sayan},
+  year      = {2026},
+  publisher = {Zenodo},
+  note      = {Preprint, Kalaris Labs},
+  doi       = {10.5281/zenodo.24121312},
+  url       = {https://doi.org/10.5281/zenodo.24121312}
+}
+```

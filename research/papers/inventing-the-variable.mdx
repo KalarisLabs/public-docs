@@ -1,0 +1,64 @@
+---
+title: "Inventing the Variable: the Level-3 gap in machine scientific discovery"
+sidebarTitle: "Inventing the Variable"
+description: "The HiddenLaw benchmark tests whether AI can introduce a variable its vocabulary lacks. Passive data blocks every learner; with interventions, Claude Opus 5.5 succeeds in 9 of 9 worlds."
+keywords: ["machine scientific discovery", "HiddenLaw benchmark", "causal discovery", "latent variables", "identifiability", "LLM agents", "interventions", "Kalaris Labs", "preprint"]
+"og:type": "article"
+---
+
+**Bottom line:** Critics say machine discovery systems cannot invent a variable their vocabulary lacks. This paper makes that claim testable with the HiddenLaw benchmark. On confounded passive data every learner fails. Given interventional data and a suitable fitting tool, Claude Opus 5.5 meets the full Level-3 criterion in 9 of 9 worlds, which refutes the universal claim on the simplest worlds.
+
+| | |
+|---|---|
+| **Author** | Sayan Chowdhury ([ORCID 0009-0004-8421-0087](https://orcid.org/0009-0004-8421-0087)), Kalaris Labs |
+| **Published** | 2026-10 on Zenodo (preprint) |
+| **Evidence** | Reports experimental results. |
+| **DOI** | [10.5281/zenodo.24120370](https://doi.org/10.5281/zenodo.24120370) |
+| **License** | CC BY 4.0 |
+| **Theme** | [Evaluation and scientific discovery](/research#evaluation-and-scientific-discovery) |
+
+<Columns cols={2}>
+  <Card title="Read the paper" icon="file-text" href="https://zenodo.org/records/24120370">
+    Full text (Chowdhury2026_InventingTheVariable.pdf) and versions on Zenodo.
+  </Card>
+  <Card title="HiddenLaw benchmark" icon="book-open" href="/benchmarks/hiddenlaw">
+    Related Kalaris Labs documentation.
+  </Card>
+</Columns>
+
+## Key points
+
+- Three levels of discovery: fitting (L1), search over a fixed vocabulary (L2) and vocabulary extension (L3).
+- When a hidden property is a deterministic function of observables, passive data cannot identify it for any learner without prior knowledge of it. This is an elementary instance of the separation between rungs 1 and 2 of Pearl's causal hierarchy.
+- **HiddenLaw** is a benchmark of procedurally generated worlds with counterfactual laws, three discovery levels and three data-access regimes. It evaluates symbolic search, black-box and latent world models, a closed-loop discovery agent (CLDA), and LLM agents built on Claude Haiku 4.5, Sonnet 5 and Opus 5.5.
+- On confounded passive data, L3 fails for every learner (CLDA 0/30; Sonnet 5 and Opus 5.5 0/9 each). With laboratory data CLDA succeeds in 30/30 worlds, and in 0/30 without its concept module.
+- With a fitting tool that can group parameters by any data column, Opus 5.5 groups by entity in 9/9 worlds with a hidden property and 0/9 matched worlds without one (*p* = 4 × 10⁻⁵). Sonnet 5 does so in 7/9 versus 0/9 and reaches L3 in 5/9.
+- A latent world model encodes the hidden variable (probe |ρ| = 0.97) but predicts about five times worse than an explicit law, and still twice as badly with 16 times more data.
+
+## Limitations
+
+There are nine worlds per cell, so intervals are wide. The agents are given interventional access and do not have to seek it. The benchmark, all transcripts and a script that reproduces every reported number are released with the paper.
+
+## Abstract
+
+> Machine discovery systems search well inside hypothesis spaces that people specify. Symbolic regression, program search against automated evaluators, and AI-scientist pipelines all start from a given set of variables. A frequent critique holds that such systems cannot perform paradigm-level discovery, the introduction of a variable that the existing vocabulary lacks, and we make this critique testable. We distinguish fitting (Level 1, L1), search over a fixed vocabulary (L2) and vocabulary extension (L3), and show that L3 faces two separable obstacles. The first concerns data: when a hidden property is a deterministic function of observables, as natural formation processes can make it, passive data cannot identify the property for any learner, human or machine, that has no prior knowledge of it, an elementary instance of the separation between rungs 1 and 2 of Pearl's causal hierarchy. The second concerns concepts: even when interventions make the property identifiable, the learner must still decide to add a new, persistent, per-entity quantity. We introduce HiddenLaw, a benchmark of procedurally generated worlds with counterfactual laws, three discovery levels and three data-access regimes. On it we evaluate symbolic search, black-box and latent world models, a minimal closed-loop discovery agent (CLDA), and LLM agents built on Claude Haiku 4.5, Sonnet 5 and Opus 5.5. As the analysis predicts, L3 fails for every learner on confounded passive data (CLDA 0/30, Sonnet 5 and Opus 5.5 0/9 each); one Haiku 4.5 success in nine runs added per-entity parameters without evidential support. With laboratory data CLDA succeeds in 30/30 worlds, and without its concept module in 0/30. A latent world model encodes the hidden variable (probe |rho| = 0.97) but predicts about five times worse than an explicit law, and still twice as badly with 16 times more data. To test concept formation without hinting at it, we gave agents a fitting tool that can group parameters by any data column and meets entities. Opus 5.5 then groups by entity and meets the full L3 criterion in 9/9 worlds with a hidden property, and groups by entity in 0/9 matched worlds where nothing is hidden (p = 4 x 10^-5); Sonnet 5 does so in 7/9 versus 0/9 and reaches L3 in 5/9. When the tool offers no grouping at all, Sonnet 5 absorbs entity differences with periodic functions of the observable, Ptolemaic epicycles, in 8/9 runs, also with 20 turns instead of 10, while Opus 5.5 posits a hidden property in every judged run, with physical or neutral variable names. Because the claim that current AI cannot invent variables is stated universally, these results refute it on the simplest L3 worlds, with wide intervals at nine worlds per cell. In these worlds access to the interventional regime is the constraint that binds every learner, although our agents are given that access and do not have to seek it; once it is available, whether concept formation occurs depends on the model and, for weaker models, on the representational interface. We release the benchmark, all transcripts and a script that reproduces every reported number, and propose an operational criterion to replace appeals to AGI in claims about machine scientific discovery.
+
+## Related research
+
+- [PrincipalBench v2](/research/papers/principalbench-v2): PrincipalBench v2 audits the v1 orchestrator benchmark, withdraws its model rankings, and replaces it with a sealed two-phase protocol with clean controls and chance-corrected detection.
+- [The Harness Is the Lab](/research/papers/the-harness-is-the-lab): A position paper and blueprint for an open AI-scientist harness that grounds every claim in a typed ontology and accepts self-improvement only on held-out evidence.
+- [VeriClust](/research/papers/vericlust): VeriClust is a proposed multi-agent architecture in which formal tools, not other language models, verify candidate answers, and each accepted result carries a proof certificate.
+
+## Cite this paper
+
+```bibtex
+@misc{chowdhury2026inventingthevariable,
+  title     = {{Inventing the Variable: Passive Data, Interventions, and the Level-3 Gap in Machine Scientific Discovery}},
+  author    = {Chowdhury, Sayan},
+  year      = {2026},
+  publisher = {Zenodo},
+  note      = {Preprint, Kalaris Labs},
+  doi       = {10.5281/zenodo.24120370},
+  url       = {https://doi.org/10.5281/zenodo.24120370}
+}
+```

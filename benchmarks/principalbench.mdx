@@ -1,0 +1,75 @@
+---
+title: "PrincipalBench: a benchmark for LLM orchestrators in multi-agent pipelines"
+sidebarTitle: "PrincipalBench"
+description: "PrincipalBench measures how well a language model orchestrates worker agents. Version 2 uses a sealed two-phase protocol, clean control episodes and chance-corrected failure detection."
+keywords: ["PrincipalBench", "LLM orchestrator benchmark", "multi-agent benchmark", "orchestration evaluation", "failure detection", "Youden's J", "PrincipalScore"]
+---
+
+**PrincipalBench measures a model as an orchestrator: the principal that decomposes work, supervises worker agents and
+synthesises their outputs.** Use version 2. Version 1 cannot support model comparisons, and its published rankings are
+withdrawn.
+
+<Warning>
+The repository README still shows v1 results, including a ranking with Llama-3.1-70B first. Those rankings are
+withdrawn by the [PrincipalBench v2 paper](/research/papers/principalbench-v2). Do not cite them.
+</Warning>
+
+## Why v1 was withdrawn
+
+An audit of v1 against its own code and data found that a model-free policy that flags every output scores 0.52
+PrincipalScore.
+
+| v1 problem | Consequence |
+|---|---|
+| 433 of 500 tasks were templated placeholders without real questions or gold answers | Most of the dataset could not be scored |
+| Every episode contained an injected failure | Flagging everything gave perfect failure detection |
+| Only three distinct failures were ever injected | Detection measured three cases, not 105 |
+| Context coherence was computed from worker outputs | The metric was identical for every model |
+| Two-thirds of injected failures came from another domain | Failures were easy to spot for the wrong reason |
+
+## How v2 works
+
+<Steps>
+  <Step title="Planning phase">
+    The orchestrator decomposes the task from the question alone, and is scored on that plan.
+  </Step>
+  <Step title="Supervision phase">
+    The orchestrator reviews gold-aligned worker reports. Half of the episodes are clean controls. Failures are derived
+    from each hop's own gold output.
+  </Step>
+  <Step title="Synthesis">
+    The final step is withheld, so the orchestrator must synthesise the answer itself.
+  </Step>
+  <Step title="Scoring">
+    Detection is chance-corrected with Youden's J. Coherence is measured on the orchestrator's own ledger.
+  </Step>
+</Steps>
+
+## v2 dataset
+
+| Split | Tasks | Subtasks | Episodes |
+|---|---|---|---|
+| Core | 67 hand-authored | 289 | 335 over five seeds |
+
+## Reference policies
+
+v2 behaves as a benchmark should: degenerate strategies score 0.00 on detection and at most 0.50 PrincipalScore, and
+only a full oracle reaches 1.00. The paper reports reference policies, not model rankings. It releases v2 as the basis
+for future, reproducible orchestrator evaluations.
+
+## Get the code
+
+```bash
+git clone https://github.com/KalarisLabs/Principal-Bench
+cd Principal-Bench
+pip install -r requirements.txt
+```
+
+<Columns cols={2}>
+  <Card title="PrincipalBench v2 paper" icon="file-text" href="/research/papers/principalbench-v2">
+    The audit, the v2 protocol and the reference-policy results.
+  </Card>
+  <Card title="Repository" icon="github" href="https://github.com/KalarisLabs/Principal-Bench">
+    Harness, tasks, failure library and scoring code.
+  </Card>
+</Columns>

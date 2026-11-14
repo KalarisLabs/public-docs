@@ -45,7 +45,13 @@ def validate_site(hub: Path, destination: Path, hub_config: dict) -> None:
         path = hub / target.lstrip("/")
         return any(
             candidate.is_file()
-            for candidate in (path, path.with_suffix(".md"), path.with_suffix(".mdx"), path / "index.md")
+            for candidate in (
+                path,
+                path.with_suffix(".md"),
+                path.with_suffix(".mdx"),
+                path / "index.md",
+                path / "index.mdx",
+            )
         )
 
     pages = [hub / "index.md", *destination.rglob("*.md"), *destination.rglob("*.mdx")]

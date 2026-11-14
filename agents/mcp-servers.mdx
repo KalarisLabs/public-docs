@@ -1,0 +1,74 @@
+---
+title: "Kalaris Labs MCP servers: setup for Claude, Codex, Cursor and more"
+sidebarTitle: "MCP servers"
+description: "Configuration for every Kalaris Labs Model Context Protocol server, Kuchi, Skill Doctor, AMARA and the docs server, in Claude Code, Claude Desktop, Cursor, Codex, VS Code and Gemini CLI."
+keywords: ["MCP servers", "Model Context Protocol setup", "Claude Code MCP", "Cursor MCP", "Codex MCP", "Kuchi MCP", "Skill Doctor MCP", "AMARA MCP"]
+---
+
+**Kalaris Labs runs one remote MCP server (Kuchi) and ships two local ones (Skill Doctor and AMARA).** The docs site
+also has a hosted search server. Remote servers need only a URL. Local servers run a command on your machine.
+
+| Server | Transport | Auth | What the agent can do |
+|---|---|---|---|
+| Kalaris docs | Streamable HTTP | None | Search and read this site |
+| Kuchi | Streamable HTTP | None | Find launch-video templates, read frame-by-frame breakdowns, plan and check remakes |
+| Skill Doctor | stdio | None | Scan skill files, tools and MCP servers for security issues before loading them |
+| AMARA | stdio | None | Find peer agents, call their tools, send messages and files, publish topics, send an emergency stop |
+
+## Claude Code
+
+```bash
+claude mcp add --transport http kalaris-docs https://docs.kalarislabs.com/mcp
+claude mcp add --transport http kuchi https://kuchi.kalarislabs.com/mcp
+claude mcp add skill-doctor -- npx -y @security.kalarislabs/skill-doctor mcp
+amara setup claude-code --write
+```
+
+## JSON configuration
+
+Use this in Claude Desktop, Cursor (`.cursor/mcp.json`), Windsurf and other clients that read an `mcpServers` object.
+
+```json mcp.json
+{
+  "mcpServers": {
+    "kalaris-docs": { "url": "https://docs.kalarislabs.com/mcp" },
+    "kuchi": { "url": "https://kuchi.kalarislabs.com/mcp" },
+    "skill-doctor": {
+      "command": "npx",
+      "args": ["-y", "@security.kalarislabs/skill-doctor", "mcp"]
+    },
+    "amara": { "command": "amara", "args": ["mcp", "--name", "my-agent"] }
+  }
+}
+```
+
+Gemini CLI uses `httpUrl` instead of `url` for remote servers, in `~/.gemini/settings.json`.
+
+## Codex CLI
+
+```bash
+codex mcp add kuchi --url https://kuchi.kalarislabs.com/mcp
+amara setup codex --write
+```
+
+## Install requirements
+
+| Server | Requires |
+|---|---|
+| Skill Doctor | Node.js for `npx`, or a binary from [GitHub releases](https://github.com/KalarisLabs/Skill-Doctor/releases) |
+| AMARA | The `amara` binary. See [install AMARA](/amara#install) |
+| Kuchi, docs | Nothing to install |
+
+## Per-product details
+
+<Columns cols={3}>
+  <Card title="Kuchi" icon="film" href="/kuchi/tools">
+    Ten tools, two prompts and two resources.
+  </Card>
+  <Card title="Skill Doctor" icon="shield-check" href="/skill-doctor/mcp">
+    MCP mode, watch mode and CI gates.
+  </Card>
+  <Card title="AMARA" icon="network" href="/amara/integrations">
+    Eleven MCP tools, HTTP API and SDKs.
+  </Card>
+</Columns>

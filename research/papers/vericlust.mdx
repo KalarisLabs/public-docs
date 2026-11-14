@@ -1,0 +1,60 @@
+---
+title: "VeriClust: verifiable multi-agent reasoning with formal cross-checking"
+sidebarTitle: "VeriClust"
+description: "VeriClust is a proposed multi-agent architecture in which formal tools, not other language models, verify candidate answers, and each accepted result carries a proof certificate."
+keywords: ["VeriClust", "formal verification", "multi-agent systems", "model checking", "SMT", "proof certificates", "hallucination", "Kalaris Labs", "preprint"]
+"og:type": "article"
+---
+
+**Bottom line:** Using one language model to check another makes the check as fallible as the thing it checks. VeriClust proposes formal verification instead, with a proof certificate for each accepted result. This is a research proposal: the system has not been built and the paper reports no results.
+
+| | |
+|---|---|
+| **Author** | Sayan Chowdhury ([ORCID 0009-0004-8421-0087](https://orcid.org/0009-0004-8421-0087)), Kalaris Labs |
+| **Published** | 2026-11 on Zenodo (preprint) |
+| **Evidence** | Proposal or design. Reports no experimental results. |
+| **DOI** | [10.5281/zenodo.24121359](https://doi.org/10.5281/zenodo.24121359) |
+| **License** | CC BY 4.0 |
+| **Theme** | [Evaluation and scientific discovery](/research#evaluation-and-scientific-discovery) |
+
+<Columns cols={2}>
+  <Card title="Read the paper" icon="file-text" href="https://zenodo.org/records/24121359">
+    Full text (06_VeriClust.pdf) and versions on Zenodo.
+  </Card>
+</Columns>
+
+## Key points
+
+- Independent **Proposers** generate candidate solutions.
+- **Verifiers** check them with formal tools: model checking, SMT solving and proof assistants.
+- An **Arbiter** combines verdicts with a reputation-weighted threshold vote.
+- An **Auditor** keeps a tamper-evident log and issues a proof certificate for each accepted result.
+- The paper gives conditions under which the weighted vote cannot accept an invalid proposal and does accept a valid one, and sets out an experimental design on mathematical reasoning, software verification and fact-checking benchmarks.
+
+## Limitations
+
+The system has not been built and no experiment has been run. The experimental section describes what will be measured and states no expected effect sizes.
+
+## Abstract
+
+> Language-model agents are being used for tasks where a wrong answer is costly, yet their outputs are probabilistic and their reasoning is hard to audit. Other language models are often used to check their work, which makes the check as fallible as the thing it checks. We propose VeriClust, a multi-agent architecture in which independent Proposers generate candidate solutions, Verifiers check them with formal tools (model checking, SMT solving and proof assistants), an Arbiter combines the verdicts with a reputation-weighted threshold vote, and an Auditor keeps a tamper-evident log and issues a proof certificate for each accepted result. We state the protocol, give conditions under which a weighted vote cannot accept an invalid proposal and does accept a valid one, and set out an experimental design on mathematical reasoning, software verification and fact-checking benchmarks. This paper is a research proposal. We have not built the system or run any experiment, and it reports no empirical results. The experimental section describes what we plan to measure, and states no expected effect sizes.
+
+## Related research
+
+- [Agent Coupling Protocol](/research/papers/agent-coupling-protocol): ACP is a ten-stage protocol that weighs provider reliability more heavily as an orchestrator's context fills. In simulation, honest providers earn 4.8 to 7.6 times more than malicious ones.
+- [PrincipalBench v2](/research/papers/principalbench-v2): PrincipalBench v2 audits the v1 orchestrator benchmark, withdraws its model rankings, and replaces it with a sealed two-phase protocol with clean controls and chance-corrected detection.
+- [Inventing the Variable](/research/papers/inventing-the-variable): The HiddenLaw benchmark tests whether AI can introduce a variable its vocabulary lacks. Passive data blocks every learner; with interventions, Claude Opus 5.5 succeeds in 9 of 9 worlds.
+
+## Cite this paper
+
+```bibtex
+@misc{chowdhury2026vericlust,
+  title     = {{VeriClust: A multi-agent system for verifiable reasoning through formal cross-checking and consensus}},
+  author    = {Chowdhury, Sayan},
+  year      = {2026},
+  publisher = {Zenodo},
+  note      = {Preprint, Kalaris Labs},
+  doi       = {10.5281/zenodo.24121359},
+  url       = {https://doi.org/10.5281/zenodo.24121359}
+}
+```

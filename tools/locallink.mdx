@@ -1,0 +1,63 @@
+---
+title: "LocalLink: let websites use the visitor's local AI models"
+sidebarTitle: "LocalLink"
+description: "LocalLink is a draft protocol and zero-dependency bridge that lets a website list and chat with AI models running on the visitor's computer, such as Ollama, LM Studio, llama.cpp or Jan, after one approval."
+keywords: ["LocalLink", "local LLM in browser", "Ollama website", "LM Studio", "llama.cpp", "OpenAI-compatible server", "browser AI SDK"]
+---
+
+**LocalLink lets a website use AI models running on the visitor's own computer.** The visitor picks "Local model" on
+the site and approves it once. The site can then list and chat with their local models: Ollama, LM Studio, llama.cpp,
+Jan or any OpenAI-compatible server.
+
+<Note>
+Draft v0.1. Tested against a mock OpenAI-compatible server; not yet verified against real Ollama or LM Studio installs
+or from public HTTPS sites.
+</Note>
+
+## Components
+
+| Path | What it is |
+|---|---|
+| `SPEC.md` | The protocol, v0.1 |
+| `bridge/locallink-bridge.mjs` | The program the visitor runs. Zero dependencies, Node 18+ |
+| `sdk/locallink.js` | What a website imports |
+| `demo/` | A sample chat site |
+| `test/` | End-to-end test and a mock model server |
+
+## Try it
+
+Run each command in its own terminal, from a clone of
+[kalaris-locallink](https://github.com/KalarisLabs/kalaris-locallink):
+
+```bash
+node bridge/locallink-bridge.mjs
+node demo/serve.mjs
+```
+
+Open `http://localhost:8787`, choose **Local model on this computer** and click **Allow** in the approval tab. With no
+model server installed, run `node test/mock-backend.mjs` and start the bridge with
+`--backend mock=http://127.0.0.1:9911`.
+
+## Use it on a website
+
+```javascript
+import { LocalLink } from './locallink.js';
+
+const link = await LocalLink.connect({
+  appName: 'My App',
+  onCode: code => showCode(code),   // the visitor matches this against the approval screen
+});
+const models = await link.models();  // [{ id: 'ollama/llama3.2:3b', backend, name }]
+for await (const text of link.chat({ model: models[0].id, messages })) append(text);
+```
+
+`LocalLink.resume()` reconnects a returning visitor without a prompt.
+
+## Manage access
+
+```bash
+node bridge/locallink-bridge.mjs grants
+node bridge/locallink-bridge.mjs revoke https://example.com
+```
+
+LocalLink is MIT licensed. For on-device inference research, see [Anudhi](/research/papers/anudhi).

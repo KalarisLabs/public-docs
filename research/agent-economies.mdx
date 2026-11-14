@@ -1,0 +1,65 @@
+---
+title: "Agent economies: mechanism design for markets of AI agents"
+sidebarTitle: "Agent economies series"
+description: "Overview of the Kalaris Labs agent economies series: context pricing, Liquidity Coupling, the Orchestration Trilemma, the Agent Coupling Protocol and economic defences against prompt injection."
+keywords: ["agent economies", "synthetic microeconomics", "mechanism design", "multi-agent systems", "AI agent payments", "insolvency cascades", "context window pricing"]
+---
+
+**When AI agents hire other agents, three things break that human markets take for granted: context is finite,
+checking a counterparty takes longer than deciding, and one default can cascade faster than a person can react.**
+This five-paper series designs economic mechanisms for each pressure and combines them into one protocol. All results
+in the series come from simulation.
+
+## Read in this order
+
+<Steps>
+  <Step title="Price context: The Marginal Utility of Context">
+    An exponential barrier price on context use makes a rational agent compress memory early.
+    [Read the paper](/research/papers/marginal-utility-of-context).
+  </Step>
+  <Step title="Stop default cascades: Liquidity Coupling">
+    Escrowing a fraction α of each contract makes insolvency cascades die out once α ≥ 1 − 1/λ.
+    [Read the paper](/research/papers/liquidity-coupling).
+  </Step>
+  <Step title="Name the problem: The Orchestration Trilemma">
+    Context, trust and solvency constraints together defeat mechanisms built for human markets.
+    [Read the paper](/research/papers/orchestration-trilemma).
+  </Step>
+  <Step title="Combine the mechanisms: The Agent Coupling Protocol">
+    A ten-stage protocol that weighs reliability more heavily as an orchestrator's context fills.
+    [Read the paper](/research/papers/agent-coupling-protocol).
+  </Step>
+  <Step title="Apply them to security: economic safeguards against prompt injection">
+    The same mechanisms make a successful indirect prompt injection cost more than it is worth.
+    [Read the paper](/research/papers/economic-safeguards-indirect-prompt-injection).
+  </Step>
+</Steps>
+
+## How the mechanisms map to the pressures
+
+| Pressure | Mechanism | Paper |
+|---|---|---|
+| Finite context window | Exponential context barrier φ(c) | [Marginal Utility of Context](/research/papers/marginal-utility-of-context) |
+| Defaults spread faster than humans react | Escrowed stake (Liquidity Coupling) | [Liquidity Coupling](/research/papers/liquidity-coupling) |
+| Verification slower than decisions | Reputation-weighted auction, quorum or challenge verification | [Agent Coupling Protocol](/research/papers/agent-coupling-protocol) |
+| All three together | Agent Coupling Protocol (ACP) | [Orchestration Trilemma](/research/papers/orchestration-trilemma) |
+| Untrusted content steers the agent | Context barrier, stake before high-impact actions, reputation cascades, verifiable execution | [Economic safeguards against IDPI](/research/papers/economic-safeguards-indirect-prompt-injection) |
+
+## Headline simulation results
+
+| Result | Value | Paper |
+|---|---|---|
+| Task success, barrier vs linear context pricing | 0.73 vs 0.42 | [Marginal Utility of Context](/research/papers/marginal-utility-of-context) |
+| Mean cascade depth, α = 0.20 vs α = 0.05 | 1.4 vs 4.7 (−70.2%) | [Liquidity Coupling](/research/papers/liquidity-coupling) |
+| Systemic failure rate, ACP vs four baselines | 0.011 vs 0.089–0.156 | [Orchestration Trilemma](/research/papers/orchestration-trilemma) |
+| Attack success, combined safeguards vs sandbox | 2.1% vs 38.4% | [Economic safeguards against IDPI](/research/papers/economic-safeguards-indirect-prompt-injection) |
+
+<Warning>
+None of these results has been replicated with deployed agents. Each paper lists the simulator's simplifications in
+its limitations section.
+</Warning>
+
+## Code
+
+The Liquidity Coupling escrow mechanism and its 10,000-node simulator are in
+[KalarisLabs/liquidity-coupling-](https://github.com/KalarisLabs/liquidity-coupling-).

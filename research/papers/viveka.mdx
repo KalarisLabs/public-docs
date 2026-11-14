@@ -1,0 +1,62 @@
+---
+title: "Viveka: separating real gains from chance in self-improving agents"
+sidebarTitle: "Viveka"
+description: "Viveka is a checking layer that re-tests a self-improving agent's changes on fresh seeds, so that changes kept by chance do not become the bar for real progress."
+keywords: ["Viveka", "self-improving agents", "agent evaluation", "statistical noise", "seeds", "winner's curse", "Kalaris Labs", "preprint"]
+"og:type": "article"
+---
+
+**Bottom line:** Agents that keep a change whenever a score goes up keep a do-nothing change half the time. Viveka is a checking layer outside the agent that re-tests each change on fresh seeds. In simulation it recovers far more real gain than the naive rule or an equal budget spent on extra seeds.
+
+| | |
+|---|---|
+| **Author** | Sayan Chowdhury ([ORCID 0009-0004-8421-0087](https://orcid.org/0009-0004-8421-0087)), Kalaris Labs |
+| **Published** | 2026-11-11 on Zenodo (preprint) |
+| **Evidence** | Results come from simulation. |
+| **DOI** | [10.5281/zenodo.24144830](https://doi.org/10.5281/zenodo.24144830) |
+| **License** | CC BY 4.0 |
+| **Theme** | [Self-improving agents](/research#self-improving-agents) |
+
+<Columns cols={2}>
+  <Card title="Read the paper" icon="file-text" href="https://zenodo.org/records/24144830">
+    Full text (Viveka_Kalaris_Labs.pdf) and versions on Zenodo.
+  </Card>
+  <Card title="Evaluation principles" icon="book-open" href="/benchmarks/evaluation-principles">
+    Related Kalaris Labs documentation.
+  </Card>
+</Columns>
+
+## Key points
+
+- Under the usual "keep it if it scores higher" rule, a change with no effect is kept half the time, however many seeds are used.
+- Once such a change is kept, its lucky score becomes the bar that real improvements must clear, so real progress slows down.
+- Viveka re-tests each change on seeds the agent has never seen. It stops early when the answer is clear, replaces lucky scores with fresh ones, and later removes changes that turn out not to matter.
+- In a simulation of 100 proposed changes, the naive rule reports a gain of 1.92σ when the real gain is 0.52σ. Viveka reaches a real gain of 1.43σ. Spending a similar budget on extra seeds reaches 0.82σ.
+
+## Limitations
+
+The numbers come from a simulation, not from real agents. The paper ends with a fixed plan for testing the same claims on an open-source self-refining coding agent.
+
+## Abstract
+
+> Agents that improve their own harness usually keep a change when a score goes up. That is weak evidence. Agent evaluations are noisy, and an agent that tries many changes will keep some that only looked better by chance. We show two simple facts. Under the usual "keep it if it scores higher" rule, a change that does nothing is kept half the time, no matter how many seeds are used. And once such a change is kept, its lucky score becomes the bar that real improvements must clear, so real progress slows down. We propose Viveka, a checking layer that sits outside the agent. It re-tests each change on fresh seeds the agent has never seen, stops early when the answer is clear, replaces lucky scores with fresh ones, and later removes changes that turn out not to matter. In a simple simulation of 100 proposed changes, the usual rule reports a gain of 1.92 sigma when the real gain is 0.52 sigma. Viveka reaches a real gain of 1.43 sigma, while spending a similar budget on extra seeds reaches 0.82 sigma. These numbers come from a simulation, not from real agents. We end with a fixed plan for testing the same claims on an open-source self-refining coding agent.
+
+## Related research
+
+- [Agent Kalki](/research/papers/agent-kalki): Agent Kalki is a Rust coding-agent harness in which a gate the agent cannot write to admits each self-modification only when eight ordered predicates hold.
+- [The Harness Is the Lab](/research/papers/the-harness-is-the-lab): A position paper and blueprint for an open AI-scientist harness that grounds every claim in a typed ontology and accepts self-improvement only on held-out evidence.
+- [PrincipalBench v2](/research/papers/principalbench-v2): PrincipalBench v2 audits the v1 orchestrator benchmark, withdraws its model rankings, and replaces it with a sealed two-phase protocol with clean controls and chance-corrected detection.
+
+## Cite this paper
+
+```bibtex
+@misc{chowdhury2026viveka,
+  title     = {{Viveka: Separating Real Gains from Chance in Self-Improving Agents}},
+  author    = {Chowdhury, Sayan},
+  year      = {2026},
+  publisher = {Zenodo},
+  note      = {Preprint, Kalaris Labs},
+  doi       = {10.5281/zenodo.24144830},
+  url       = {https://doi.org/10.5281/zenodo.24144830}
+}
+```

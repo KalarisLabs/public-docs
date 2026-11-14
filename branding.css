@@ -1,0 +1,6 @@
+/* Hide Mintlify's footer attribution until branding.js replaces it with a Kalaris Labs link.
+   Once the link's href changes, this selector no longer matches and the link shows again.
+   Delete this file and branding.js to restore the default footer. */
+a[href*="utm_campaign=poweredBy"] {
+  visibility: hidden;
+}

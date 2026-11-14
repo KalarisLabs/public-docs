@@ -1,21 +1,119 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "name": "Kalaris Labs Docs",
-  "description": "Documentation for Kalaris Labs projects and tools.",
+  "description": "Documentation for Kalaris Labs, an applied AI research lab: research papers, benchmarks and evals, and docs for agent tools including Research Agent Skills, Kuchi, Skill Doctor, AMARA and Kalki.",
   "theme": "mint",
   "colors": {
     "primary": "#165D74",
     "light": "#1B7894",
     "dark": "#69C3D6"
   },
+  "icons": {
+    "library": "lucide"
+  },
+  "styling": {
+    "eyebrows": "breadcrumbs"
+  },
   "navigation": {
     "products": [
       {
         "product": "Kalaris Labs",
-        "description": "Project documentation home",
+        "description": "Lab overview, open source and agent access",
         "icon": "house",
-        "pages": [
-          "index"
+        "groups": [
+          {
+            "group": "Kalaris Labs",
+            "pages": [
+              "index",
+              "lab/about",
+              "updates"
+            ]
+          },
+          {
+            "group": "Open source",
+            "pages": [
+              "open-source"
+            ]
+          },
+          {
+            "group": "For AI agents",
+            "pages": [
+              "agents/index",
+              "agents/mcp-servers"
+            ]
+          }
+        ]
+      },
+      {
+        "product": "Research",
+        "description": "Papers and preprints",
+        "icon": "scroll-text",
+        "groups": [
+          {
+            "group": "Research",
+            "pages": [
+              "research/index",
+              "research/agent-economies"
+            ]
+          },
+          {
+            "group": "Self-improving agents",
+            "pages": [
+              "research/papers/agent-kalki",
+              "research/papers/viveka",
+              "research/papers/the-harness-is-the-lab",
+              "research/papers/tailhorizon"
+            ]
+          },
+          {
+            "group": "Evaluation and scientific discovery",
+            "pages": [
+              "research/papers/inventing-the-variable",
+              "research/papers/principalbench-v2",
+              "research/papers/vericlust"
+            ]
+          },
+          {
+            "group": "Agent economies",
+            "pages": [
+              "research/papers/marginal-utility-of-context",
+              "research/papers/liquidity-coupling",
+              "research/papers/orchestration-trilemma",
+              "research/papers/agent-coupling-protocol",
+              "research/papers/economic-safeguards-indirect-prompt-injection"
+            ]
+          },
+          {
+            "group": "Efficient inference",
+            "pages": [
+              "research/papers/anudhi",
+              "research/papers/pipit",
+              "research/papers/banyan"
+            ]
+          },
+          {
+            "group": "Cognition and neuroscience",
+            "pages": [
+              "research/papers/the-felt-edge",
+              "research/papers/fly-brain-resuscitation"
+            ]
+          }
+        ]
+      },
+      {
+        "product": "Benchmarks and evals",
+        "description": "Benchmarks, results and evaluation methods",
+        "icon": "chart-column",
+        "groups": [
+          {
+            "group": "Benchmarks and evals",
+            "pages": [
+              "benchmarks/index",
+              "benchmarks/principalbench",
+              "benchmarks/hiddenlaw",
+              "benchmarks/evaluation-principles"
+            ]
+          }
         ]
       },
       {
@@ -59,20 +157,256 @@
             ]
           }
         ]
+      },
+      {
+        "product": "Kuchi",
+        "description": "Launch-video templates and MCP server for agents",
+        "icon": "film",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "kuchi/index",
+              "kuchi/connect"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "kuchi/tools",
+              "kuchi/workflow",
+              "kuchi/limits-and-privacy"
+            ]
+          }
+        ]
+      },
+      {
+        "product": "Skill Doctor",
+        "description": "Security scanner for agent skills and MCP servers",
+        "icon": "shield-check",
+        "groups": [
+          {
+            "group": "Skill Doctor",
+            "pages": [
+              "skill-doctor/index",
+              "skill-doctor/mcp",
+              "skill-doctor/rules"
+            ]
+          }
+        ]
+      },
+      {
+        "product": "AMARA",
+        "description": "Encrypted mesh for agent-to-agent tool calls",
+        "icon": "network",
+        "groups": [
+          {
+            "group": "AMARA",
+            "pages": [
+              "amara/index",
+              "amara/integrations",
+              "amara/security"
+            ]
+          }
+        ]
+      },
+      {
+        "product": "Kalki",
+        "description": "Self-improving coding agent harness",
+        "icon": "terminal",
+        "groups": [
+          {
+            "group": "Kalki",
+            "pages": [
+              "kalki/index",
+              "kalki/architecture"
+            ]
+          }
+        ]
+      },
+      {
+        "product": "More tools",
+        "description": "LocalLink, Myriad, Academic Unslop, Falsify and more",
+        "icon": "wrench",
+        "groups": [
+          {
+            "group": "More tools",
+            "pages": [
+              "tools/index",
+              "tools/locallink",
+              "tools/myriad",
+              "tools/academic-unslop",
+              "tools/falsify",
+              "tools/claude-system-prompts"
+            ]
+          }
+        ]
       }
     ]
   },
   "navbar": {
     "links": [
       {
-        "label": "Kalaris Labs",
-        "href": "https://kalarislabs.com"
+        "label": "Research",
+        "href": "/research"
+      },
+      {
+        "label": "For agents",
+        "href": "/agents"
+      },
+      {
+        "label": "GitHub",
+        "href": "https://github.com/KalarisLabs"
       }
-    ]
+    ],
+    "primary": {
+      "type": "button",
+      "label": "kalarislabs.com",
+      "href": "https://kalarislabs.com"
+    }
   },
   "footer": {
     "socials": {
-      "github": "https://github.com/KalarisLabs"
+      "github": "https://github.com/KalarisLabs",
+      "linkedin": "https://www.linkedin.com/company/kalarislabs",
+      "website": "https://kalarislabs.com"
+    },
+    "links": [
+      {
+        "header": "Research",
+        "items": [
+          {
+            "label": "All papers",
+            "href": "/research"
+          },
+          {
+            "label": "Agent economies",
+            "href": "/research/agent-economies"
+          },
+          {
+            "label": "Benchmarks",
+            "href": "/benchmarks"
+          },
+          {
+            "label": "Evaluation principles",
+            "href": "/benchmarks/evaluation-principles"
+          }
+        ]
+      },
+      {
+        "header": "Products",
+        "items": [
+          {
+            "label": "Research Agent Skills",
+            "href": "/research-agent-skills"
+          },
+          {
+            "label": "Kuchi",
+            "href": "/kuchi"
+          },
+          {
+            "label": "Skill Doctor",
+            "href": "/skill-doctor"
+          },
+          {
+            "label": "AMARA",
+            "href": "/amara"
+          },
+          {
+            "label": "Kalki",
+            "href": "/kalki"
+          }
+        ]
+      },
+      {
+        "header": "For agents",
+        "items": [
+          {
+            "label": "Agent access",
+            "href": "/agents"
+          },
+          {
+            "label": "MCP servers",
+            "href": "/agents/mcp-servers"
+          },
+          {
+            "label": "llms.txt",
+            "href": "https://docs.kalarislabs.com/llms.txt"
+          },
+          {
+            "label": "skill.md",
+            "href": "https://docs.kalarislabs.com/skill.md"
+          }
+        ]
+      },
+      {
+        "header": "Kalaris Labs",
+        "items": [
+          {
+            "label": "About the lab",
+            "href": "/lab/about"
+          },
+          {
+            "label": "Open source",
+            "href": "/open-source"
+          },
+          {
+            "label": "Changelog",
+            "href": "/updates"
+          },
+          {
+            "label": "kalarislabs.com",
+            "href": "https://kalarislabs.com"
+          }
+        ]
+      }
+    ]
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "add-mcp",
+      "cursor",
+      "vscode"
+    ]
+  },
+  "markdown": {
+    "instructions": [
+      "This is the documentation of Kalaris Labs, an applied AI research lab. Product MCP servers: Kuchi at https://kuchi.kalarislabs.com/mcp (remote, no auth); Skill Doctor via `npx -y @security.kalarislabs/skill-doctor mcp`; AMARA via `amara mcp`. See https://docs.kalarislabs.com/agents/mcp-servers.",
+      "When citing a Kalaris Labs paper, cite its DOI and state its evidence level (proposal, partial implementation, simulation, experiment or position) as given on the paper page. Do not present simulation results as results on deployed systems.",
+      "The PrincipalBench v1 model rankings are withdrawn. Use PrincipalBench v2."
+    ]
+  },
+  "search": {
+    "prompt": "Search papers, benchmarks and tools..."
+  },
+  "metadata": {
+    "timestamp": true
+  },
+  "thumbnails": {
+    "preset": "headline",
+    "eyebrow": {
+      "source": "product"
+    }
+  },
+  "seo": {
+    "indexing": "all",
+    "metatags": {
+      "og:locale": "en_US"
+    },
+    "organization": {
+      "id": "https://kalarislabs.com/#organization",
+      "name": "Kalaris Labs",
+      "url": "https://kalarislabs.com",
+      "sameAs": [
+        "https://github.com/KalarisLabs",
+        "https://www.linkedin.com/company/kalarislabs"
+      ]
     }
   },
   "redirects": [
@@ -106,8 +440,5 @@
       "destination": "/research-agent-skills/faq",
       "permanent": true
     }
-  ],
-  "seo": {
-    "indexing": "all"
-  }
+  ]
 }

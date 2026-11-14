@@ -1,0 +1,50 @@
+---
+title: "Kuchi MCP tools, prompts and resources reference"
+sidebarTitle: "MCP tools"
+description: "Reference for the Kuchi MCP server: kuchi_suggest_templates, kuchi_get_breakdown, kuchi_plan_remake, kuchi_check_remake and the other tools, plus its prompts and resources."
+keywords: ["Kuchi MCP tools", "kuchi_plan_remake", "kuchi_get_breakdown", "kuchi_suggest_templates", "MCP tool reference", "video breakdown API"]
+---
+
+**Kuchi exposes ten tools, two prompts and two resources.** Every catalog tool is read-only. `kuchi_send_feedback` is
+the only tool that records what the agent sends.
+
+## Tools
+
+| Tool | What it does |
+|---|---|
+| `kuchi_get_workflow` | Returns the remake method, whole or one step at a time (`find`, `study`, `plan`, `build`, `check`). Works in clients that ignore server instructions, prompts and resources. |
+| `kuchi_suggest_templates` | Returns a short numbered list of templates ranked for the user: what fits, what differs, what the user must supply, a recommended choice, the question to ask, and the gallery link. |
+| `kuchi_search_videos` | Searches by keywords, style, category, format, aspect ratio, length, pace or theme. Paginated with `limit` and `offset`. |
+| `kuchi_get_video` | Returns one video by id, slug, Kuchi link or X URL: file, poster, storyboard sheet, length, size, measured rhythm and motion notes. |
+| `kuchi_list_filters` | Lists every style, category, format, aspect ratio, pace and theme with counts, plus the 14 shot kinds used to analyse a storyboard. |
+| `kuchi_get_breakdown` | Returns the frame-by-frame measurement of one video: every shot with exact start and end, entrance, motion, colors, and its position on the storyboard sheets. Sets the analysis task for the agent. |
+| `kuchi_plan_remake` | Takes the user's product details and assets and the agent's `shot_analysis`. Returns what to borrow, a blueprint that re-times every shot to the target length on whole frames (`start_frame`, `end_frame` at the chosen `fps`), the rules, and `missing_inputs` to ask the user for. |
+| `kuchi_check_remake` | Takes the agent's shot list before delivery. Flags reused brand words, assets taken from the reference, invented logos or UI, placeholders and gaps. With `reference_shot` set, measures each shot's length and entrance against the reference and returns `compare_frames`. |
+| `kuchi_send_feedback` | Reports a failure, a confusing result or a missing capability to Kuchi's maintainers. |
+| `search`, `fetch` | The two tools ChatGPT connectors and deep research look for, over the same catalog. |
+
+Text output is Markdown by default. Pass `response_format: "json"` for structured data.
+
+## Prompts
+
+| Prompt | Arguments |
+|---|---|
+| `remake_launch_video` | Product name, optional reference |
+| `find_launch_inspiration` | Product, optional vibe |
+
+In Claude, these appear in the prompt menu.
+
+## Resources
+
+| Resource | Contents |
+|---|---|
+| `kuchi://workflow` | The full remake workflow |
+| `skill://kuchi/SKILL.md` | The Kuchi skill |
+
+## HTTP endpoints without MCP
+
+| Endpoint | Contents |
+|---|---|
+| `https://kuchi.kalarislabs.com/agent/catalog.json` | The full catalog |
+| `https://kuchi.kalarislabs.com/agent/breakdowns/<id>.json` | One video's breakdown |
+| `https://kuchi.kalarislabs.com/agent/workflow.md` | The workflow as Markdown |
