@@ -40,7 +40,7 @@ skill-doctor gate ./my-skill --fail-on HIGH --fail-under-coverage 0.8
 
 ## Gating
 
-<ResponseField name="--fail-on" type="LOW | MEDIUM | HIGH | CRITICAL" default="HIGH">
+<ResponseField name="--fail-on" type="INFO | LOW | MEDIUM | HIGH | CRITICAL" default="HIGH">
   Lowest finding severity that returns exit code `2`.
 </ResponseField>
 
@@ -51,19 +51,19 @@ skill-doctor gate ./my-skill --fail-on HIGH --fail-under-coverage 0.8
 ## Opt-in analysis
 
 <ResponseField name="--sandbox" type="flag">
-  Run the L3 behavioral harness in a temporary, isolated environment.
+  Run the L3 behavioral harness in a temporary, isolated environment. Requires a build with `--features sandbox`.
 </ResponseField>
 
 <ResponseField name="--intel" type="flag">
-  Enable L2 semantic analysis and L4 threat-intelligence digest lookups. This makes network calls.
+  Enable L4 threat-intelligence digest lookups. This makes network calls. Requires a build with `--features intel`.
 </ResponseField>
 
 <ResponseField name="--tui" type="flag">
-  Open the interactive full-screen terminal dashboard.
+  Open the interactive full-screen terminal dashboard. Requires a build with `--features tui`.
 </ResponseField>
 
-<ResponseField name="--offline" type="flag" default="on">
-  On by default: no required network calls and no telemetry.
+<ResponseField name="--offline" type="flag">
+  Block all network calls, including `--intel` lookups. Without `--intel`, Skill Doctor makes no network calls.
 </ResponseField>
 
 ## Exit codes

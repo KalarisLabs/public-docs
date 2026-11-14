@@ -34,8 +34,8 @@ You need Node.js for `npx`. Nothing else has to be installed.
     ```
 
     Look up any ID in [threat classes](/skill-doctor/reference/threat-classes). **Coverage** is the share
-    of the skill's structure that Skill Doctor could parse. Low coverage means part of the skill was not
-    analyzed.
+    of the 11 threat classes that Skill Doctor could evaluate for the skill. Low coverage means some classes
+    were not checked.
   </Step>
   <Step title="Check the exit code">
     Use the exit code in scripts and CI:

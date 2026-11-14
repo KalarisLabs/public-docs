@@ -29,7 +29,7 @@ channel that fits your setup.
     </Warning>
   </Tab>
   <Tab title="Prebuilt binary">
-    Download a stripped binary for your platform from
+    Download the release archive for your platform from
     [GitHub Releases](https://github.com/KalarisLabs/Skill-Doctor/releases/tag/v0.1.0), then
     [verify it](/skill-doctor/reference/verify-releases) before you put it on your `PATH`.
 
