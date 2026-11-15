@@ -1,0 +1,66 @@
+---
+title: "PrincipalBench v2: a validity-first benchmark for LLM orchestrators"
+sidebarTitle: "PrincipalBench v2"
+description: "PrincipalBench v2 audits the v1 orchestrator benchmark, withdraws its model rankings, and replaces it with a sealed two-phase protocol with clean controls and chance-corrected detection."
+keywords: ["PrincipalBench", "LLM orchestrator benchmark", "multi-agent pipelines", "benchmark validity", "Youden's J", "failure detection", "Kalaris Labs", "preprint"]
+"og:type": "article"
+---
+
+**Bottom line:** An audit of PrincipalBench v1 against its own code and data found it cannot support model comparisons: a model-free policy that flags everything scores 0.52 PrincipalScore. Version 2 replaces the protocol with a sealed two-phase design. The v1 model rankings are withdrawn.
+
+| | |
+|---|---|
+| **Author** | Sayan Chowdhury ([ORCID 0009-0004-8421-0087](https://orcid.org/0009-0004-8421-0087)), Kalaris Labs |
+| **Published** | 2026-11-11 on Zenodo (preprint) |
+| **Evidence** | Reports experimental results. |
+| **DOI** | [10.5281/zenodo.24144843](https://doi.org/10.5281/zenodo.24144843) |
+| **License** | CC BY 4.0 |
+| **Theme** | [Evaluation and scientific discovery](/research#evaluation-and-scientific-discovery) |
+
+<Columns cols={2}>
+  <Card title="Read the paper" icon="file-text" href="https://zenodo.org/records/24144843">
+    Full text (PrincipalBench_v2_Kalaris_Labs.pdf) and versions on Zenodo.
+  </Card>
+  <Card title="Code" icon="github" href="https://github.com/KalarisLabs/Principal-Bench">
+    Source on GitHub: `Principal-Bench`.
+  </Card>
+  <Card title="PrincipalBench benchmark" icon="book-open" href="/benchmarks/principalbench">
+    Related Kalaris Labs documentation.
+  </Card>
+</Columns>
+
+## Key points
+
+- v1 problems: 433 of 500 tasks were templated placeholders without real questions or gold answers; every episode contained an injected failure, so flagging everything gave perfect detection; only three distinct failures were ever injected; the context-coherence metric was computed from worker outputs and was identical for every model; and two-thirds of injected failures came from a different domain than the task.
+- v2 scores planning from the question alone. It scores supervision on gold-aligned worker reports in which half of the episodes are clean controls, and derives failures from each hop's own gold output.
+- Detection is chance-corrected with Youden's J. The final step is withheld, so the orchestrator must synthesise the answer, and coherence is measured on the orchestrator's own ledger.
+- The v2 core split has 67 hand-authored tasks: 289 subtasks and 335 episodes over five seeds.
+- Reference policies now behave as a benchmark should: degenerate strategies score 0.00 on detection and at most 0.50 PrincipalScore, and only a full oracle reaches 1.00.
+
+## Limitations
+
+The model rankings reported with v1, which still appear in the repository README, are withdrawn. v2 is released as the basis for future, reproducible orchestrator evaluations.
+
+## Abstract
+
+> Multi-agent systems place a principal model in charge of decomposing work, supervising worker agents, and synthesising their outputs, yet orchestrators are still chosen with benchmarks that measure single-model task performance. PrincipalBench was introduced to measure orchestration directly. This report describes its second version. We first audit the v1 release against its own code and data and find that it cannot support model comparisons: 433 of its 500 tasks are templated placeholders without real questions or gold answers, every evaluation episode contained an injected failure so a policy that flags everything attains perfect detection, only three distinct failures were ever injected, the context-coherence metric was computed from worker outputs and is therefore identical for every model, and two-thirds of injected failures came from a different domain than the task. A model-free "flag everything" policy scores 0.52 PrincipalScore under the v1 harness. PrincipalBench v2 replaces the protocol with a two-phase sealed design: planning is scored from the question alone; supervision is scored on gold-aligned worker reports in which half of the episodes are clean controls and failures are derived from the hop's own gold output. Detection is chance-corrected (Youden's J), the final step is withheld so the orchestrator must synthesise the answer, and coherence is measured on the orchestrator's own ledger. The v2 core split contains 67 hand-authored tasks (289 subtasks, 335 episodes over five seeds). Reference policies now behave as a benchmark should: degenerate strategies score 0.00 on detection and at most 0.50 PrincipalScore, while only a full oracle reaches 1.00. We withdraw the model rankings reported with v1 and release v2 as the basis for future, reproducible orchestrator evaluations. Code and data are available at https://github.com/KalarisLabs/Principal-Bench.
+
+## Related research
+
+- [Inventing the Variable](/research/papers/inventing-the-variable): The HiddenLaw benchmark tests whether AI can introduce a variable its vocabulary lacks. Passive data blocks every learner; with interventions, Claude Opus 5.5 succeeds in 9 of 9 worlds.
+- [Orchestration Trilemma](/research/papers/orchestration-trilemma): Agent markets face finite context, slow verification and fast default cascades at once. The Agent Coupling Protocol cut simulated systemic failure 8.1 to 14.2 times against four baselines.
+- [Viveka](/research/papers/viveka): Viveka is a checking layer that re-tests a self-improving agent's changes on fresh seeds, so that changes kept by chance do not become the bar for real progress.
+
+## Cite this paper
+
+```bibtex
+@misc{chowdhury2026principalbenchv2,
+  title     = {{PrincipalBench v2: A Validity-First Benchmark for LLM Orchestrators in Multi-Agent Pipelines}},
+  author    = {Chowdhury, Sayan},
+  year      = {2026},
+  publisher = {Zenodo},
+  note      = {Preprint, Kalaris Labs},
+  doi       = {10.5281/zenodo.24144843},
+  url       = {https://doi.org/10.5281/zenodo.24144843}
+}
+```

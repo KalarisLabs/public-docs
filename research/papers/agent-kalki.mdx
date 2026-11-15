@@ -1,0 +1,66 @@
+---
+title: "Agent Kalki: admission-controlled self-improvement for coding agents"
+sidebarTitle: "Agent Kalki"
+description: "Agent Kalki is a Rust coding-agent harness in which a gate the agent cannot write to admits each self-modification only when eight ordered predicates hold."
+keywords: ["Agent Kalki", "recursive self-improvement", "coding agent harness", "admission control", "agent security", "Rust", "Kalaris Labs", "preprint"]
+"og:type": "article"
+---
+
+**Bottom line:** Agent Kalki separates the agent that proposes a change to its own harness from the gate that admits it. The kernel (event log, policy engine and three provider wires) runs today. The gate, sandbox and context compiler are designed but not yet measured, and the paper reports no benchmark results.
+
+| | |
+|---|---|
+| **Author** | Sayan Chowdhury ([ORCID 0009-0004-8421-0087](https://orcid.org/0009-0004-8421-0087)), Kalaris Labs |
+| **Published** | 2026-11-11 on Zenodo (preprint) |
+| **Evidence** | Partial implementation. Reports no benchmark measurements. |
+| **DOI** | [10.5281/zenodo.24144783](https://doi.org/10.5281/zenodo.24144783) |
+| **License** | CC BY 4.0 |
+| **Theme** | [Self-improving agents](/research#self-improving-agents) |
+
+<Columns cols={2}>
+  <Card title="Read the paper" icon="file-text" href="https://zenodo.org/records/24144783">
+    Full text (agent kalki-preprint.pdf) and versions on Zenodo.
+  </Card>
+  <Card title="Code" icon="github" href="https://github.com/KalarisLabs/kalki-code">
+    Source on GitHub: `kalki-code`.
+  </Card>
+  <Card title="Kalki documentation" icon="book-open" href="/kalki">
+    Related Kalaris Labs documentation.
+  </Card>
+</Columns>
+
+## Key points
+
+- The agent may edit a **genome** of prompt notes, skills, guidance and memory. A gate outside the agent's read and write sets admits a candidate only when eight ordered predicates hold.
+- The gate compares candidate and incumbent with *k* live runs per case from matched starting states. It rejects any loss on a protected set beyond a Bonferroni-corrected flake margin, and it requires gains to exceed a measured noise ceiling τ at a token cost bounded by κ.
+- A kernel records every event in a CRC32C-framed append-only log and enforces a deny-first policy. It loads a genome version only when an admission record names that version's hash.
+- The paper contributes a formal admission rule, a write-barrier specification with five invariants, a threat model mapped to MITRE ATT&CK, MITRE ATLAS and the OWASP Top 10 for LLM applications, and five falsifiable hypotheses with an evaluation protocol.
+- Implemented today: the log, blob store, policy engine and provider wires, in 5,621 lines of Rust with 89 passing tests.
+
+## Limitations
+
+The gate, sandbox and context compiler are unmeasured, and the paper reports no Agent Kalki benchmark measurement.
+
+## Abstract
+
+> Coding agents now run multi-hour sessions in which a model edits code, runs tools, and revises its own prompts, skills, guidance, and memory. We present Agent Kalki, a harness written in Rust that separates the agent proposing a change from the component admitting it. The agent may edit a genome of prompt notes, skills, guidance, and memory, and a gate outside its write and read sets admits a candidate only when eight ordered predicates hold. A kernel below both records each event in a CRC32C-framed append-only log, enforces a deny-first policy, and loads a genome version only when an admission record names its hash. The gate compares candidate and incumbent with k live runs per case from matched starting states, rejects any loss on a protected set beyond a Bonferroni-corrected flake margin, and requires gains to exceed a measured noise ceiling tau at a token cost bounded by kappa. We contribute the formal admission rule, a write-barrier specification with five invariants, a threat model mapped to MITRE ATT&CK, MITRE ATLAS, and the OWASP Top 10 for LLM applications, and five falsifiable hypotheses with an evaluation protocol. The log, blob store, policy engine, and three provider wires run today in 5,621 lines of Rust with 89 passing tests; the gate, sandbox, and context compiler are designed and unmeasured, and this paper reports no Agent Kalki benchmark measurement. Code is available at https://github.com/KalarisLabs/kalki.
+
+## Related research
+
+- [Viveka](/research/papers/viveka): Viveka is a checking layer that re-tests a self-improving agent's changes on fresh seeds, so that changes kept by chance do not become the bar for real progress.
+- [The Harness Is the Lab](/research/papers/the-harness-is-the-lab): A position paper and blueprint for an open AI-scientist harness that grounds every claim in a typed ontology and accepts self-improvement only on held-out evidence.
+- [TailHorizon](/research/papers/tailhorizon): TailHorizon chooses between many short restarts and one long attempt for each task from the tail ratio of four probe runs, and improves KernelBench scores by 5.0 points on average.
+
+## Cite this paper
+
+```bibtex
+@misc{chowdhury2026agentkalki,
+  title     = {{Agent Kalki: An Admission-Controlled Kernel for Recursive Self-Improvement of Coding Agent Harnesses}},
+  author    = {Chowdhury, Sayan},
+  year      = {2026},
+  publisher = {Zenodo},
+  note      = {Preprint, Kalaris Labs},
+  doi       = {10.5281/zenodo.24144783},
+  url       = {https://doi.org/10.5281/zenodo.24144783}
+}
+```

@@ -1,0 +1,63 @@
+---
+title: "The Agent Coupling Protocol: preventing cognitive collapse in agent meshes"
+sidebarTitle: "Agent Coupling Protocol"
+description: "ACP is a ten-stage protocol that weighs provider reliability more heavily as an orchestrator's context fills. In simulation, honest providers earn 4.8 to 7.6 times more than malicious ones."
+keywords: ["Agent Coupling Protocol", "cognitive collapse", "reputation", "Vickrey auction", "Sybil resistance", "agent economies", "Kalaris Labs", "preprint"]
+"og:type": "article"
+---
+
+**Bottom line:** An orchestrating agent that buys computation from untrusted providers is pushed toward the cheapest quote, which is often the least reliable. Every failed call costs context, and when the window runs out before the task is done, the agent suffers cognitive collapse. ACP is a ten-stage protocol designed to prevent it.
+
+| | |
+|---|---|
+| **Author** | Sayan Chowdhury ([ORCID 0009-0004-8421-0087](https://orcid.org/0009-0004-8421-0087)), Kalaris Labs |
+| **Published** | 2026-11 on Zenodo (preprint) |
+| **Evidence** | Results come from simulation. |
+| **DOI** | [10.5281/zenodo.24121264](https://doi.org/10.5281/zenodo.24121264) |
+| **License** | CC BY 4.0 |
+| **Theme** | [Agent economies](/research#agent-economies) |
+
+<Columns cols={2}>
+  <Card title="Read the paper" icon="file-text" href="https://zenodo.org/records/24121264">
+    Full text (04_The_Agent_Coupling_Protocol.pdf) and versions on Zenodo.
+  </Card>
+  <Card title="Agent economies series" icon="book-open" href="/research/agent-economies">
+    Related Kalaris Labs documentation.
+  </Card>
+</Columns>
+
+## Key points
+
+- ACP scores providers on price and reputation, and the orchestrator's weight on reliability grows as its context fills.
+- Providers post a stake (liquidity coupling). Results are verified by quorum or by challenge, and reputation penalties propagate to upstream routers.
+- Two small proofs: the weight on unreliability diverges as context fills, and a provider with zero reputation cannot win a scored auction against an established one unless the price weight exceeds a stated bound.
+- In simulation, honest providers earn about 4.8 to 7.6 times the revenue of malicious ones.
+- The ablation shows the reputation-weighted auction accounts for the gain in task success. The stake does not change task success in this setup.
+
+## Limitations
+
+All results are from simulation. The paper did not obtain a reliable end-to-end demonstration of cognitive collapse under lowest-price routing, and lists that comparison as open work.
+
+## Abstract
+
+> An agent that buys computation from a network of untrusted providers faces a hidden trap: the cheapest quote is often the least reliable. Each failed call has to be read, reasoned about and retried, and each retry uses up the orchestrating agent's context window. The point where the window runs out before the task is done is called cognitive collapse. This paper describes the Agent Coupling Protocol (ACP), a ten-stage protocol that tries to prevent it. ACP scores providers on price and reputation, makes the orchestrator's weight on reliability grow as its context fills, requires providers to post a stake (liquidity coupling), verifies results by quorum or by challenge, and propagates reputation penalties to upstream routers. We prove two small results: the weight on unreliability diverges as context fills, and a provider with zero reputation cannot win a scored auction against an established provider unless the price weight exceeds a stated bound. We report simulation results on reputation dynamics, Sybil resistance, topology and ablation. In these simulations honest providers earn between about 4.8 and 7.6 times the revenue of malicious ones, and the ablation shows that the reputation-weighted auction accounts for the gain in task success while the stake does not change task success in this setup. We did not obtain a reliable end-to-end demonstration of cognitive collapse under lowest-price routing; that comparison is listed as open work. All results are from simulation.
+
+## Related research
+
+- [Orchestration Trilemma](/research/papers/orchestration-trilemma): Agent markets face finite context, slow verification and fast default cascades at once. The Agent Coupling Protocol cut simulated systemic failure 8.1 to 14.2 times against four baselines.
+- [Safeguards against prompt injection](/research/papers/economic-safeguards-indirect-prompt-injection): A system-level defence against indirect prompt injection that makes attacks cost more than they are worth. Simulated attack success fell from 38.4% to 2.1%.
+- [Liquidity Coupling](/research/papers/liquidity-coupling): Escrowing a fraction of each contract stops insolvency cascades when AI agents hire agents. In a 10,000-agent simulation, mean cascade depth fell by 70.2%.
+
+## Cite this paper
+
+```bibtex
+@misc{chowdhury2026agentcouplingprotocol,
+  title     = {{The Agent Coupling Protocol: Preventing cognitive collapse in autonomous mesh networks}},
+  author    = {Chowdhury, Sayan},
+  year      = {2026},
+  publisher = {Zenodo},
+  note      = {Preprint, Kalaris Labs},
+  doi       = {10.5281/zenodo.24121264},
+  url       = {https://doi.org/10.5281/zenodo.24121264}
+}
+```

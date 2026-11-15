@@ -1,0 +1,68 @@
+---
+title: "Myriad: a 10,000-node biotech agent skill graph"
+sidebarTitle: "Myriad"
+description: "Myriad maps biotechnology and pharmaceutical work into 100 domains, 1,000 workstreams and 10,000 bounded, searchable agent tasks for routing, planning and evaluation. Includes a Node.js CLI."
+keywords: ["Myriad", "biotech agent skills", "drug discovery AI", "bioinformatics tasks", "life sciences agent", "task graph", "kalaris-myriad"]
+---
+
+**Myriad is a machine-readable map of biotech and pharmaceutical work: 100 domains, 1,000 workstreams and 10,000
+atomic task nodes that agents can search and route to.** It is a taxonomy, not a set of validated protocols: three
+nodes are implemented as complete skills.
+
+```bash
+npx kalaris-myriad stats
+```
+
+## Maturity
+
+| Level | Count | Meaning |
+|---|---:|---|
+| Taxonomy-defined nodes | 10,000 | Bounded tasks with routing metadata, objectives, provenance expectations, review boundaries and completion evidence |
+| Implemented seed skills | 3 | Complete `SKILL.md` implementations with schemas, tool contracts, validation logic and examples |
+
+The three seed skills are diploid PacBio HiFi assembly optimization, variant-aware CRISPR off-target scoring, and HTS
+normalization, plate QC and hit calling.
+
+<Warning>
+Myriad does not authorize autonomous wet-lab execution, clinical decisions, GMP disposition, regulatory determinations
+or safety overrides. Operational use requires current primary sources, validated local procedures, appropriate
+authorization and qualified human review.
+</Warning>
+
+## Coverage
+
+Molecular and omics, structure and discovery, therapeutics and development, and manufacturing and translation: from
+genome assembly and single-cell transcriptomics through docking, ADME and CRISPR editing to bioreactor control,
+clinical trials, pharmacovigilance and GxP.
+
+## CLI
+
+| Command | Purpose |
+|---|---|
+| `kalaris-myriad stats` | Show release counts and maturity |
+| `kalaris-myriad list domains` | List all 100 domains |
+| `kalaris-myriad list tasks --domain N` | Browse task nodes |
+| `kalaris-myriad search <query>` | Search titles, objectives and routing names |
+| `kalaris-myriad show <id-or-name>` | Inspect one task node |
+| `kalaris-myriad export --format md --output <path>` | Export all or part of the graph as `jsonl`, `json` or `md` |
+| `kalaris-myriad validate` | Validate the installed release |
+| `kalaris-myriad init [directory]` | Initialize a working subset |
+
+Add `--json` to `stats`, `list`, `show` and `validate` for machine-readable output.
+
+```bash
+npx kalaris-myriad search "variant-aware off-target" --limit 5
+npx kalaris-myriad show MYR-D051-T041
+```
+
+## Design principles
+
+- **Precise routing:** task names say when a node should activate and what decision artifact it produces.
+- **Progressive disclosure:** agents start at the global index, narrow to a domain or workstream, and load a full node
+  only when needed.
+- **Evidence before confidence:** a score or model output is never treated as experimental, clinical or regulatory
+  proof.
+- **Fail closed:** nodes support `pass`, `warning`, `fail` and `no-call` outcomes.
+
+Explore the graph in the browser at [myriad-explorer.vercel.app](https://myriad-explorer.vercel.app). Code is
+Apache-2.0 and content CC BY 4.0. Source: [KalarisLabs/Myriad](https://github.com/KalarisLabs/Myriad).

@@ -1,0 +1,110 @@
+---
+title: "Kalki: a self-improving coding agent harness that proves each change"
+sidebarTitle: "Overview"
+description: "Kalki is a Rust coding-agent harness with an append-only log and a deny-first policy, designed so an agent can change its own prompts and skills only when a gate it cannot write to admits the change."
+keywords: ["Kalki", "coding agent", "self-improving agent", "agent harness", "Rust CLI", "deny-first policy", "Ollama", "open-weight models"]
+---
+
+**Kalki is a coding harness designed to improve itself, but only by changes it can prove.** The agent may propose
+changes to its own prompts, skills and context policy. A gate that the agent cannot write to re-runs the failures
+behind a change, a protected set of cases that pass today and held-out tasks, and measures cost. A change is kept only
+if it helps and breaks nothing that worked. One Rust binary, any model, no telemetry.
+
+<Warning>
+**v0.0.1, pre-release.** Kalki today is a headless agent loop with a durable log, three provider wires and a deny-first
+policy. It has no terminal UI and no sandbox, and it does not yet improve itself. Run it only inside a container or
+virtual machine, and only with a workspace and a model you trust.
+</Warning>
+
+## Why
+
+Agents that rewrite their own harness score higher on benchmarks. Left to judge their own changes, they also break
+things that worked, overfit their test tasks and get more expensive. In one 2026 study, 55% of the self-modifications
+a reviewer rejected had fixed the failure they targeted and broken something else
+([arXiv:2609.24130](https://arxiv.org/abs/2609.24130)). Kalki is built around that reviewer.
+
+## Install
+
+Build from source with Rust 1.88 or newer:
+
+```bash
+git clone https://github.com/KalarisLabs/kalki-code
+cd kalki-code
+cargo build --release --package kalki   # binary: target/release/kalki
+```
+
+Prebuilt archives for Linux, macOS and Windows will be on the
+[releases page](https://github.com/KalarisLabs/kalki-code/releases) when a release is published.
+
+## Quick start
+
+<Steps>
+  <Step title="Decide what the agent may run">
+    Kalki denies any command no rule allows. Without a policy file it uses a built-in default that allows `ls`, `rg`,
+    `cat`, `head`, `tail`, `pwd`, `git`, `cargo` and `rustc`. That default allows all of `git` and `cargo`, including
+    `git push` and build scripts, so write your own policy. It lives at `~/.config/kalki/policy.toml` on Linux and macOS
+    and `%APPDATA%\kalki\policy.toml` on Windows.
+
+    ```toml policy.toml
+    # Rules are checked in order and the first match wins, so denials go first.
+    [[rules]]
+    id = "deny-publish-and-push"
+    action = "deny"
+    tools = ["bash"]
+    commands = ["cargo publish", "git push"]
+
+    [[rules]]
+    id = "allow-build-and-read"
+    action = "allow"
+    tools = ["bash"]
+    commands = ["cargo", "git", "ls", "cat", "rg"]
+    ```
+  </Step>
+  <Step title="Point Kalki at a model">
+    For a local open-weight model served by Ollama:
+
+    ```bash
+    export KALKI_PROVIDER=openai_compat
+    export OPENAI_COMPAT_BASE_URL=http://localhost:11434/v1
+    export OPENAI_COMPAT_API_KEY=local
+    export KALKI_MODEL=qwen3-coder
+    ```
+
+    Without `KALKI_PROVIDER`, Kalki uses the OpenAI Responses wire and reads `OPENAI_API_KEY`.
+  </Step>
+  <Step title="Check the setup and run a task">
+    From inside a git repository:
+
+    ```bash
+    kalki doctor
+    kalki run -p "run the tests and tell me which ones fail" --max-turns 20
+    ```
+
+    `--max-turns` defaults to 200.
+  </Step>
+</Steps>
+
+Two limits in v0.0.1: an `ask` rule is treated as a denial because there is no prompt yet, and `apply_patch` is
+confined to the workspace but not checked against policy rules.
+
+## What works today
+
+| Works in v0.0.1 | Not yet |
+|---|---|
+| `kalki run`: a headless session with a turn cap | Terminal UI |
+| Append-only session log with checksums, rotation and crash recovery | Hash chain and `kalki audit verify` |
+| Large tool output stored by hash, kept out of the context | Sandbox |
+| Deny-first policy with named rules, applied to `bash` | Policy on `apply_patch`; rewind |
+| Tools: `bash` (argv only, no shell string) and `apply_patch` | Self-improvement: genome and gate |
+| OpenAI Responses, Anthropic Messages and OpenAI-compatible wires | Pi as an executor |
+
+<Columns cols={2}>
+  <Card title="Architecture and admission gate" icon="layers" href="/kalki/architecture">
+    The kernel, the genome and the eight-predicate gate.
+  </Card>
+  <Card title="Agent Kalki paper" icon="file-text" href="/research/papers/agent-kalki">
+    The formal admission rule, threat model and hypotheses.
+  </Card>
+</Columns>
+
+Kalki is dual-licensed under MIT or Apache-2.0.

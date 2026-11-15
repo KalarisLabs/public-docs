@@ -1,0 +1,36 @@
+---
+title: "Evaluation principles for AI agent research at Kalaris Labs"
+sidebarTitle: "Evaluation principles"
+description: "The rules Kalaris Labs applies before publishing an agent result: clean controls, chance correction, fresh seeds, sealed evaluators, held-out curves, pre-registration and stated evidence levels."
+keywords: ["AI evaluation methodology", "agent benchmark validity", "pre-registration", "held-out evaluation", "statistical significance", "self-improving agents", "reproducibility"]
+---
+
+**A result counts only if a degenerate strategy cannot reach it, it survives fresh seeds, and its evaluator was sealed
+before the run.** These rules come from our own mistakes and from the papers listed with each one.
+
+| Rule | Why | Source |
+|---|---|---|
+| Include clean control episodes | If every episode contains a failure, flagging everything scores perfectly | [PrincipalBench v2](/research/papers/principalbench-v2) |
+| Correct detection for chance | Raw detection rate rewards over-flagging; use a measure such as Youden's J | [PrincipalBench v2](/research/papers/principalbench-v2) |
+| Score degenerate policies first | A benchmark where "flag everything" scores 0.52 cannot rank models | [PrincipalBench v2](/research/papers/principalbench-v2) |
+| Re-test kept changes on unseen seeds | Under "keep if higher", a no-op change is kept half the time | [Viveka](/research/papers/viveka) |
+| Never let a lucky score become the bar | It slows real improvement | [Viveka](/research/papers/viveka) |
+| Protect what already works | Reject any loss on a protected set beyond a corrected flake margin | [Agent Kalki](/research/papers/agent-kalki) |
+| Require gains above the noise ceiling, at bounded cost | Small gains inside run-to-run noise are not gains | [Agent Kalki](/research/papers/agent-kalki) |
+| Keep evaluators sealed from the system under test | A system that can read its evaluator can game it | [The Harness Is the Lab](/research/papers/the-harness-is-the-lab) |
+| Report a held-out improvement curve for any self-improvement claim | Without one, the claim is marketing | [The Harness Is the Lab](/research/papers/the-harness-is-the-lab) |
+| Pre-register hypotheses and baselines | Fixing claims in advance lets results be judged against them | [Pipit](/research/papers/pipit) |
+| Compare on the same machine with matched settings | Mismatched settings inflate speed-ups | [Pipit](/research/papers/pipit) |
+| Gate every kernel against a reference and an oracle | Fast and wrong is not a result | [Anudhi](/research/papers/anudhi) |
+| Use matched control worlds | Tests whether a learner invents structure it does not need | [Inventing the Variable](/research/papers/inventing-the-variable) |
+| State the evidence level and limitations next to every result | Readers and agents should not mistake a simulation for a deployment | All papers |
+
+## Evidence levels used on this site
+
+Every paper page states one of these levels:
+
+- **Experiment**: measured results from experiments.
+- **Simulation**: results from a simulator, not from deployed systems.
+- **Partial implementation**: some components run; no benchmark measurements.
+- **Proposal**: design or pre-registration; no experimental results.
+- **Position**: an argument; no experiments.

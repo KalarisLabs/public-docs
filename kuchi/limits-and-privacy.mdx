@@ -1,0 +1,48 @@
+---
+title: "Kuchi rate limits, privacy and data sources"
+sidebarTitle: "Limits and privacy"
+description: "Kuchi MCP rate limits (120 requests a minute, 1,500 an hour per IP), request size caps, what anonymous analytics it records, and how its video stats should be read."
+keywords: ["Kuchi rate limits", "MCP rate limit", "Kuchi privacy", "MCP analytics", "launch video stats"]
+---
+
+**Kuchi allows 120 requests a minute and 1,500 an hour per IP, and never records what you tell it about your
+product.**
+
+## Rate limits
+
+| Limit | Value |
+|---|---|
+| Requests per minute, per IP | 120 |
+| Requests per hour, per IP | 1,500 |
+| JSON-RPC messages per HTTP request | 10 |
+| MCP request body | 64 KiB |
+
+- The MCP server and the `/agent` routes share the limits. The website and video files are not limited.
+- Every JSON-RPC message counts as one request.
+- IPv6 clients are counted per /64 network, so rotating addresses does not reset the count.
+- Over the limit, the server returns HTTP 429 with `Retry-After` set to the seconds until a slot frees.
+- Tool inputs are validated strictly. Unknown arguments are rejected, and every string, list and number is bounded.
+- The catalog refreshes from the repository's `main` branch at most once a minute. If GitHub is unreachable, the last
+  good copy keeps serving for up to a day.
+
+## Analytics
+
+Kuchi sends anonymous usage events to PostHog: which tool ran, how long it took, whether it failed, the client's name
+and version, the country, catalog search terms and filters, and the reference requested.
+
+It never sends what `kuchi_plan_remake` or `kuchi_check_remake` receive about your product (name, description,
+features, copy, asset descriptions, file locations or shot analysis), tool results, or IP addresses. A test in the
+repository enforces this. See the [privacy policy](https://kuchi.kalarislabs.com/privacy.html).
+
+## How to read the video stats
+
+- Metrics are historical snapshots in Pacific time. Each entry records its own date; counts are not live.
+- Impressions describe post exposure, not video plays, and do not exclude paid promotion.
+- Follower counts may describe a founder or employee rather than a company.
+- Eight entries are excerpts; their original durations are shown. Stats describe the full source posts.
+- Style categories are editorial judgments based on sampled frames.
+
+## Suggest a video
+
+Open an [issue](https://github.com/KalarisLabs/kuchi/issues/new?template=suggest-video.yml) with the X link, or add the
+entry in a pull request following the repository's `CONTRIBUTING.md`.

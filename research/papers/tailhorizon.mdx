@@ -1,0 +1,63 @@
+---
+title: "TailHorizon: tail-aware horizon allocation for research agents"
+sidebarTitle: "TailHorizon"
+description: "TailHorizon chooses between many short restarts and one long attempt for each task from the tail ratio of four probe runs, and improves KernelBench scores by 5.0 points on average."
+keywords: ["TailHorizon", "test-time compute", "restarts", "horizon allocation", "KernelBench", "RE-Bench", "LLM agents", "Kalaris Labs", "preprint"]
+"og:type": "article"
+---
+
+**Bottom line:** With a fixed compute budget, should an agent make one long attempt or several short independent ones? TailHorizon decides per task from four short probes. On KernelBench it beat the strongest baseline by 5.0 percentage points on average.
+
+| | |
+|---|---|
+| **Author** | Sayan Chowdhury ([ORCID 0009-0004-8421-0087](https://orcid.org/0009-0004-8421-0087)), Kalaris Labs |
+| **Published** | 2026-11 on Zenodo (preprint) |
+| **Evidence** | Reports experimental results. |
+| **DOI** | [10.5281/zenodo.24121494](https://doi.org/10.5281/zenodo.24121494) |
+| **License** | CC BY 4.0 |
+| **Theme** | [Self-improving agents](/research#self-improving-agents) |
+
+<Columns cols={2}>
+  <Card title="Read the paper" icon="file-text" href="https://zenodo.org/records/24121494">
+    Full text (07_TailHorizon.pdf) and versions on Zenodo.
+  </Card>
+  <Card title="Benchmarks and evals" icon="book-open" href="/benchmarks">
+    Related Kalaris Labs documentation.
+  </Card>
+</Columns>
+
+## Key points
+
+- TailHorizon runs *m* = 4 short probe attempts and computes the **tail ratio**: the largest probe improvement divided by the median positive one.
+- When the ratio is high or few probes succeed, it spends the rest of the budget on many restarts. Otherwise it extends the best attempt. The idea comes from restart theory for randomised algorithms.
+- On KernelBench with a budget of ten calls, TailHorizon reached fast_1 scores of 48%, 78% and 22% on Levels 1, 2 and 3, against 43%, 72% and 18% for the strongest baseline (three seeds).
+- On RE-Bench it was ahead of the best baseline in six of seven environments. This is suggestive but not statistically significant (one-sided sign test *p* = 0.0625).
+- Ablations that remove or randomise the tail signal lowered KernelBench Level 2 performance.
+
+## Limitations
+
+The experiments are small. Several reported numbers in the underlying experiments cannot yet be reconciled with each other and are listed in the paper's limitations. The claim that a tail ratio above 2 identifies restart-dominated tasks is a hypothesis these experiments do not test directly.
+
+## Abstract
+
+> Given a fixed compute budget, should a language-model agent make one long attempt at a task, or several shorter independent ones? The answer differs from task to task, and systems usually fix it by hand. We describe TailHorizon, a small controller that runs m = 4 short probe attempts, computes the ratio of the largest probe improvement to the median positive one (the tail ratio), and then spends the rest of the budget either on many restarts, when the ratio is high or few probes succeed, or on extending the best attempt. The idea comes from restart theory for randomised algorithms. On KernelBench with a budget of ten calls, TailHorizon reached fast_1 scores of 48%, 78% and 22% on Levels 1, 2 and 3, against 43%, 72% and 18% for the strongest baseline, an average gain of 5.0 percentage points (three seeds). On RE-Bench, TailHorizon was ahead of the best baseline in six of seven environments, which is suggestive but not statistically significant (one-sided sign test p = 0.0625). Ablations that remove or randomise the tail signal lowered KernelBench Level 2 performance. Several reported numbers in the underlying experiments cannot yet be reconciled with each other, and we list them in the limitations. The experiments are small, and the claim that a tail ratio above 2 identifies restart-dominated tasks is a hypothesis that these experiments do not test directly.
+
+## Related research
+
+- [Viveka](/research/papers/viveka): Viveka is a checking layer that re-tests a self-improving agent's changes on fresh seeds, so that changes kept by chance do not become the bar for real progress.
+- [Agent Kalki](/research/papers/agent-kalki): Agent Kalki is a Rust coding-agent harness in which a gate the agent cannot write to admits each self-modification only when eight ordered predicates hold.
+- [The Harness Is the Lab](/research/papers/the-harness-is-the-lab): A position paper and blueprint for an open AI-scientist harness that grounds every claim in a typed ontology and accepts self-improvement only on held-out evidence.
+
+## Cite this paper
+
+```bibtex
+@misc{chowdhury2026tailhorizon,
+  title     = {{TailHorizon: Tail-aware horizon allocation for long-horizon autonomous research agents}},
+  author    = {Chowdhury, Sayan},
+  year      = {2026},
+  publisher = {Zenodo},
+  note      = {Preprint, Kalaris Labs},
+  doi       = {10.5281/zenodo.24121494},
+  url       = {https://doi.org/10.5281/zenodo.24121494}
+}
+```

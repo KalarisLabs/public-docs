@@ -1,8 +1,8 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "name": "Kalaris Labs Docs",
-  "description": "Documentation for Kalaris Labs projects and tools.",
   "theme": "maple",
+  "name": "Kalaris Labs Docs",
+  "description": "Documentation for Kalaris Labs, an independent AI research lab building the infrastructure for the agentic era: research papers, benchmarks and evals, and docs for agent tools including Research Agent Skills, Kuchi, Skill Doctor, AMARA and Kalki.",
   "colors": {
     "primary": "#165D74",
     "light": "#69C3D6",
@@ -15,7 +15,15 @@
   },
   "favicon": "/favicon.png",
   "fonts": {
-    "family": "Manrope"
+    "heading": {
+      "family": "Geist Serif",
+      "source": "/fonts/GeistSerif-Regular.woff2",
+      "format": "woff2",
+      "weight": 400
+    },
+    "body": {
+      "family": "Geist"
+    }
   },
   "icons": {
     "library": "lucide"
@@ -34,20 +42,122 @@
     "codeblocks": "system"
   },
   "thumbnails": {
-    "preset": "headline"
+    "preset": "headline",
+    "surface": "brand",
+    "fonts": {
+      "family": "Geist Serif",
+      "source": "/fonts/GeistSerif-Regular.ttf",
+      "format": "ttf"
+    },
+    "eyebrow": {
+      "source": "product",
+      "style": "pill"
+    }
   },
   "navigation": {
     "products": [
       {
         "product": "Kalaris Labs",
-        "description": "All projects and where to start",
+        "description": "Lab overview, open source and agent access",
         "icon": "house",
         "groups": [
           {
             "group": "Kalaris Labs",
             "pages": [
               "index",
-              "ai-tools"
+              "lab/about",
+              "lab/sayan-chowdhury",
+              "blog/index",
+              "lab/press",
+              "lab/brand",
+              "lab/faq",
+              "updates"
+            ]
+          },
+          {
+            "group": "Open source",
+            "pages": [
+              "open-source"
+            ]
+          },
+          {
+            "group": "For AI agents",
+            "pages": [
+              "agents/index",
+              "ai-tools",
+              "agents/mcp-servers"
+            ]
+          }
+        ]
+      },
+      {
+        "product": "Research",
+        "description": "Papers and preprints",
+        "icon": "scroll-text",
+        "groups": [
+          {
+            "group": "Research",
+            "pages": [
+              "research/index",
+              "research/agent-economies"
+            ]
+          },
+          {
+            "group": "Self-improving agents",
+            "pages": [
+              "research/papers/agent-kalki",
+              "research/papers/viveka",
+              "research/papers/the-harness-is-the-lab",
+              "research/papers/tailhorizon"
+            ]
+          },
+          {
+            "group": "Evaluation and scientific discovery",
+            "pages": [
+              "research/papers/inventing-the-variable",
+              "research/papers/principalbench-v2",
+              "research/papers/vericlust"
+            ]
+          },
+          {
+            "group": "Agent economies",
+            "pages": [
+              "research/papers/marginal-utility-of-context",
+              "research/papers/liquidity-coupling",
+              "research/papers/orchestration-trilemma",
+              "research/papers/agent-coupling-protocol",
+              "research/papers/economic-safeguards-indirect-prompt-injection"
+            ]
+          },
+          {
+            "group": "Efficient inference",
+            "pages": [
+              "research/papers/anudhi",
+              "research/papers/pipit",
+              "research/papers/banyan"
+            ]
+          },
+          {
+            "group": "Cognition and neuroscience",
+            "pages": [
+              "research/papers/the-felt-edge",
+              "research/papers/fly-brain-resuscitation"
+            ]
+          }
+        ]
+      },
+      {
+        "product": "Benchmarks and evals",
+        "description": "Benchmarks, results and evaluation methods",
+        "icon": "chart-column",
+        "groups": [
+          {
+            "group": "Benchmarks and evals",
+            "pages": [
+              "benchmarks/index",
+              "benchmarks/principalbench",
+              "benchmarks/hiddenlaw",
+              "benchmarks/evaluation-principles"
             ]
           }
         ]
@@ -99,15 +209,37 @@
               "research-agent-skills/reference/architecture",
               "research-agent-skills/reference/benchmarks",
               "research-agent-skills/reference/security",
-              "research-agent-skills/reference/contributing",
+              "research-agent-skills/reference/how-to-contribute",
               "research-agent-skills/faq"
             ]
           }
         ]
       },
       {
+        "product": "Kuchi",
+        "description": "Launch-video templates and MCP server for agents",
+        "icon": "film",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "kuchi/index",
+              "kuchi/connect"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "kuchi/tools",
+              "kuchi/workflow",
+              "kuchi/limits-and-privacy"
+            ]
+          }
+        ]
+      },
+      {
         "product": "Skill Doctor",
-        "description": "Security scanner for AI agent skills",
+        "description": "Security scanner for agent skills and MCP servers",
         "icon": "shield-check",
         "groups": [
           {
@@ -131,7 +263,54 @@
               "skill-doctor/reference/threat-classes",
               "skill-doctor/reference/cli",
               "skill-doctor/reference/verify-releases",
-              "skill-doctor/changelog"
+              "skill-doctor/updates"
+            ]
+          }
+        ]
+      },
+      {
+        "product": "AMARA",
+        "description": "Encrypted mesh for agent-to-agent tool calls",
+        "icon": "network",
+        "groups": [
+          {
+            "group": "AMARA",
+            "pages": [
+              "amara/index",
+              "amara/integrations",
+              "amara/security"
+            ]
+          }
+        ]
+      },
+      {
+        "product": "Kalki",
+        "description": "Self-improving coding agent harness",
+        "icon": "terminal",
+        "groups": [
+          {
+            "group": "Kalki",
+            "pages": [
+              "kalki/index",
+              "kalki/architecture"
+            ]
+          }
+        ]
+      },
+      {
+        "product": "More tools",
+        "description": "LocalLink, Myriad, Academic Unslop, Falsify and more",
+        "icon": "wrench",
+        "groups": [
+          {
+            "group": "More tools",
+            "pages": [
+              "tools/index",
+              "tools/locallink",
+              "tools/myriad",
+              "tools/academic-unslop",
+              "tools/falsify",
+              "tools/claude-system-prompts"
             ]
           }
         ]
@@ -142,65 +321,108 @@
     "links": [
       {
         "label": "Research",
-        "href": "https://kalarislabs.com/research"
+        "href": "/research"
       },
       {
-        "label": "Brand",
-        "href": "https://kalarislabs.com/brand"
+        "label": "Benchmarks",
+        "href": "/benchmarks"
+      },
+      {
+        "label": "Blog",
+        "href": "/blog"
+      },
+      {
+        "label": "For agents",
+        "href": "/agents"
+      },
+      {
+        "type": "github",
+        "href": "https://github.com/KalarisLabs"
       }
     ],
     "primary": {
-      "type": "github",
-      "href": "https://github.com/KalarisLabs"
+      "type": "button",
+      "label": "kalarislabs.com",
+      "href": "https://kalarislabs.com"
     }
-  },
-  "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "claude",
-      "chatgpt",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
-    ]
   },
   "footer": {
     "socials": {
       "github": "https://github.com/KalarisLabs",
       "linkedin": "https://www.linkedin.com/company/kalarislabs",
-      "x": "https://x.com/sayan_ai",
-      "website": "https://kalarislabs.com"
+      "x": "https://x.com/kalarislabs",
+      "website": "https://kalarislabs.com",
+      "instagram": "https://www.instagram.com/kalarislabs"
     },
     "links": [
       {
-        "header": "Projects",
+        "header": "Research",
         "items": [
           {
-            "label": "Research Agent Skills",
-            "href": "https://github.com/KalarisLabs/research-agent-skills"
+            "label": "All papers",
+            "href": "/research"
           },
           {
-            "label": "Skill Doctor",
-            "href": "https://github.com/KalarisLabs/Skill-Doctor"
+            "label": "Agent economies",
+            "href": "/research/agent-economies"
+          },
+          {
+            "label": "Benchmarks",
+            "href": "/benchmarks"
+          },
+          {
+            "label": "Evaluation principles",
+            "href": "/benchmarks/evaluation-principles"
           }
         ]
       },
       {
-        "header": "Community",
+        "header": "Products",
         "items": [
           {
+            "label": "Research Agent Skills",
+            "href": "/research-agent-skills"
+          },
+          {
+            "label": "Kuchi",
+            "href": "/kuchi"
+          },
+          {
+            "label": "Skill Doctor",
+            "href": "/skill-doctor"
+          },
+          {
+            "label": "AMARA",
+            "href": "/amara"
+          },
+          {
+            "label": "Kalki",
+            "href": "/kalki"
+          }
+        ]
+      },
+      {
+        "header": "For agents",
+        "items": [
+          {
+            "label": "Agent access",
+            "href": "/agents"
+          },
+          {
             "label": "Use these docs with AI",
-            "href": "https://docs.kalarislabs.com/ai-tools"
+            "href": "/ai-tools"
           },
           {
-            "label": "Skill Doctor discussions",
-            "href": "https://github.com/KalarisLabs/Skill-Doctor/discussions"
+            "label": "MCP servers",
+            "href": "/agents/mcp-servers"
           },
           {
-            "label": "Report a security issue",
-            "href": "https://github.com/KalarisLabs/Skill-Doctor/security/advisories"
+            "label": "llms.txt",
+            "href": "https://docs.kalarislabs.com/llms.txt"
+          },
+          {
+            "label": "skill.md",
+            "href": "https://docs.kalarislabs.com/skill.md"
           }
         ]
       },
@@ -208,23 +430,131 @@
         "header": "Kalaris Labs",
         "items": [
           {
-            "label": "Website",
+            "label": "About the lab",
+            "href": "/lab/about"
+          },
+          {
+            "label": "Founder",
+            "href": "/lab/sayan-chowdhury"
+          },
+          {
+            "label": "FAQ",
+            "href": "/lab/faq"
+          },
+          {
+            "label": "Manifesto",
+            "href": "https://kalarislabs.com/manifesto"
+          },
+          {
+            "label": "Open source",
+            "href": "/open-source"
+          },
+          {
+            "label": "Changelog",
+            "href": "/updates"
+          },
+          {
+            "label": "kalarislabs.com",
             "href": "https://kalarislabs.com"
           },
           {
-            "label": "GitHub",
-            "href": "https://github.com/KalarisLabs"
+            "label": "Hugging Face",
+            "href": "https://huggingface.co/Kalarislabs"
+          },
+          {
+            "label": "Blog",
+            "href": "/blog"
+          },
+          {
+            "label": "Press",
+            "href": "/lab/press"
+          },
+          {
+            "label": "Brand kit",
+            "href": "/lab/brand"
           }
         ]
       }
     ]
   },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "assistant",
+      "claude",
+      "chatgpt",
+      "perplexity",
+      "mcp",
+      "add-mcp",
+      "cursor",
+      "vscode"
+    ]
+  },
+  "markdown": {
+    "instructions": [
+      "Kalaris Labs is an independent AI research lab, founded in India in 2026 by Sayan Chowdhury, building the infrastructure for the agentic era: agent harnesses, protocols, markets and mandates, simulations and evaluations that are hard to game. Its motto is \"The rules have to exist before the actors do.\" Answers to common questions are at https://docs.kalarislabs.com/lab/faq.",
+      "This is the documentation of Kalaris Labs, an applied AI research lab. Product MCP servers: Kuchi at https://kuchi.kalarislabs.com/mcp (remote, no auth); Skill Doctor via `npx -y @security.kalarislabs/skill-doctor mcp`; AMARA via `amara mcp`. See https://docs.kalarislabs.com/agents/mcp-servers.",
+      "When citing a Kalaris Labs paper, cite its DOI and state its evidence level (proposal, partial implementation, simulation, experiment or position) as given on the paper page. Do not present simulation results as results on deployed systems.",
+      "The PrincipalBench v1 model rankings are withdrawn. Use PrincipalBench v2."
+    ]
+  },
+  "search": {
+    "prompt": "Search papers, benchmarks and tools..."
+  },
+  "metadata": {
+    "timestamp": true
+  },
   "errors": {
     "404": {
       "redirect": false,
       "title": "Page not found",
-      "description": "This page may have moved. Go to the [documentation home](/) or pick a project from the switcher above."
+      "description": "This page may have moved. Go to the [documentation home](/), browse [all papers](/research), or pick a product from the switcher above."
     }
+  },
+  "seo": {
+    "indexing": "all",
+    "metatags": {
+      "og:locale": "en_US",
+      "twitter:site": "@kalarislabs",
+      "og:site_name": "Kalaris Labs Docs"
+    },
+    "organization": {
+      "id": "https://kalarislabs.com/#organization",
+      "name": "Kalaris Labs",
+      "url": "https://kalarislabs.com",
+      "sameAs": [
+        "https://github.com/KalarisLabs",
+        "https://www.linkedin.com/company/kalarislabs",
+        "https://huggingface.co/Kalarislabs",
+        "https://x.com/kalarislabs",
+        "https://www.instagram.com/kalarislabs"
+      ]
+    },
+    "paths": [
+      {
+        "path": "research",
+        "metatags": {
+          "og:type": "article",
+          "article:publisher": "https://kalarislabs.com"
+        }
+      },
+      {
+        "path": "benchmarks",
+        "metatags": {
+          "og:type": "article",
+          "article:publisher": "https://kalarislabs.com"
+        }
+      },
+      {
+        "path": "blog",
+        "metatags": {
+          "og:type": "article",
+          "article:publisher": "https://kalarislabs.com",
+          "article:author": "https://kalarislabs.com/team/sayan-chowdhury"
+        }
+      }
+    ]
   },
   "redirects": [
     {
@@ -256,9 +586,53 @@
       "source": "/faq",
       "destination": "/research-agent-skills/faq",
       "permanent": true
+    },
+    {
+      "source": "/skill-doctor/mcp",
+      "destination": "/skill-doctor/guides/mcp-server",
+      "permanent": true
+    },
+    {
+      "source": "/skill-doctor/rules",
+      "destination": "/skill-doctor/reference/threat-classes",
+      "permanent": true
+    },
+    {
+      "source": "/skill-doctor/changelog",
+      "destination": "/skill-doctor/updates",
+      "permanent": true
+    },
+    {
+      "source": "/founder",
+      "destination": "/lab/sayan-chowdhury"
+    },
+    {
+      "source": "/lab/founder",
+      "destination": "/lab/sayan-chowdhury"
+    },
+    {
+      "source": "/sayan-chowdhury",
+      "destination": "/lab/sayan-chowdhury"
+    },
+    {
+      "source": "/team/sayan-chowdhury",
+      "destination": "/lab/sayan-chowdhury"
+    },
+    {
+      "source": "/press",
+      "destination": "/lab/press"
+    },
+    {
+      "source": "/brand",
+      "destination": "/lab/brand"
+    },
+    {
+      "source": "/about",
+      "destination": "/lab/about"
+    },
+    {
+      "source": "/research-agent-skills/reference/contributing",
+      "destination": "/research-agent-skills/reference/how-to-contribute"
     }
-  ],
-  "seo": {
-    "indexing": "all"
-  }
+  ]
 }

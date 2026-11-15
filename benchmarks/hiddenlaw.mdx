@@ -1,0 +1,47 @@
+---
+title: "HiddenLaw: a benchmark for machine scientific discovery"
+sidebarTitle: "HiddenLaw"
+description: "HiddenLaw tests whether AI systems can invent a variable their vocabulary lacks, using procedurally generated worlds with counterfactual laws, three discovery levels and three data-access regimes."
+keywords: ["HiddenLaw", "scientific discovery benchmark", "AI scientist evaluation", "causal discovery", "latent variables", "LLM agents", "Claude Opus 5.5"]
+---
+
+**HiddenLaw tests whether a learner can discover a hidden, per-entity property that its starting vocabulary does not
+contain.** It makes the critique "AI cannot invent new variables" testable. The benchmark was introduced in
+[Inventing the Variable](/research/papers/inventing-the-variable).
+
+## Discovery levels
+
+| Level | Name | What the learner must do |
+|---|---|---|
+| L1 | Fitting | Fit parameters of a given law |
+| L2 | Search | Find a law within a fixed vocabulary of variables |
+| L3 | Vocabulary extension | Add a new, persistent, per-entity quantity the vocabulary lacks |
+
+## Design
+
+- Worlds are procedurally generated and follow counterfactual laws, so a learner cannot recall the answer.
+- Each world is offered under three data-access regimes, including confounded passive data and laboratory
+  (interventional) data.
+- Matched control worlds contain nothing hidden, which tests whether a learner invents variables it does not need.
+
+## Results
+
+| Learner | Confounded passive data (L3) | With laboratory data |
+|---|---|---|
+| Closed-loop discovery agent (CLDA) | 0/30 | 30/30; 0/30 without its concept module |
+| Claude Sonnet 5 agent | 0/9 | Groups by entity in 7/9 (0/9 controls); full L3 in 5/9 |
+| Claude Opus 5.5 agent | 0/9 | Groups by entity and meets full L3 in 9/9 (0/9 controls, *p* = 4 × 10⁻⁵) |
+| Latent world model | n/a | Encodes the variable (probe \|ρ\| = 0.97) but predicts about 5× worse than an explicit law |
+
+The agent results with laboratory data use a fitting tool that can group parameters by any data column. When the tool
+offers no grouping, Sonnet 5 absorbs entity differences with periodic functions of the observable in 8 of 9 runs,
+while Opus 5.5 posits a hidden property in every judged run.
+
+## What the results mean
+
+Passive data blocks every learner, human or machine, when the hidden property is a deterministic function of
+observables. Once interventional data is available, whether a learner forms the new concept depends on the model and,
+for weaker models, on the tool interface. With nine worlds per cell, the intervals are wide.
+
+The paper releases the benchmark, all transcripts and a script that reproduces every reported number. Get them from
+the [Zenodo record](https://doi.org/10.5281/zenodo.24120370).

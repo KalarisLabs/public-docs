@@ -1,0 +1,66 @@
+---
+title: "Liquidity Coupling: stopping insolvency cascades in agent networks"
+sidebarTitle: "Liquidity Coupling"
+description: "Escrowing a fraction of each contract stops insolvency cascades when AI agents hire agents. In a 10,000-agent simulation, mean cascade depth fell by 70.2%."
+keywords: ["Liquidity Coupling", "agent economies", "insolvency cascades", "Galton-Watson process", "escrow", "mechanism design", "Kalaris Labs", "preprint"]
+"og:type": "article"
+---
+
+**Bottom line:** When AI agents hire other agents, one default at the bottom of the chain can travel upward faster than a person can intervene. Liquidity Coupling has the delegating agent escrow a fraction α of each payment for downstream creditors. Once α is above a threshold set by the branching factor, cascades die out.
+
+| | |
+|---|---|
+| **Author** | Sayan Chowdhury ([ORCID 0009-0004-8421-0087](https://orcid.org/0009-0004-8421-0087)), Kalaris Labs |
+| **Published** | 2026-11 on Zenodo (preprint) |
+| **Evidence** | Results come from simulation. |
+| **DOI** | [10.5281/zenodo.24121189](https://doi.org/10.5281/zenodo.24121189) |
+| **License** | CC BY 4.0 |
+| **Theme** | [Agent economies](/research#agent-economies) |
+
+<Columns cols={2}>
+  <Card title="Read the paper" icon="file-text" href="https://zenodo.org/records/24121189">
+    Full text (02_Liquidity_Coupling.pdf) and versions on Zenodo.
+  </Card>
+  <Card title="Code" icon="github" href="https://github.com/KalarisLabs/liquidity-coupling-">
+    Source on GitHub: `liquidity-coupling-`.
+  </Card>
+  <Card title="Agent economies series" icon="book-open" href="/research/agent-economies">
+    Related Kalaris Labs documentation.
+  </Card>
+</Columns>
+
+## Key points
+
+- The paper names the **Recursive Default Problem**: a worker fails, its hirer cannot pay the sub-contractors it already engaged, and the hirer's own hirer is exposed in turn.
+- Modelled as a branching process with mean branching factor λ, each default transmits upward with probability 1 − α. The cascade dies out with probability one when α ≥ 1 − 1/λ, and has finite expected size 1 / (1 − λ(1 − α)) when α > 1 − 1/λ.
+- A Markov inequality gives a tail bound on cascade size. Under a stated sub-linear extraction assumption, Sybil cartels that stake α·p per member are unprofitable once they are large enough.
+- In a simulation with N = 10,000 agents and λ = 1.15 (100 trials per α), mean cascade depth fell from 4.7 at α = 0.05 to 1.4 at α = 0.20, a 70.2% reduction. The transition appears near the predicted α_c = 0.1304.
+- A small experiment on five-hop chains of locally served language models shows the same direction of effect.
+
+## Limitations
+
+All results are simulation or small-scale experiment, and the paper's empirical section lists what remains unverified. The reference repository's README describes an earlier version of the paper with different numbers; the Zenodo preprint is the current version.
+
+## Abstract
+
+> When AI agents hire other agents, a failure at the bottom of the chain can travel upward faster than any human can intervene. A worker fails, its hirer cannot pay the sub-contractors it has already engaged, and the hirer's own hirer is left exposed in turn. We call this the Recursive Default Problem. We propose Liquidity Coupling: a delegating agent escrows a fraction alpha of each contract's payment, which is released to downstream creditors if the worker defaults. Modelling the hierarchy as a branching process with mean branching factor lambda and homogeneous, locally tree-like structure, we show that each default transmits upward with probability 1 - alpha, so the cascade dies out with probability one when alpha >= 1 - 1/lambda and has finite expected size 1/(1 - lambda(1 - alpha)) when alpha > 1 - 1/lambda. A Markov inequality gives a simple tail bound on cascade size, and a short argument shows that Sybil cartels that stake alpha p per member are unprofitable once they are large enough, under a stated sub-linear extraction assumption. In a simulation with N = 10,000 agents and lambda = 1.15 (100 trials per value of alpha), mean cascade depth fell from 4.7 at alpha = 0.05 to 1.4 at alpha = 0.20, a reduction of 70.2%, and the transition appears near the predicted alpha_c = 0.1304. A small experiment on five-hop chains of locally served language models shows the same direction of effect. All results are simulation or small-scale experiment; the empirical section lists what remains unverified.
+
+## Related research
+
+- [Orchestration Trilemma](/research/papers/orchestration-trilemma): Agent markets face finite context, slow verification and fast default cascades at once. The Agent Coupling Protocol cut simulated systemic failure 8.1 to 14.2 times against four baselines.
+- [Agent Coupling Protocol](/research/papers/agent-coupling-protocol): ACP is a ten-stage protocol that weighs provider reliability more heavily as an orchestrator's context fills. In simulation, honest providers earn 4.8 to 7.6 times more than malicious ones.
+- [Marginal Utility of Context](/research/papers/marginal-utility-of-context): An exponential barrier price on context use makes a rational agent compress memory early. In a 50-agent simulation it raised task success from 0.42 to 0.73.
+
+## Cite this paper
+
+```bibtex
+@misc{chowdhury2026liquiditycoupling,
+  title     = {{Liquidity Coupling in Autonomous Agent Networks: A branching-process threshold for systemic stability}},
+  author    = {Chowdhury, Sayan},
+  year      = {2026},
+  publisher = {Zenodo},
+  note      = {Preprint, Kalaris Labs},
+  doi       = {10.5281/zenodo.24121189},
+  url       = {https://doi.org/10.5281/zenodo.24121189}
+}
+```

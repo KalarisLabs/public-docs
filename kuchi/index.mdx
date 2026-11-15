@@ -1,0 +1,61 @@
+---
+title: "Kuchi: launch-video templates for AI agents, with an MCP server"
+sidebarTitle: "Overview"
+description: "Kuchi is a library of 84 product-launch videos measured frame by frame. Agents connect to its MCP server to pick a reference, study its shots and plan a remake for your product."
+keywords: ["Kuchi", "launch video", "product launch video AI", "MCP server", "video templates", "motion design", "AI video remake", "Claude Code plugin"]
+---
+
+**Kuchi is a library of real product-launch videos that your agent uses as inspiration templates.** Each video is
+measured frame by frame. Your agent picks a reference, studies its shots, plans a remake that uses your product,
+assets and copy, and checks the result against the reference. It copies motion and taste, never the reference's brand,
+footage or music.
+
+```text Setup prompt
+Connect the Kuchi MCP server at https://kuchi.kalarislabs.com/mcp (Streamable HTTP, no sign-in) and confirm it works by listing its tools.
+```
+
+<Columns cols={2}>
+  <Card title="Connect your agent" icon="plug" href="/kuchi/connect">
+    Claude, Claude Code, ChatGPT, Codex, Cursor, VS Code and Gemini CLI.
+  </Card>
+  <Card title="Browse the gallery" icon="film" href="https://kuchi.kalarislabs.com/">
+    All 84 videos play in the browser, with stats and copyable prompts.
+  </Card>
+  <Card title="MCP tools" icon="wrench" href="/kuchi/tools">
+    Ten tools, two prompts and two resources.
+  </Card>
+  <Card title="Remake workflow" icon="list-checks" href="/kuchi/workflow">
+    Find, study, plan, build and check.
+  </Card>
+</Columns>
+
+## What is in the library
+
+| Style category | Videos |
+|---|---|
+| Device and UI transformations: phones, floating windows, camera moves, interfaces that change shape | 19 |
+| Clean UI, data and graphics | 20 |
+| Pastel UI and cursor demos | 12 |
+| Typography and abstract motion | 11 |
+| Dark, gradient and mixed media | 19 |
+| Illustrated mascot stories | 3 |
+| **Total** | **84** |
+
+Every entry includes a playable MP4, a poster, a remake prompt, historical post stats and credit to the original
+creator. Kuchi's data files are in the [repository](https://github.com/KalarisLabs/kuchi/tree/main/data).
+
+## What Kuchi does and what your agent does
+
+| Kuchi supplies | Your agent does |
+|---|---|
+| Exact shot boundaries, entrances, motion levels, colors and loudness, measured from every frame | Reads storyboard frames and decides what each shot shows |
+| Storyboard sheets of real frames | Builds the video with your product, assets and copy |
+| A blueprint that re-times every reference shot to your target length on whole frames | Asks you for missing assets |
+| Checks for reused brand words, borrowed assets and timing drift | Compares its frames with the reference before delivering |
+
+Without MCP, the same data is available as JSON at `https://kuchi.kalarislabs.com/agent/catalog.json`.
+
+## License
+
+Kuchi's curation, prompts and code are MIT licensed. The videos, previews, product UI, logos and branding remain with
+their owners, and every entry links to its original post.

@@ -1,0 +1,60 @@
+---
+title: "Banyan: 1-bit LLM conversion with homotopy on-policy distillation"
+sidebarTitle: "Banyan"
+description: "Banyan proposes an open recipe for converting a pretrained language model to 1-bit weights with Homotopy On-Policy Distillation. Version 0.1 is a pre-results proposal."
+keywords: ["Banyan", "1-bit quantization", "on-policy distillation", "quantization-aware training", "model compression", "binary LLM", "Kalaris Labs", "preprint"]
+"og:type": "article"
+---
+
+**Bottom line:** A 1-bit language model stores each weight as a sign with a shared group scale: 1.125 bits per weight, about a fourteenth of the memory of its 16-bit parent. Banyan proposes an open recipe for converting a pretrained model to this format. Version 0.1 is a pre-results proposal with no experimental results.
+
+| | |
+|---|---|
+| **Author** | Sayan Chowdhury ([ORCID 0009-0004-8421-0087](https://orcid.org/0009-0004-8421-0087)), Kalaris Labs |
+| **Published** | 2026-11-05 on Zenodo (preprint) |
+| **Evidence** | Proposal or design. Reports no experimental results. |
+| **DOI** | [10.5281/zenodo.23983913](https://doi.org/10.5281/zenodo.23983913) |
+| **License** | See the Zenodo record |
+| **Theme** | [Efficient inference](/research#efficient-inference) |
+
+<Columns cols={2}>
+  <Card title="Read the paper" icon="file-text" href="https://zenodo.org/records/23983913">
+    Full text (banyan-whitepaper.tex) and versions on Zenodo.
+  </Card>
+</Columns>
+
+## Key points
+
+- Motivation: PrismML's Bonsai models show such a conversion can keep most of a model's capability, but the method is unpublished and the one known open reproduction falls well short.
+- **Homotopy On-Policy Distillation (HOPD)** starts the student at its full-precision parent and raises quantization strength gradually, training on text the student generates itself, scored token by token by the parent.
+- A KL-gated controller keeps each step toward binary weights only if the student recovers within a fixed budget, and rolls the step back otherwise.
+- Hypothesis: gradual quantization and on-policy distillation help each other, so learning from the student's own outputs can start at step zero instead of after a separate initialization stage.
+- The paper gives the full method, an implementation for whole-network binarization with tied embeddings and explicit bit accounting, and a staged plan that keeps the mechanism test apart from the strongest-baseline comparison.
+
+## Limitations
+
+This document reports no new experimental results.
+
+## Abstract
+
+> Status: pre-results research proposal (version 0.1). This document reports no new experimental results. A 1-bit language model stores each weight as a single sign and shares one scale across a small group of weights. At 1.125 bits per weight it needs about a fourteenth of the memory of its 16-bit parent, which matters most on devices where memory bandwidth, not arithmetic, limits generation. PrismML's Bonsai models show that a pretrained model can be converted to this format and keep most of its capability, but the method behind them is unpublished, and the one open reproduction we know of falls well short. This whitepaper proposes Banyan, an open recipe for the conversion, built on Homotopy On-Policy Distillation (HOPD). HOPD starts the student at its full-precision parent and raises quantization strength gradually, training on text the student generates itself, scored token by token by the parent. A KL-gated controller keeps each step toward binary weights only if the student recovers within a fixed budget, and rolls the step back otherwise. Neither gradual quantization nor on-policy distillation is new. Our hypothesis is that they help each other: a gradually quantized student stays a usable generator for longer, so learning from its own outputs can start at step zero instead of after a separate initialization stage. We give the full method, an implementation for whole-network binarization with tied embeddings and explicit bit accounting, and a staged plan that keeps the mechanism test apart from the strongest-baseline comparison.
+
+## Related research
+
+- [Anudhi](/research/papers/anudhi): Anudhi compiles a language model offline into one signed .kali container and replays a flat execution plan on phones, with fused 4-bit kernels and a thermal governor.
+- [Pipit](/research/papers/pipit): Pipit is a design for a memory-safe Rust engine that runs frontier mixture-of-experts models on consumer machines by placing experts across GPU memory, RAM and NVMe.
+- [Viveka](/research/papers/viveka): Viveka is a checking layer that re-tests a self-improving agent's changes on fresh seeds, so that changes kept by chance do not become the bar for real progress.
+
+## Cite this paper
+
+```bibtex
+@misc{chowdhury2026banyan,
+  title     = {{Banyan: Converting Pretrained Language Models to 1-Bit Weights with Homotopy On-Policy Distillation}},
+  author    = {Chowdhury, Sayan},
+  year      = {2026},
+  publisher = {Zenodo},
+  note      = {Preprint, Kalaris Labs},
+  doi       = {10.5281/zenodo.23983913},
+  url       = {https://doi.org/10.5281/zenodo.23983913}
+}
+```

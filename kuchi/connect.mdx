@@ -1,0 +1,51 @@
+---
+title: "Connect Claude, ChatGPT, Codex or Cursor to the Kuchi MCP server"
+sidebarTitle: "Connect your agent"
+description: "Add the Kuchi MCP server at https://kuchi.kalarislabs.com/mcp to Claude, Claude Code, ChatGPT, Codex CLI, Cursor, VS Code or Gemini CLI. No sign-in or token required."
+keywords: ["Kuchi MCP setup", "Claude custom connector", "Claude Code plugin", "ChatGPT MCP", "Codex MCP", "Cursor MCP", "Gemini CLI MCP"]
+---
+
+**The Kuchi MCP server is `https://kuchi.kalarislabs.com/mcp`.** It uses Streamable HTTP, is read-only, and needs no
+sign-in or token. Add it as a remote MCP server in your client.
+
+| Client | Setup |
+|---|---|
+| Claude (web, desktop) | Settings → Connectors → **Add custom connector**. Name `Kuchi`, the URL above, no authentication. Or open the [prefilled link](https://kuchi.kalarislabs.com/agent/connect/claude). |
+| Claude Code | `claude mcp add --transport http kuchi https://kuchi.kalarislabs.com/mcp` |
+| ChatGPT | Turn on developer mode, then add a custom MCP app: name `Kuchi`, the URL above, **No authentication**. Deep research uses the `search` and `fetch` tools. |
+| Codex CLI | `codex mcp add kuchi --url https://kuchi.kalarislabs.com/mcp` |
+| Cursor | Add `{"mcpServers":{"kuchi":{"url":"https://kuchi.kalarislabs.com/mcp"}}}` to `.cursor/mcp.json` |
+| VS Code | **MCP: Add Server** → HTTP → the URL above |
+| Gemini CLI | Add `{"mcpServers":{"kuchi":{"httpUrl":"https://kuchi.kalarislabs.com/mcp"}}}` to `~/.gemini/settings.json` |
+| Anything else | Use the URL as a remote MCP server, or paste the setup prompt below |
+
+## Claude Code plugin
+
+The plugin installs the MCP server and the Kuchi skill together:
+
+```text
+/plugin install kuchi --marketplace KalarisLabs/kuchi
+```
+
+## Setup prompt
+
+Paste this into any agent that can add MCP servers:
+
+```text
+Connect the Kuchi MCP server at https://kuchi.kalarislabs.com/mcp (Streamable HTTP, no sign-in) and confirm it works by listing its tools.
+
+Kuchi is a library of real product-launch videos to use as inspiration templates. When I want a launch video, read kuchi_get_workflow and follow it: get a short list with kuchi_suggest_templates and show me each one's poster and link so I can choose, in chat or by picking a video on kuchi.kalarislabs.com and pasting its link. Once I pick one, study it with kuchi_get_breakdown, look at its storyboard and note what each shot shows, then call kuchi_plan_remake with my product details and your shot analysis, and ask me for my logo, screenshots and anything else it lists as missing. Build to the blueprint's frames. Before you deliver, run kuchi_check_remake and compare your frames with the reference. Copy only the reference's motion and taste; everything on screen comes from my product.
+```
+
+## Install the skill by hand
+
+Copy [`SKILL.md`](https://kuchi.kalarislabs.com/agent/SKILL.md) into your agent's skills folder, for example
+`.claude/skills/kuchi/SKILL.md`. Clients that support the MCP skills extension can load it as
+`skill://kuchi/SKILL.md`.
+
+## Verify the connection
+
+Ask your agent to list Kuchi's tools. You should see `kuchi_get_workflow`, `kuchi_suggest_templates` and eight others.
+See [MCP tools](/kuchi/tools).
+
+New videos reach connected agents within a minute, with no reinstall.

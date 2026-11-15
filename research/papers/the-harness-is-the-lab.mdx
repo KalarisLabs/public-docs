@@ -1,0 +1,63 @@
+---
+title: "The Harness Is the Lab: measured self-improvement for AI scientists"
+sidebarTitle: "The Harness Is the Lab"
+description: "A position paper and blueprint for an open AI-scientist harness that grounds every claim in a typed ontology and accepts self-improvement only on held-out evidence."
+keywords: ["AI scientist", "research harness", "recursive self-improvement", "ontology", "sealed evaluators", "autoresearch", "Kalaris Labs", "preprint"]
+"og:type": "article"
+---
+
+**Bottom line:** In AI-scientist systems, generating hypotheses, code and papers is no longer the hard part. Deciding which results deserve to be believed is. This position paper argues seven positions and describes an open research harness built around that problem. It reports no experimental results.
+
+| | |
+|---|---|
+| **Author** | Sayan Chowdhury ([ORCID 0009-0004-8421-0087](https://orcid.org/0009-0004-8421-0087)), Kalaris Labs |
+| **Published** | 2026-11-11 on Zenodo (preprint) |
+| **Evidence** | Position paper. Makes an argument and reports no experiments. |
+| **DOI** | [10.5281/zenodo.24144800](https://doi.org/10.5281/zenodo.24144800) |
+| **License** | CC BY 4.0 |
+| **Theme** | [Self-improving agents](/research#self-improving-agents) |
+
+<Columns cols={2}>
+  <Card title="Read the paper" icon="file-text" href="https://zenodo.org/records/24144800">
+    Full text (Kalaris_Labs_The_Harness_Is_the_Lab.pdf) and versions on Zenodo.
+  </Card>
+  <Card title="Research Agent Skills" icon="book-open" href="/research-agent-skills">
+    Related Kalaris Labs documentation.
+  </Card>
+</Columns>
+
+## Key points
+
+- Generic coding harnesses are now commodities. Research scaffolds evolved for specific tasks are not.
+- Research memory should be a typed ontology of hypotheses, runs and results, not a chat log.
+- A claim of recursive self-improvement without a held-out improvement curve is marketing.
+- The proposed harness keeps its evaluators sealed and improves at three nested levels (search policy, harness skills, model weights). Each level accepts a change only on held-out evidence.
+- The paper situates this against Karpathy's autoresearch, Sakana's Agentic Scientist, Aster, Recursive's Eureka Machine, Prime Intellect's Prime Agent and Edison's Kosmos.
+
+## Limitations
+
+The paper reports no experimental results. It states falsifiable predictions and the evaluation protocol the lab commits to, including a self-improvement curve no public system has yet reported.
+
+## Abstract
+
+> Every serious AI-scientist system released in 2026 has converged on the same lesson: generating hypotheses, code and papers is no longer the hard part; deciding which results deserve to be believed is. Karpathy's autoresearch showed that a sealed evaluator, a fixed budget and a git ratchet can run a hundred useful experiments overnight. Sakana's Agentic Scientist, Aster, Recursive's Eureka Machine, Prime Intellect's Prime Agent and Edison's Kosmos each add a missing piece: evidence generation, massive parallelism, a model-harness flywheel, a self-editing harness, and a structured world model. This paper is a position and a blueprint. We argue seven positions, among them that generic coding harnesses are now commodities while task-evolved research scaffolds are not; that research memory must be a typed ontology rather than a chat log; and that any claim of recursive self-improvement without a held-out improvement curve is marketing. We then describe an open research harness that grounds every claim in an ontology of hypotheses, runs and results, keeps its evaluators sealed, and improves itself at three nested levels (search policy, harness skills, model weights), each accepted only on held-out evidence. We define the evaluation protocol we will hold ourselves to, including a self-improvement curve no public system has yet reported. We report no experimental results here; we state falsifiable predictions instead.
+
+## Related research
+
+- [Agent Kalki](/research/papers/agent-kalki): Agent Kalki is a Rust coding-agent harness in which a gate the agent cannot write to admits each self-modification only when eight ordered predicates hold.
+- [Viveka](/research/papers/viveka): Viveka is a checking layer that re-tests a self-improving agent's changes on fresh seeds, so that changes kept by chance do not become the bar for real progress.
+- [Inventing the Variable](/research/papers/inventing-the-variable): The HiddenLaw benchmark tests whether AI can introduce a variable its vocabulary lacks. Passive data blocks every learner; with interventions, Claude Opus 5.5 succeeds in 9 of 9 worlds.
+
+## Cite this paper
+
+```bibtex
+@misc{chowdhury2026theharnessisthelab,
+  title     = {{The Harness Is the Lab: Measured Self-Improvement for Ontology-Grounded AI Scientists}},
+  author    = {Chowdhury, Sayan},
+  year      = {2026},
+  publisher = {Zenodo},
+  note      = {Preprint, Kalaris Labs},
+  doi       = {10.5281/zenodo.24144800},
+  url       = {https://doi.org/10.5281/zenodo.24144800}
+}
+```

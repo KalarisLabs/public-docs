@@ -1,0 +1,133 @@
+---
+title: "AMARA: serverless encrypted mesh for AI agents and robots"
+sidebarTitle: "Overview"
+description: "AMARA lets AI agents and robots find each other and call each other's tools over Wi-Fi or Bluetooth, with no servers, accounts or API keys, and end-to-end encryption. MCP-native, written in Rust."
+keywords: ["AMARA", "agent-to-agent communication", "agent mesh network", "MCP", "Bluetooth LE mesh", "robot emergency stop", "end-to-end encryption", "multi-agent tool calling"]
+---
+
+**AMARA lets your AI agents and robots discover each other, talk and call each other's tools directly over Wi-Fi or
+Bluetooth.** There are no servers, accounts or API keys. Calls and messages are sealed end to end, even when they are
+relayed through other agents.
+
+```text
+$ amara peers
+● nova      9f3e21aa  1 hop   reasoning, summarize
+● orion     77ab01cd  2 hops  vision, ocr, describe
+● codex-pc  c0de5eed  1 hop   review
+
+$ amara call - ocr '{"png_base64":"…"}'      # "-" routes to whoever offers `ocr`
+```
+
+For example, Claude on your laptop can ask Codex on your desktop to review a diff, a Raspberry Pi can expose its
+sensors as a tool, and any agent in range can send a robot an emergency stop.
+
+## Install
+
+<Tabs>
+  <Tab title="macOS and Linux">
+    ```bash
+    curl -fsSL https://raw.githubusercontent.com/KalarisLabs/amara/main/install.sh | sh
+    ```
+  </Tab>
+  <Tab title="Windows">
+    ```powershell
+    irm https://raw.githubusercontent.com/KalarisLabs/amara/main/install.ps1 | iex
+    ```
+  </Tab>
+  <Tab title="From source">
+    Requires Rust 1.89 or newer.
+
+    ```bash
+    cargo install --git https://github.com/KalarisLabs/amara amara-cli
+    ```
+  </Tab>
+</Tabs>
+
+Check the machine, then try every feature in one process:
+
+```bash
+amara doctor
+amara simulate
+```
+
+## Quick start
+
+<Steps>
+  <Step title="Connect your AI app">
+    ```bash
+    amara setup claude-code --write
+    ```
+    Other clients: `claude-desktop`, `codex`, `cursor`, `windsurf`, `vscode` and `gemini`. Restart the app and ask
+    it "Who's on the AMARA mesh?"
+  </Step>
+  <Step title="Do the same on another machine">
+    Use the same Wi-Fi or LAN, or add a second app on the same machine. Agents discover each other within a second.
+  </Step>
+  <Step title="Make them collaborate">
+    Ask Codex to expose a tool called `review` and wait for calls. Then ask Claude to have whoever offers `review` look
+    at your staged diff.
+  </Step>
+</Steps>
+
+## Features
+
+| Feature | What it means |
+|---|---|
+| Serverless mesh | Zero-config LAN discovery over multicast and Bluetooth LE, multi-hop relay with learned routes. Static peers for VPNs and clouds. |
+| Offline delivery | Message an agent that is out of range; the mesh holds the sealed message and delivers it when the agent returns. |
+| Capability anycast | Call a tool by name with no address, and the mesh picks the closest, least-loaded agent that offers it. |
+| Inbox-served tools | An AI that only speaks MCP can still serve tools: `expose`, receive calls in `inbox`, then `reply`. |
+| Streaming and files | Tools stream partial output. Files move encrypted, repaired on lossy links and verified with BLAKE3. |
+| Robots | Live telemetry topics without a broker, streaming tool calls and a signed, mesh-wide emergency stop. See [security and robots](/amara/security). |
+| Small binary | Rust, no runtime dependencies. Linux, macOS, Windows and Raspberry Pi. |
+
+## CLI
+
+| Command | Purpose |
+|---|---|
+| `amara` or `amara chat` | Interactive mesh chat with `/msg`, `/call`, `/card` and `/peers` |
+| `amara up` | Run a node with the HTTP API |
+| `amara mcp` | MCP server over stdio |
+| `amara setup <client> --write` | Configure Claude Code, Claude Desktop, Codex, Cursor, Windsurf, VS Code or Gemini |
+| `amara peers`, `send`, `call --stream`, `card`, `inbox` | Talk to the running node |
+| `amara send-file <agent> <path>` | Encrypted, verified file transfer |
+| `amara topics --watch`, `publish <topic> <json>` | Live telemetry |
+| `amara stop [robot]` | Emergency stop for every robot in range, or one |
+| `amara tray`, `amara pair` | Desktop tray app, phone dashboard by QR code |
+| `amara schema openai` | Function-calling definitions (also `anthropic`, `mcp`) |
+| `amara simulate`, `amara bench` | In-process demo of every feature, and performance numbers |
+| `amara doctor`, `amara id` | Diagnostics and identity |
+
+Global flags: `--name`, `--tag`, `--port`, `--peer host:port` (repeatable), `--no-multicast`, `--ble` and `-v`.
+
+## Configuration
+
+All settings are optional. AMARA reads `~/.amara/config.toml`, or `$AMARA_HOME/config.toml`.
+
+```toml config.toml
+name = "nova"
+tags = ["reasoning"]
+peers = ["100.64.0.7:7433"]      # static peers for VPNs and clouds
+
+[api]
+bind = "127.0.0.1:7432"
+
+[security]
+require_trusted = false
+trusted = ["9f3e21aa5c0d4b11"]   # PeerIds allowed when require_trusted = true
+
+[store]
+custody = true                   # carry sealed messages for out-of-range agents
+
+[files]
+accept = "anyone"                # or "trusted" or "off"
+max_mb = 32
+
+[robot]
+estop_from = "anyone"            # who may stop this robot: anyone, trusted or off
+estop_command = ["python", "halt.py"]
+```
+
+## Roadmap
+
+Native iOS and Android apps and a ROS 2 bridge package are planned. AMARA is dual-licensed under MIT or Apache-2.0.

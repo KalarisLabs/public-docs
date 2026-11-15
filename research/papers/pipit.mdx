@@ -1,0 +1,59 @@
+---
+title: "Pipit: placement-first MoE inference on consumer hardware"
+sidebarTitle: "Pipit"
+description: "Pipit is a design for a memory-safe Rust engine that runs frontier mixture-of-experts models on consumer machines by placing experts across GPU memory, RAM and NVMe."
+keywords: ["Pipit", "mixture of experts", "MoE inference", "local LLM", "consumer hardware", "Rust", "speculative decoding", "Kalaris Labs", "preprint"]
+"og:type": "article"
+---
+
+**Bottom line:** Mixture-of-experts models activate only a few per cent of their weights per token, so they can run on machines with far less memory than the model, if the right experts are in the right memory tier at the right moment. Pipit is a design for a memory-safe Rust engine built on that idea. The report pre-registers its claims and contains no measured results.
+
+| | |
+|---|---|
+| **Author** | Sayan Chowdhury ([ORCID 0009-0004-8421-0087](https://orcid.org/0009-0004-8421-0087)), Kalaris Labs |
+| **Published** | 2026-11-11 on Zenodo (preprint) |
+| **Evidence** | Proposal or design. Reports no experimental results. |
+| **DOI** | [10.5281/zenodo.24144909](https://doi.org/10.5281/zenodo.24144909) |
+| **License** | CC BY 4.0 |
+| **Theme** | [Efficient inference](/research#efficient-inference) |
+
+<Columns cols={2}>
+  <Card title="Read the paper" icon="file-text" href="https://zenodo.org/records/24144909">
+    Full text (pipit-whitepaper.pdf) and versions on Zenodo.
+  </Card>
+</Columns>
+
+## Key points
+
+- Pipit treats decoding as a bandwidth problem across three tiers: GPU memory, RAM and NVMe.
+- Components: a slot-slab expert store, a learned expert predictor, bandwidth-saturating CPU kernels for six instruction-set levels, union-aware speculative decoding, and validated loaders for GGUF, safetensors and a new streaming format, KXF.
+- The report compares the design with existing local engines (Colibri, uzu and Magnitude) and the gaps it targets in each.
+- It pre-registers ten falsifiable hypotheses against same-machine baselines, with a protocol that scores every run against its physical roofline.
+
+## Limitations
+
+The report contains no measured Pipit results. It fixes the claims in advance so that forthcoming results can be judged against them.
+
+## Abstract
+
+> Mixture-of-experts (MoE) language models with hundreds of billions of parameters activate only a few per cent of their weights for each token. That makes them runnable on machines with far less memory than the model, provided the right expert weights sit in the right memory tier at the right moment. Today's local engines each solve part of this. Colibri streams experts from SSD but relies on general-purpose kernels and has repeatedly patched memory-safety defects in its loaders; uzu reaches strong speculative-decoding speed on Apple Silicon but is not yet stable on other operating systems; Magnitude tunes kernels per device and connects to coding agents, though its headline speed-ups rest on comparisons with mismatched settings. This report presents the design of Pipit, a memory-safe Rust engine that treats decoding as a bandwidth problem across three tiers (GPU memory, RAM and NVMe). It combines a slot-slab expert store, a learned expert predictor, bandwidth-saturating CPU kernels for six instruction-set levels, union-aware speculative decoding, and validated loaders for GGUF, safetensors and a new streaming format, KXF. We pre-register ten falsifiable hypotheses against same-machine baselines, together with a protocol that scores every run against its physical roofline. The report contains no measured Pipit results: it fixes the claims in advance, so that forthcoming results can be judged against them.
+
+## Related research
+
+- [Anudhi](/research/papers/anudhi): Anudhi compiles a language model offline into one signed .kali container and replays a flat execution plan on phones, with fused 4-bit kernels and a thermal governor.
+- [Banyan](/research/papers/banyan): Banyan proposes an open recipe for converting a pretrained language model to 1-bit weights with Homotopy On-Policy Distillation. Version 0.1 is a pre-results proposal.
+- [The Harness Is the Lab](/research/papers/the-harness-is-the-lab): A position paper and blueprint for an open AI-scientist harness that grounds every claim in a typed ontology and accepts self-improvement only on held-out evidence.
+
+## Cite this paper
+
+```bibtex
+@misc{chowdhury2026pipit,
+  title     = {{Pipit: A Placement-First Inference Engine for Frontier Mixture-of-Experts Models on Consumer Hardware}},
+  author    = {Chowdhury, Sayan},
+  year      = {2026},
+  publisher = {Zenodo},
+  note      = {Preprint, Kalaris Labs},
+  doi       = {10.5281/zenodo.24144909},
+  url       = {https://doi.org/10.5281/zenodo.24144909}
+}
+```

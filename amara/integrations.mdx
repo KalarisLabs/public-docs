@@ -1,0 +1,96 @@
+---
+title: "Use AMARA from MCP, HTTP, Python, JavaScript or Rust"
+sidebarTitle: "MCP, API and SDKs"
+description: "Connect to the AMARA agent mesh through its eleven MCP tools, its local HTTP API with server-sent events, zero-dependency Python and JavaScript SDKs, the Rust crate or OpenAI and Anthropic function schemas."
+keywords: ["AMARA MCP", "AMARA SDK", "agent mesh API", "Python agent SDK", "function calling schema", "server-sent events"]
+---
+
+**Every AMARA interface talks to the same local node.** Pick the one your agent or program already speaks.
+
+## MCP
+
+Works with Claude Code, Claude Desktop, Codex, Cursor, Windsurf, VS Code and Gemini CLI. Run `amara setup <client>
+--write`, or add the server yourself:
+
+```json mcp.json
+{ "mcpServers": { "amara": { "command": "amara", "args": ["mcp", "--name", "my-agent"] } } }
+```
+
+| Tool | Purpose |
+|---|---|
+| `peers` | List agents on the mesh, with hops and capabilities |
+| `call` | Call a tool on a peer by name, by `@capability`, or by tool name alone |
+| `card` | Fetch a peer's full tool schemas on demand |
+| `send` | Send a direct message |
+| `inbox` | Read incoming calls and messages |
+| `expose` | Offer a tool that this agent serves from its inbox |
+| `reply` | Answer a call received in the inbox |
+| `send_file` | Send an encrypted, verified file |
+| `topics` | Read live telemetry topics |
+| `publish` | Publish a value to a topic |
+| `estop` | Send a signed emergency stop |
+
+Outputs are compact text, and schemas are fetched lazily with `card`, so the tools use little context.
+
+## HTTP API
+
+```bash
+amara up    # node and API on 127.0.0.1:7432
+curl -H "Authorization: Bearer $(cat ~/.amara/api.token)" localhost:7432/v1/peers
+```
+
+Endpoints: `status`, `peers`, `send`, `call`, `card/{peer}`, `inbox`, `reply`, `tools`, `schema` and `events`
+(server-sent events).
+
+## SDKs
+
+<CodeGroup>
+
+```python Python
+from amara import Amara
+
+mesh = Amara()
+mesh.call("summarize", {"text": open("notes.md").read()})
+mesh.serve("translate", "Translate to French", lambda args, call: my_model(args["text"]))
+```
+
+```javascript JavaScript
+import { Amara } from "./sdk/js/amara.mjs";
+
+const mesh = await Amara.connect();
+await mesh.call("describe", { url }, { to: "@vision" });
+```
+
+```rust Rust
+let agent = Agent::builder("nova")
+    .tool_fn(ToolSpec::new("echo", "Echo"), |ctx| async move { Ok(ctx.args) })
+    .start().await?;
+let out = agent.call_tool(None, "summarize", json!({"text": "…"})).await?;
+```
+
+</CodeGroup>
+
+The Python SDK has no dependencies. The JavaScript SDK runs in Node, Deno, Bun and browsers.
+
+## Any LLM with function calling
+
+```bash
+amara schema openai      # or anthropic, mcp
+```
+
+```python
+tools = mesh.tool_definitions("openai")
+result = mesh.handle_tool_call(name, arguments)
+```
+
+## Any program, no code
+
+Register a command as a tool. AMARA passes JSON arguments on stdin and reads the result from stdout.
+
+```toml ~/.amara/config.toml
+[[tools]]
+name = "ocr"
+description = "Extract text from a base64 PNG"
+command = "python"
+args = ["ocr.py"]
+```
