@@ -1,6 +1,20 @@
+/* Typography. docs.json sets Geist Serif for headings and Geist for body text.
+   Geist Serif ships in a single weight (400), so headings stay at 400 and the browser is told not to fake a
+   bold. The size and spacing changes give page titles an editorial, journal-like look. */
+#content-area :is(h1, h2, h3, h4) {
+  font-weight: 400;
+  font-synthesis: none;
+  letter-spacing: -0.01em;
+}
+
+#content-area h1 {
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
 /* Hide Mintlify's footer attribution until branding.js replaces it with a Kalaris Labs link.
    Once the link's href changes, this selector no longer matches and the link shows again.
-   Delete this file and branding.js to restore the default footer. */
+   Delete this block and branding.js to restore the default footer. */
 a[href*="utm_campaign=poweredBy"] {
   visibility: hidden;
 }

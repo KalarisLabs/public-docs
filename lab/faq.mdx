@@ -1,0 +1,98 @@
+---
+title: "Kalaris Labs FAQ: the lab, its research and its tools"
+sidebarTitle: "FAQ"
+description: "Answers to common questions about Kalaris Labs: what the lab is, what the agentic era and its infrastructure mean, who founded it, where it is based, how to cite its papers and how agents can use these docs."
+keywords: ["Kalaris Labs FAQ", "what is Kalaris Labs", "agentic era", "agent infrastructure", "Sayan Chowdhury", "Research Agent Skills", "Skill Doctor", "MCP server"]
+boost: 2
+---
+
+**Short answers to the questions people and agents ask most about Kalaris Labs.** Each answer links to the page with
+the full detail.
+
+## About the lab
+
+<AccordionGroup>
+  <Accordion title="What is Kalaris Labs?" defaultOpen>
+    Kalaris Labs is an independent AI research lab, founded in India in 2026, building the infrastructure for the
+    agentic era. Its research covers agent harnesses, continual and reinforcement learning, multi-agent simulation,
+    game theory and the economics of agents, agent protocols, evaluations, and AI safety and security. See
+    [about the lab](/lab/about).
+  </Accordion>
+  <Accordion title="What is the agentic era?">
+    The period in which AI agents act rather than only answer: writing and shipping code, transacting, negotiating,
+    and coordinating with other agents on behalf of people and institutions. Those agents need infrastructure the
+    current internet was not built for, including shared protocols, enforceable mandates and evaluations they cannot
+    game.
+  </Accordion>
+  <Accordion title="What does infrastructure for the agentic era mean?">
+    The foundations agents need before they can be trusted with real work: harnesses they run in, protocols they use
+    to identify themselves and prove what they did, markets and mandates that set what they may spend, and
+    evaluations they cannot game. Every earlier era of computing got this layer after the damage. This one has to be
+    built before.
+  </Accordion>
+  <Accordion title="What is the Kalaris Labs motto?">
+    "The rules have to exist before the actors do." When software acts at machine speed, the rules, protocols and
+    checks agents operate under have to be in place before agents are deployed, not added after something breaks.
+    Read the [manifesto](https://kalarislabs.com/manifesto).
+  </Accordion>
+  <Accordion title="Who founded Kalaris Labs?">
+    Sayan Chowdhury, an Indian agentic AI researcher and systems architect who directs the lab's research on agentic
+    systems architecture, execution harnesses and the economic layer of autonomous agent systems. He is the author of
+    the lab's preprints ([ORCID](https://orcid.org/0009-0004-8421-0087)).
+  </Accordion>
+  <Accordion title="Where is Kalaris Labs based?">
+    India. The lab builds in the open from India because it believes the foundations of the agentic era should be a
+    public good, the way India's payments network is one that any bank or app can build on.
+  </Accordion>
+  <Accordion title="What is Kalaris Labs working on next?">
+    Agent protocols, game theory, the economics of agents, and AI security and safety. The flagship project, Agents on
+    Web, is a planned public simulation where agents live in a shared world and anyone can watch where they break;
+    work begins in 2027. New results appear in the [changelog](/updates).
+  </Accordion>
+  <Accordion title="How do I contact Kalaris Labs?">
+    Email [hello@kalarislabs.com](mailto:hello@kalarislabs.com) for research collaboration, press or partnerships.
+    Report security issues through each repository's `SECURITY.md`, not in public issues.
+  </Accordion>
+</AccordionGroup>
+
+## Research
+
+<AccordionGroup>
+  <Accordion title="Where are Kalaris Labs papers published?">
+    Sixteen papers are open access on Zenodo with a DOI; the fly brain study is published with its code on GitHub.
+    Every paper is listed on the [research page](/research).
+  </Accordion>
+  <Accordion title="How should I cite a Kalaris Labs paper?">
+    Cite its DOI and state its evidence level (proposal, partial implementation, simulation, experiment or position),
+    both shown on the paper's page. Do not present simulation results as results on deployed systems.
+  </Accordion>
+  <Accordion title="Are the PrincipalBench v1 rankings still valid?">
+    No. The PrincipalBench v1 model rankings are withdrawn. Use [PrincipalBench v2](/benchmarks/principalbench).
+  </Accordion>
+</AccordionGroup>
+
+## Tools and agents
+
+<AccordionGroup>
+  <Accordion title="Are Kalaris Labs tools free and open source?">
+    Yes. All code is public at [github.com/KalarisLabs](https://github.com/KalarisLabs). Licenses differ by
+    repository; see [open source](/open-source).
+  </Accordion>
+  <Accordion title="How do I install Research Agent Skills?">
+    Run `npx skills add KalarisLabs/research-agent-skills`. There is no `research-agent-skills` package on npm. See
+    [installation](/research-agent-skills/getting-started/installation).
+  </Accordion>
+  <Accordion title="How do I check an agent skill before installing it?">
+    Run `npx @security.kalarislabs/skill-doctor scan ./my-skill`. Skill Doctor runs offline by default and does not
+    use a model to decide what is safe. See the [Skill Doctor quickstart](/skill-doctor/getting-started/quickstart).
+  </Accordion>
+  <Accordion title="Which coding agents do the tools work with?">
+    Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot, OpenCode and Windsurf.
+  </Accordion>
+  <Accordion title="How can an AI agent read these docs?">
+    Connect the docs MCP server at `https://docs.kalarislabs.com/mcp`, read
+    [llms.txt](https://docs.kalarislabs.com/llms.txt) or
+    [llms-full.txt](https://docs.kalarislabs.com/llms-full.txt), or append `.md` to any page URL. See
+    [agent access](/agents).
+  </Accordion>
+</AccordionGroup>

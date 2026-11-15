@@ -1,0 +1,36 @@
+name: Docs checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      MINT: npx --yes mint@4.2.1069
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Validate build
+        run: $MINT validate
+      - name: Check internal links
+        run: $MINT broken-links
+      - name: Check accessibility
+        run: $MINT a11y
+      - name: Check hub links and navigation
+        run: |
+          python3 - <<'EOF'
+          import json, sys
+          from pathlib import Path
+          sys.path.insert(0, "scripts")
+          import sync_research_agent_skills as sync
+          hub = Path(".").resolve()
+          sync.validate_site(hub, hub / "research-agent-skills", json.loads(Path("docs.json").read_text()))
+          print("Hub links and navigation are valid")
+          EOF
