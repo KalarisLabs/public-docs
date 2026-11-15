@@ -95,6 +95,9 @@ See [all papers](/research) or the [changelog](/updates).
 | Connect an MCP server to my agent | [MCP servers](/agents/mcp-servers) |
 | Compare orchestrator models fairly | [PrincipalBench](/benchmarks/principalbench) |
 | Give my agent these docs as context | [Use these docs with AI](/ai-tools) |
+| Read the lab's engineering essays | [Blog](/blog) |
+| Learn who founded the lab | [Sayan Chowdhury](/lab/sayan-chowdhury) |
+| Write about the lab or use its logo | [Press kit](/lab/press) and [brand kit](/lab/brand) |
 
 ## Open source
 

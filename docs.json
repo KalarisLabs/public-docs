@@ -66,6 +66,10 @@
             "pages": [
               "index",
               "lab/about",
+              "lab/sayan-chowdhury",
+              "blog/index",
+              "lab/press",
+              "lab/brand",
               "lab/faq",
               "updates"
             ]
@@ -324,6 +328,10 @@
         "href": "/benchmarks"
       },
       {
+        "label": "Blog",
+        "href": "/blog"
+      },
+      {
         "label": "For agents",
         "href": "/agents"
       },
@@ -343,7 +351,8 @@
       "github": "https://github.com/KalarisLabs",
       "linkedin": "https://www.linkedin.com/company/kalarislabs",
       "x": "https://x.com/kalarislabs",
-      "website": "https://kalarislabs.com"
+      "website": "https://kalarislabs.com",
+      "instagram": "https://www.instagram.com/kalarislabs"
     },
     "links": [
       {
@@ -425,6 +434,10 @@
             "href": "/lab/about"
           },
           {
+            "label": "Founder",
+            "href": "/lab/sayan-chowdhury"
+          },
+          {
             "label": "FAQ",
             "href": "/lab/faq"
           },
@@ -443,6 +456,22 @@
           {
             "label": "kalarislabs.com",
             "href": "https://kalarislabs.com"
+          },
+          {
+            "label": "Hugging Face",
+            "href": "https://huggingface.co/Kalarislabs"
+          },
+          {
+            "label": "Blog",
+            "href": "/blog"
+          },
+          {
+            "label": "Press",
+            "href": "/lab/press"
+          },
+          {
+            "label": "Brand kit",
+            "href": "/lab/brand"
           }
         ]
       }
@@ -498,7 +527,8 @@
         "https://github.com/KalarisLabs",
         "https://www.linkedin.com/company/kalarislabs",
         "https://huggingface.co/Kalarislabs",
-        "https://x.com/kalarislabs"
+        "https://x.com/kalarislabs",
+        "https://www.instagram.com/kalarislabs"
       ]
     },
     "paths": [
@@ -514,6 +544,14 @@
         "metatags": {
           "og:type": "article",
           "article:publisher": "https://kalarislabs.com"
+        }
+      },
+      {
+        "path": "blog",
+        "metatags": {
+          "og:type": "article",
+          "article:publisher": "https://kalarislabs.com",
+          "article:author": "https://kalarislabs.com/team/sayan-chowdhury"
         }
       }
     ]
@@ -563,6 +601,34 @@
       "source": "/skill-doctor/changelog",
       "destination": "/skill-doctor/updates",
       "permanent": true
+    },
+    {
+      "source": "/founder",
+      "destination": "/lab/sayan-chowdhury"
+    },
+    {
+      "source": "/lab/founder",
+      "destination": "/lab/sayan-chowdhury"
+    },
+    {
+      "source": "/sayan-chowdhury",
+      "destination": "/lab/sayan-chowdhury"
+    },
+    {
+      "source": "/team/sayan-chowdhury",
+      "destination": "/lab/sayan-chowdhury"
+    },
+    {
+      "source": "/press",
+      "destination": "/lab/press"
+    },
+    {
+      "source": "/brand",
+      "destination": "/lab/brand"
+    },
+    {
+      "source": "/about",
+      "destination": "/lab/about"
     }
   ]
 }
