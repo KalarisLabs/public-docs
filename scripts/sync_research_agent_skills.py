@@ -13,6 +13,23 @@ PRODUCT = "research-agent-skills"
 SKIP_TOP_LEVEL = {"docs.json", "llms.txt", "maintainers", "overrides"}
 LINK_PATTERN = re.compile(r'(\]\(|\b(?:href|src)=")/(?!/)')
 MARKDOWN_LINK = re.compile(r"\]\(/([^\s)#]+)")
+# Mintlify does not publish pages with these file names, so a page named like this 404s and fails
+# `mint validate`. The sync renames them and rewrites navigation and links to match.
+RESERVED_NAMES = {"contributing": "how-to-contribute", "changelog": "release-notes"}
+
+
+def safe_page(path: str) -> str:
+    """Return a page path whose last segment Mintlify will publish."""
+    head, _, name = path.rpartition("/")
+    renamed = RESERVED_NAMES.get(name.lower())
+    return f"{head}/{renamed}" if head and renamed else (renamed or path)
+
+
+def rewrite_reserved_links(text: str) -> str:
+    """Point links at renamed pages, keeping any #anchor."""
+    names = "|".join(RESERVED_NAMES)
+    pattern = re.compile(rf"(/{PRODUCT}/(?:[^\s)\"'#]*/)?)({names})(?=[)\"'#\s])", re.IGNORECASE)
+    return pattern.sub(lambda m: m.group(1) + RESERVED_NAMES[m.group(2).lower()], text)
 
 
 def prefix_navigation(value: object) -> object:
@@ -23,10 +40,10 @@ def prefix_navigation(value: object) -> object:
         output = {}
         for key, item in value.items():
             if key in {"pages", "root"} and isinstance(item, str):
-                output[key] = f"{PRODUCT}/{item.lstrip('/')}"
+                output[key] = f"{PRODUCT}/{safe_page(item.lstrip('/'))}"
             elif key == "pages" and isinstance(item, list):
                 output[key] = [
-                    f"{PRODUCT}/{page.lstrip('/')}" if isinstance(page, str) else prefix_navigation(page)
+                    f"{PRODUCT}/{safe_page(page.lstrip('/'))}" if isinstance(page, str) else prefix_navigation(page)
                     for page in item
                 ]
             elif key == "href" and isinstance(item, str) and item.startswith("/"):
@@ -99,11 +116,15 @@ def sync(source: Path, hub: Path) -> None:
         elif item.is_file():
             shutil.copy2(item, target)
 
+    for page in list(destination.rglob("*")):
+        if page.suffix in {".md", ".mdx"} and page.is_file() and page.stem.lower() in RESERVED_NAMES:
+            page.rename(page.with_name(RESERVED_NAMES[page.stem.lower()] + page.suffix))
+
     for page in destination.rglob("*"):
         if page.suffix not in {".md", ".mdx"} or not page.is_file():
             continue
         original = page.read_text(encoding="utf-8")
-        updated = LINK_PATTERN.sub(rf"\1/{PRODUCT}/", original)
+        updated = rewrite_reserved_links(LINK_PATTERN.sub(rf"\1/{PRODUCT}/", original))
         if updated != original:
             page.write_text(updated, encoding="utf-8")
 

@@ -209,7 +209,7 @@
               "research-agent-skills/reference/architecture",
               "research-agent-skills/reference/benchmarks",
               "research-agent-skills/reference/security",
-              "research-agent-skills/reference/contributing",
+              "research-agent-skills/reference/how-to-contribute",
               "research-agent-skills/faq"
             ]
           }
@@ -629,6 +629,10 @@
     {
       "source": "/about",
       "destination": "/lab/about"
+    },
+    {
+      "source": "/research-agent-skills/reference/contributing",
+      "destination": "/research-agent-skills/reference/how-to-contribute"
     }
   ]
 }
