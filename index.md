@@ -5,6 +5,13 @@ description: "Documentation for Kalaris Labs, an AI research lab building the in
 keywords: ["Kalaris Labs", "AI research lab", "agent skills", "MCP servers", "LLM benchmarks", "self-improving agents", "open-source AI tools"]
 mode: "wide"
 boost: 2
+verification:
+  status: "verified"
+  expiresAt: "2027-02-16T21:23:04.901Z"
+  by:
+    type: "user"
+    id: "6a9a86437f97d72a94a9811e"
+  at: "2026-11-18T21:23:07.346Z"
 ---
 
 **Kalaris Labs is an independent AI research lab building the infrastructure for the agentic era.** Agents now write
