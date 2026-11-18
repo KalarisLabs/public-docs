@@ -5,7 +5,7 @@ description: "Check that a Skill Doctor binary came from the official release wo
 ---
 
 Release binaries are built in isolated CI, hashed into `SHA256SUMS.txt` and signed with keyless Sigstore
-Cosign (GitHub OIDC). Download `SHA256SUMS.txt`, `SHA256SUMS.txt.bundle` and your binary from the
+Cosign (GitHub OIDC). Download `SHA256SUMS.txt`, `SHA256SUMS.txt.bundle` and the archive for your platform from the
 [release page](https://github.com/KalarisLabs/Skill-Doctor/releases), then:
 
 <Steps>
